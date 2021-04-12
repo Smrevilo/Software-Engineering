@@ -2,15 +2,14 @@ Feature: Start a new project
 Description: Start a new project
 Actors: Project leader
 
+Background: An employee is logged in
+	Given that an employee is logged in
+
 Scenario: Host new project
-Given that the Project leader have a project to start
-And the project have a name not already used by another project
-When the Project leader create the project using the name
-Then the Project leader can access a project called that name
+	When the employee creates a project using the name "Project1"
+	Then a project with the name "Project1" exsits
 
 Scenario: Host new project ERROR
-Given that the Project leader have a project to start
-And the project have a name already used by another project
-When the Project leader create the project using the name
-Then the Project leader request is denied
-And an error containing ”That name is occupied”is displayed
+	Given a project with the name "Project1" has been created
+	When the employee creates a project using the name "Project1"
+	Then an error containing "A project with that name already exsits" is displayed
