@@ -28,4 +28,10 @@ public class PKV {
 		return this.loggedInAs;
 	}
 
+
+	public void logOut() {
+		this.loggedInAs = null;
+		
+	}
+
 }
