@@ -57,5 +57,14 @@ public class PKV {
 		}
 		return false;		
 	}
+	
+	public Project getProject(String name) {
+		for (Project p : projects) {
+			if (p.getName().equals(name)) {
+				return p;
+			}
+		}
+		return null;
+	}
 
 }
