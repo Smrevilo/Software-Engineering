@@ -1,5 +1,7 @@
 package system.app;
 
+import java.util.*;
+
 public class Activity {
 
 	private String name;
@@ -7,6 +9,7 @@ public class Activity {
 	private int startDate;
 	private int deadline;
 	private boolean state;
+	private List<Pomodoro> pomodoro;
 	
 	public Activity(String name) {
 		this(name, 0, 0, 0, false);
@@ -18,6 +21,7 @@ public class Activity {
 		this.startDate = startDate;
 		this.deadline = deadline;
 		this.state = state;
+		this.pomodoro= new ArrayList<Pomodoro>();
 	}
 	
 	public String getName() {
@@ -59,4 +63,9 @@ public class Activity {
 	public void setState(boolean state) {
 		this.state = state;
 	}
+	
+	public void addEmployee(Employee employee) {
+		pomodoro.add(new Pomodoro(employee, this));
+	}
+	
 }

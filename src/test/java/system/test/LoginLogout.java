@@ -27,19 +27,16 @@ public class LoginLogout {
 	public void that_an_employee_is_logged_in() {
 		this.system.login(employee);
 		assertTrue(this.system.getLoggedInAs().equals(employee));
-
 	}
 
 	@When("the employee logs out")
 	public void the_employee_logs_out() {
 		this.system.logOut();
-
 	}
 
 	@Then("the employee is logged out")
 	public void the_employee_is_logged_out() {
 		assert this.system.getLoggedInAs() == null;
-
 	}
 }
 

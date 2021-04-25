@@ -38,4 +38,14 @@ public class Project {
 	public void setLeader(Employee leader) {
 		this.leader = leader;
 	}
+	
+	public Activity getActivity(String name) {
+		for (Activity a : activites) {
+			if (a.getName().equals(name)) {
+				return a;
+			}
+		}
+		return null;
+	}
+	
 }

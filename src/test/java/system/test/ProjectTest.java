@@ -16,7 +16,6 @@ public class ProjectTest {
 	private PKV system;
 	private Employee employee;
 	private ErrorMessageHolder errorMessageHolder;
-	private Project selectedProject;
 	private Employee dummy = new Employee("dummy");
 
 	// PKV stands for projekt kordinerings værktøj
@@ -24,7 +23,6 @@ public class ProjectTest {
 		this.system = system;
 		EmployeeHelper initialer = new EmployeeHelper();
 		this.employee = new Employee(initialer.getInitials());
-		this.system.add(employee);
 		this.errorMessageHolder = errorMessageHolder;
 	}
 	
@@ -40,7 +38,7 @@ public class ProjectTest {
 	@Then("a project with the name {string} exists")
 	public void a_project_with_the_name_exists(String name) {
 		assertTrue(system.hasProject(name));
-		selectedProject = system.getProject(name);
+		system.setSelectedProject(system.getProject(name));
 	}
 	
 	@Given("a project with the name {string} has been created")
@@ -57,20 +55,20 @@ public class ProjectTest {
 
 	@When("the project leader adds the activity {string}")
 	public void the_project_leader_adds_the_activity(String string) {
-		System.out.println("project: "+selectedProject);
+		System.out.println("project: "+system.getSelectedProject());
 		System.out.println(string);
-		selectedProject.createActivty(string);
+		system.getSelectedProject().createActivty(string);
 		assertTrue(true);
 	}
 
 	@Then("the project has the activity {string}")
 	public void the_project_has_the_activity(String string) {
-		assertTrue(selectedProject.hasActivty(string));
+		assertTrue(system.getSelectedProject().hasActivty(string));
 	}
 	
 	@Given("that the project has no project leader assigned")
 	public void that_the_project_has_no_project_leader_assigned() {
-		if (selectedProject.getLeader() == null) {
+		if (system.getSelectedProject().getLeader() == null) {
 			assertTrue(true);
 		} else {
 			assertTrue(false);
@@ -79,16 +77,23 @@ public class ProjectTest {
 
 	@When("an employee is set as the project leader")
 	public void an_employee_is_set_as_the_project_leader() {
-		selectedProject.setLeader(dummy);
+		system.getSelectedProject().setLeader(dummy);
 	}
 
 	@Then("the project has a project leader")
 	public void the_project_has_a_project_leader() {
-		if (selectedProject.getLeader() == dummy) {
+		if (system.getSelectedProject().getLeader() == dummy) {
 			assertTrue(true);
 		} else {
 			assertTrue(false);
 		}
+	}
+	
+	@Given("the logged in employee is the project leader of {string}")
+	public void the_logged_in_employee_is_the_project_leader_of(String string) {
+		Employee leader = system.getLoggedInAs();
+		system.getSelectedProject().setLeader(leader);
+	   assertTrue(system.getSelectedProject().getLeader()==system.getLoggedInAs());
 	}
 
 

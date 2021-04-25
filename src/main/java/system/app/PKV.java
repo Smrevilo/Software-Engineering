@@ -8,6 +8,17 @@ public class PKV {
 	private ArrayList<Project> projects;
 	private DateServer date;
 	private int id = 0;
+	private Project selectedProject;
+
+	public Project getSelectedProject() {
+		return selectedProject;
+	}
+
+
+	public void setSelectedProject(Project selectedProject) {
+		this.selectedProject = selectedProject;
+	}
+
 
 	public PKV() {
 		this.employees = new ArrayList<Employee>();
