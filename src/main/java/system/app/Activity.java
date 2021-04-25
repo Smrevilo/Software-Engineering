@@ -79,6 +79,11 @@ public class Activity {
 		
 	}
 	
+	
+	
+	
+	
+	
 	public int getTotalTime() {
 		int output=0;
 		for(Pomodoro time: pomodoro) {

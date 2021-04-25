@@ -23,5 +23,9 @@ public class Pomodoro {
 	public Employee getEmployee() {
 		return employee;
 	}
+	
+	public String getActivity() {
+		return activity.getName();
+	}
 
 }

@@ -16,5 +16,20 @@ public class Employee {
 		activities.add(temp);
 		
 	}
+	
+	public String getInitials() {
+		return initialer;
+	}
+	
+	
+	public int getTimefor(String check) {
+		int time=0;
+		for(Pomodoro activity: activities) {
+			if(activity.getActivity().equals(check)) {
+				time=activity.getTime();
+			}
+		}
+		return time;
+	}
 
 }

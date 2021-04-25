@@ -65,6 +65,19 @@ public class TimeRegTest {
 	    Activity activity= projekt.getActivity(string);
 	    assertTrue(activity.getTotalTime()==0);
 	}
+	
+	@When("the employee registers time to sick days")
+	public void the_employee_registers_time_to_sick_days() {
+		system.setSelectedProject(system.getProject(system.getLoggedInAs().getInitials()));
+		Activity activity = system.getSelectedProject().getActivity("Sick Days");
+		activity.addtime(system.getLoggedInAs(), 10);
+	}
+
+	@Then("the time is registered under sick days")
+	public void the_time_is_registered_under_sick_days() {
+		assertTrue(system.getLoggedInAs().getTimefor("Sick Days")==10);
+	}
+
 
 
 }

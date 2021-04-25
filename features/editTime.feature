@@ -22,10 +22,10 @@ Scenario: Registering time to an activity the employee is NOT assigned to
 	Then the time is not registered to the activity with the name "Test Developement" under the project "Project1"
 
 
-#Scenario: Registering time to sick days
-#	When the employee registers time to sick days
-#	Then the time is registered under sick days
-#	
+Scenario: Registering time to sick days
+	When the employee registers time to sick days
+	Then the time is registered under sick days
+	
 #Scenario: Deleting time registration for an activity
 #	Given that the employee is assigned to the activity with the name "Test Developement" under the project "New Software"
 #	And the employee has registered 5 hours to the activity with the name "Test Developement" under the project "New Software"

@@ -12,21 +12,20 @@ import system.app.PKV;
 
 public class LoginLogout {
 	private PKV system;
-	private Employee employee; 
+	private String employeeInitials;
 
 	// PKV stands for projekt kordinerings værktøj
 	public LoginLogout(PKV system) {
 		this.system = system;
 		EmployeeHelper initialer = new EmployeeHelper();
-		this.employee = new Employee(initialer.getInitials());
-		this.system.add(employee);
+		this.employeeInitials = initialer.getInitials();
 	}
 
 
 	@Given("that an employee is logged in")
 	public void that_an_employee_is_logged_in() {
-		this.system.login(employee);
-		assertTrue(this.system.getLoggedInAs().equals(employee));
+		this.system.login(employeeInitials);
+		assertTrue(this.system.getLoggedInAs().getInitials().equals(employeeInitials));
 	}
 
 	@When("the employee logs out")

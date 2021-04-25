@@ -24,6 +24,9 @@ public class PKV {
 		this.employees = new ArrayList<Employee>();
 		this.projects = new ArrayList<Project>();
 		this.date = new DateServer();
+		EmployeeHelper temp=new EmployeeHelper();
+		this.employees.addAll(temp.getEmployeeList());
+		this.projects.addAll(temp.getProjectList());
 	}
 
 
@@ -33,9 +36,13 @@ public class PKV {
 	}
 
 
-	public void login(Employee employee) {
-		this.loggedInAs = employee;
-		
+	public void login(String initialer) {
+		for(Employee employee: employees) {
+			if(initialer.equals(employee.getInitials())) {
+				this.loggedInAs=employee;
+			}
+		}
+
 	}
 
 
