@@ -27,9 +27,9 @@ Scenario: Registering time to sick days
 	Then the time is registered under sick days
 	
 #Scenario: Deleting time registration for an activity
-#	Given that the employee is assigned to the activity with the name "Test Developement" under the project "New Software"
-#	And the employee has registered 5 hours to the activity with the name "Test Developement" under the project "New Software"
-#	When the employee deletes 3 hours from the activity with the name "Test Developement" under the project "New Software"
-#	Then there is only 2 hours registered for the employee on the activity with the name "Test Developement" under the project "New Software"
+#	Given that the employee is assigned to the activity with the name "Test Developement" under the project "Project1"
+#	And the employee has registered 5 hours to the activity with the name "Test Developement" under the project "Project1"
+#	When the employee deletes 3 hours from the activity with the name "Test Developement" under the project "Project1"
+#	Then there is only 2 hours registered for the employee on the activity with the name "Test Developement" under the project "Project1"
 #
 #	

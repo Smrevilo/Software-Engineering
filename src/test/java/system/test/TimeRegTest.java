@@ -13,16 +13,11 @@ import system.app.*;
 
 public class TimeRegTest {
 	private PKV system;
-	private Employee employee;
-	private ErrorMessageHolder errorMessageHolder;
-	private Employee dummy = new Employee("dummy");
 
 	// PKV stands for projekt kordinerings værktøj
 	public TimeRegTest(PKV system, ErrorMessageHolder errorMessageHolder) {
 		this.system = system;
-		EmployeeHelper initialer = new EmployeeHelper();
-		this.employee = new Employee(initialer.getInitials());
-		this.errorMessageHolder = errorMessageHolder;
+
 	}
 
 	@Given("this project has this activity {string}")
