@@ -52,6 +52,19 @@ public class TimeRegTest {
 	    assertTrue(activity.getTotalTime()==10);
 	}
 	
+	@Given("that the employee is Not assigned to the activity with the name {string} under the project {string}")
+	public void that_the_employee_is_not_assigned_to_the_activity_with_the_name_under_the_project(String string, String string2) {
+		Project projekt=system.getProject(string2);
+	    Activity activity= projekt.getActivity(string);
+	    assertFalse(activity.isAssignedTo(system.getLoggedInAs()));
+	}
+
+	@Then("the time is not registered to the activity with the name {string} under the project {string}")
+	public void the_time_is_not_registered_to_the_activity_with_the_name_under_the_project(String string, String string2) {
+		Project projekt=system.getProject(string2);
+	    Activity activity= projekt.getActivity(string);
+	    assertTrue(activity.getTotalTime()==0);
+	}
 
 
 }

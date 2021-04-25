@@ -16,12 +16,12 @@ Scenario: Registering time to an activity
 	When the employee registers time to the activity with the name "Test Developement" under the project "Project1"
 	Then the time is registered to the activity with the name "Test Developement" under the project "Project1"
 
-#Scenario: Registering time to an activity the employee is NOT assigned to
-#	Given that the employee is Not assigned to the activity with the name "Test Developement" under the project "New Software"
-#	When the employee registers time to the activity with the name "Test Development" under the project "New Software"
-#	Then the time is not registered to the activity with the name "Test Development" under the project "New Software"
-#
-#
+Scenario: Registering time to an activity the employee is NOT assigned to
+	Given that the employee is Not assigned to the activity with the name "Test Developement" under the project "Project1"
+	When the employee registers time to the activity with the name "Test Developement" under the project "Project1"
+	Then the time is not registered to the activity with the name "Test Developement" under the project "Project1"
+
+
 #Scenario: Registering time to sick days
 #	When the employee registers time to sick days
 #	Then the time is registered under sick days

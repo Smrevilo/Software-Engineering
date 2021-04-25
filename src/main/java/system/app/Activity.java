@@ -86,6 +86,15 @@ public class Activity {
 		}
 		return output;
 	}
+
+	public boolean isAssignedTo(Employee check) {
+		for(Pomodoro employee: pomodoro) {
+			if(employee.getEmployee()==check) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
 
 
