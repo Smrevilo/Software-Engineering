@@ -65,7 +65,32 @@ public class Activity {
 	}
 	
 	public void addEmployee(Employee employee) {
-		pomodoro.add(new Pomodoro(employee, this));
+		Pomodoro temp= new Pomodoro(employee, this);
+		pomodoro.add(temp);
+		employee.addActivity(temp);
+	}
+
+	public void addtime(Employee loggedInAs, int i) {
+		for(Pomodoro employee: pomodoro) {
+			if(employee.getEmployee()==loggedInAs) {
+				employee.addTime(i);
+			}
+		}
+		
 	}
 	
+	public int getTotalTime() {
+		int output=0;
+		for(Pomodoro time: pomodoro) {
+			output+=time.getTime();
+		}
+		return output;
+	}
 }
+
+
+
+
+
+
+

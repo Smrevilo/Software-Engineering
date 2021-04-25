@@ -10,5 +10,18 @@ public class Pomodoro {
 		this.employee=employee;
 		this.activity=activity;
 	}
+	
+	
+	public void addTime(int time) {
+		this.time+=time;
+	}
+	
+	public int getTime() {
+		return this.time;
+	}
+	
+	public Employee getEmployee() {
+		return employee;
+	}
 
 }

@@ -40,14 +40,18 @@ public class TimeRegTest {
 
 	@When("the employee registers time to the activity with the name {string} under the project {string}")
 	public void the_employee_registers_time_to_the_activity_with_the_name_under_the_project(String string, String string2) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		 Project projekt=system.getProject(string2);
+		 Activity activity= projekt.getActivity(string);
+		 activity.addtime(system.getLoggedInAs(), 10);
 	}
 
 	@Then("the time is registered to the activity with the name {string} under the project {string}")
 	public void the_time_is_registered_to_the_activity_with_the_name_under_the_project(String string, String string2) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		Project projekt=system.getProject(string2);
+	    Activity activity= projekt.getActivity(string);
+	    assertTrue(activity.getTotalTime()==10);
 	}
+	
+
 
 }
