@@ -50,6 +50,7 @@ public class TimeOverviewProject {
 	    	report = system.makeReportFor(projectName);
 		} catch (Exception e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
+		
 		}
 	}
 

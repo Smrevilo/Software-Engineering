@@ -10,14 +10,14 @@ Background: there is a project leader of a project
 	Then the project has a project leader
 
 Scenario: the project leader requests to view total time of activities of a certain project, for each employee
-	Given the employee requests to view total time of "Project1"
-	And the project has these activities
+	Given the project has these activities
 		| activity1 |
 		| activity2 |
 		| activity3 |
 		| activity4 |
 	And the activity "activity1" has the employee assigned
 	And the activity "activity1" has 5 registred hours
+	And the employee requests to view total time of "Project1"
 	Then display a list of the work hours each employee is assigned to
 
 Scenario: the project leader requests to view total time of activities of a certain empty project, for each employee
@@ -33,4 +33,4 @@ Scenario: an employee who is not the project leader requests to view total time 
 	When the employee logs out
 	And a second employee logs in
 	Given the employee requests to view total time of "Project1"
-	Then an error message ocurres with the text "only the project can get a project report"
+	Then an error message ocurres with the text "only the project leader can get a project report"

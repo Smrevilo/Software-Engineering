@@ -41,8 +41,8 @@ public class PKV {
 	}
 
 	public void login(String initialer) {
-		for(Employee employee: employees) {
-			if(initialer.equals(employee.getInitials())) {
+		for (Employee employee : employees) {
+			if (initialer.equals(employee.getInitials())) {
 				this.loggedInAs = employee;
 			}
 		}
@@ -71,9 +71,9 @@ public class PKV {
 				return true;
 			}
 		}
-		return false;		
+		return false;
 	}
-	
+
 	public Project getProject(String name) throws Exception {
 		if (!hasProject(name)) {
 			throw new Exception("A project with that name doesn't exsits");
@@ -90,19 +90,20 @@ public class PKV {
 		if (!hasProject(name)) {
 			throw new Exception("A project with that name doesn't exsits");
 		}
-		if (selectedProject.getLeader() != loggedInAs) {	
-			throw new Exception("Only the project leaders can delete the project");		
+		if (selectedProject.getLeader() != loggedInAs) {
+			throw new Exception("Only the project leaders can delete the project");
 		}
 		Project project = getProject(name);
 		projects.remove(project);
 	}
-	
+
 	public String makeReportFor(String projectName) throws Exception {
 		Project temp = getProject(projectName);
-		if(temp.getLeader() == loggedInAs) {
+		if (temp.getLeader() == loggedInAs) {
 			return temp.makeRepport();
+		} else {
+			throw new Exception("only the project leader can get a project report");
 		}
-		throw new Exception("only the project can get a project report");
 	}
 
 }
