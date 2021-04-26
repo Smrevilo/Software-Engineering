@@ -34,11 +34,8 @@ public class EmployeeHelper {
 			temp=projects.get(i).getActivity("Courses");
 			temp.addEmployee(employeeList.get(i));
 			i++;
-			
 		}
-		
 	}
-
 
 	public String getInitials() {
 		return employeeList.get(0).getInitials();

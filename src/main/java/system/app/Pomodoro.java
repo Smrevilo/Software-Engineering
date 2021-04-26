@@ -5,15 +5,13 @@ public class Pomodoro {
 	private Employee employee;
 	private Activity activity;
 	
-	
 	public Pomodoro(Employee employee, Activity activity) {
-		this.employee=employee;
-		this.activity=activity;
+		this.employee = employee;
+		this.activity = activity;
 	}
 	
-	
 	public void addTime(int time) {
-		this.time+=time;
+		this.time += time;
 	}
 	
 	public int getTime() {
@@ -27,7 +25,6 @@ public class Pomodoro {
 	public String getActivity() {
 		return activity.getName();
 	}
-
 
 	public void deleteTime(int i) throws Exception {
 		if (this.time > i) {

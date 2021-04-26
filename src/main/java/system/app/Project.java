@@ -48,4 +48,20 @@ public class Project {
 		return null;
 	}
 	
+	public String makeRepport() {
+		String repport = "";
+		for (Activity activity : activites) {
+			repport += "Activity " + activity.getName() + "\n";
+			String activityRepport = activity.getRepport();
+			if (activityRepport.equals("")) {
+				repport += "\tThis activity has no registred hours\n\n";
+			} else {
+				repport += "\t"+activityRepport + "\n";
+			}
+		}
+		if (repport.equals("")) {
+			repport = "There is no activites";
+		}
+		return repport;
+	}
 }

@@ -8,28 +8,24 @@ public class Employee {
 	
 	public Employee(String initialer) {
 		this.initialer = initialer;
-		this.activities= new ArrayList<>();
-				
+		this.activities = new ArrayList<>();		
 	}
 
-	public void addActivity(Pomodoro temp) {
-		activities.add(temp);
-		
+	public void addActivity(Pomodoro pomodoro) {
+		activities.add(pomodoro);
 	}
 	
 	public String getInitials() {
 		return initialer;
 	}
 	
-	
 	public int getTimefor(String check) {
-		int time=0;
+		int time = 0;
 		for(Pomodoro activity: activities) {
 			if(activity.getActivity().equals(check)) {
-				time=activity.getTime();
+				time = activity.getTime();
 			}
 		}
 		return time;
 	}
-
 }

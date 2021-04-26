@@ -15,21 +15,17 @@ public class PKV {
 		return selectedActivity;
 	}
 
-
 	public void setSelectedActivity(Activity selectedActivity) {
 		this.selectedActivity = selectedActivity;
 	}
-
 
 	public Project getSelectedProject() {
 		return selectedProject;
 	}
 
-
 	public void setSelectedProject(Project selectedProject) {
 		this.selectedProject = selectedProject;
 	}
-
 
 	public PKV() {
 		this.employees = new ArrayList<Employee>();
@@ -40,12 +36,9 @@ public class PKV {
 		this.projects.addAll(temp.getProjectList());
 	}
 
-
 	public void add(Employee employee) {
 		employees.add(employee);
-		
 	}
-
 
 	public void login(String initialer) {
 		for(Employee employee: employees) {
@@ -53,20 +46,15 @@ public class PKV {
 				this.loggedInAs=employee;
 			}
 		}
-
 	}
-
 
 	public Employee getLoggedInAs() {
 		return this.loggedInAs;
 	}
 
-
 	public void logOut() {
 		this.loggedInAs = null;
-		
 	}
-
 
 	public void createProject(String name) throws Exception {
 		if (hasProject(name)) {
@@ -76,7 +64,6 @@ public class PKV {
 		Project newProject = new Project(name, this.date.getYear() * 10000 + id);
 		projects.add(newProject);
 	}
-
 
 	public boolean hasProject(String name) {
 		for (int i = 0; i < projects.size(); i++) {

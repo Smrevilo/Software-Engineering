@@ -30,6 +30,7 @@ public class ProjectTest {
 	public void the_employee_create_a_project_using_the_name(String name) {
 	    try {
 	    	system.createProject(name);
+			system.setSelectedProject(system.getProject(name));
 	    } catch (Exception e) {
 	    	errorMessageHolder.setErrorMessage(e.getMessage());
 	    }
@@ -38,7 +39,6 @@ public class ProjectTest {
 	@Then("a project with the name {string} exists")
 	public void a_project_with_the_name_exists(String name) {
 		assertTrue(system.hasProject(name));
-		system.setSelectedProject(system.getProject(name));
 	}
 	
 	@Given("a project with the name {string} has been created")
@@ -66,11 +66,7 @@ public class ProjectTest {
 	
 	@Given("that the project has no project leader assigned")
 	public void that_the_project_has_no_project_leader_assigned() {
-		if (system.getSelectedProject().getLeader() == null) {
-			assertTrue(true);
-		} else {
-			assertTrue(false);
-		}
+		assert system.getSelectedProject().getLeader() == null;
 	}
 
 	@When("an employee is set as the project leader")

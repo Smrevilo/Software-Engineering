@@ -70,10 +70,13 @@ public class Activity {
 		employee.addActivity(temp);
 	}
 
-	public void addTime(Employee loggedInAs, int i) throws Exception {
-		boolean found=false;
+	public void addTime(Employee employee, int i) throws Exception {
+		boolean found = false;
 		for (Pomodoro pomodoro : pomodoros) {
-			if (pomodoro.getEmployee() == loggedInAs) {
+			if (pomodoro.getEmployee() == employee) {
+				if (found) {
+					throw new Exception("Employee assigned twice to same activity");
+				}
 				pomodoro.addTime(i);
 				found=true;
 			}
@@ -81,14 +84,30 @@ public class Activity {
 		if (!found) {
 			throw new Exception("You are not assigned to this activity");
 		}
-		
-
 	}
 
 	public int getTotalTime() {
 		int output = 0;
 		for (Pomodoro pomodoro : pomodoros) {
 			output += pomodoro.getTime();
+		}
+		return output;
+	}
+
+	public int getTotalTimeForEmployee(Employee employee) {
+		int output = 0;
+		for (Pomodoro pomodoro : pomodoros) {
+			if (pomodoro.getEmployee() == employee) {
+				output += pomodoro.getTime();
+			}
+		}
+		return output;
+	}
+	
+	public String getRepport() {
+		String output = "";
+		for (Pomodoro pomodoro : pomodoros) {
+			output += "Employee: " + pomodoro.getEmployee().getInitials() + ", hours: " + pomodoro.getTime() + "\n";
 		}
 		return output;
 	}
@@ -103,12 +122,10 @@ public class Activity {
 	}
 
 	public void deleteTime(Employee loggedInAs, int i) throws Exception {
-
 		for (Pomodoro pomodoro : pomodoros) {
 			if (pomodoro.getEmployee() == loggedInAs) {
 				pomodoro.deleteTime(i);
 			}
 		}
-
 	}
 }
