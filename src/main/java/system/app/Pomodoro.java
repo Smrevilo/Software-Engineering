@@ -28,4 +28,14 @@ public class Pomodoro {
 		return activity.getName();
 	}
 
+
+	public void deleteTime(int i) {
+		if (this.time > i) {
+			this.time -= i;
+			
+		}
+		
+		
+	}
+
 }

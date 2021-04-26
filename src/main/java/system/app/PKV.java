@@ -9,6 +9,17 @@ public class PKV {
 	private DateServer date;
 	private int id = 0;
 	private Project selectedProject;
+	private Activity selectedActivity;
+
+	public Activity getSelectedActivity() {
+		return selectedActivity;
+	}
+
+
+	public void setSelectedActivity(Activity selectedActivity) {
+		this.selectedActivity = selectedActivity;
+	}
+
 
 	public Project getSelectedProject() {
 		return selectedProject;
