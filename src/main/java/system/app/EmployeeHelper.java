@@ -49,4 +49,8 @@ public class EmployeeHelper {
 	public List<Project> getProjectList() {
 		return projects;
 	}
+	
+	public String getInitials2() {
+		return employeeList.get(1).getInitials();
+	}
 }

@@ -96,5 +96,13 @@ public class PKV {
 		Project project = getProject(name);
 		projects.remove(project);
 	}
+	
+	public String makeReportFor(String projectName) throws Exception {
+		Project temp = getProject(projectName);
+		if(temp.getLeader() == loggedInAs) {
+			return temp.makeRepport();
+		}
+		throw new Exception("only the project can get a project report");
+	}
 
 }

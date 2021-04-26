@@ -14,6 +14,7 @@ import system.app.*;
 public class TimeOverviewProject {
 	private PKV system;
 	private ErrorMessageHolder errorMessageHolder;
+	private String report;
 
 	// PKV stands for projekt kordinerings værktøj
 	public TimeOverviewProject(PKV system, ErrorMessageHolder errorMessageHolder) {
@@ -43,23 +44,22 @@ public class TimeOverviewProject {
 	}
 
 	
-	@Given("the project leader requests to view total time of {string}")
-	public void the_project_leader_requests_to_view_total_time_of(String projectName) {
+	@Given("the employee requests to view total time of {string}")
+	public void the_employee_requests_to_view_total_time_of(String projectName) {
 	    try {
-			system.setSelectedProject(system.getProject(projectName));
+	    	report = system.makeReportFor(projectName);
 		} catch (Exception e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
 	}
 
-	@Then("show the project leader a list of the work hours each employee is assigned to")
-	public void show_the_project_leader_a_list_of_the_work_hours_each_employee_is_assigned_to() {
-	    String repport = system.getSelectedProject().makeRepport();
-	    System.out.println(repport);
+	@Then("display a list of the work hours each employee is assigned to")
+	public void display_a_list_of_the_work_hours_each_employee_is_assigned_to() {
+	    System.out.println(report);
 	}
 	
-	@Then("show the project leader an empty list of the work hours each employee is assigned to")
-	public void show_the_project_leader_an_empty_list_of_the_work_hours_each_employee_is_assigned_to() {
+	@Then("display an empty list of the work hours each employee is assigned to")
+	public void display_an_empty_list_of_the_work_hours_each_employee_is_assigned_to() {
 		String repport = system.getSelectedProject().makeRepport();
 	    System.out.println(repport);
 	    assertTrue(repport.equals("There is no activites"));

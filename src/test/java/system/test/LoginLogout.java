@@ -37,5 +37,11 @@ public class LoginLogout {
 	public void the_employee_is_logged_out() {
 		assert this.system.getLoggedInAs() == null;
 	}
+	
+	@When("a second employee logs in")
+	public void a_second_employee_logs_in() throws Exception {
+		EmployeeHelper initialer = new EmployeeHelper();
+		this.system.login(initialer.getInitials2());
+	}
 }
 

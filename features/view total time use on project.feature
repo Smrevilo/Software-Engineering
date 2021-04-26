@@ -10,7 +10,7 @@ Background: there is a project leader of a project
 	Then the project has a project leader
 
 Scenario: the project leader requests to view total time of activities of a certain project, for each employee
-	Given the project leader requests to view total time of "Project1"
+	Given the employee requests to view total time of "Project1"
 	And the project has these activities
 		| activity1 |
 		| activity2 |
@@ -18,10 +18,19 @@ Scenario: the project leader requests to view total time of activities of a cert
 		| activity4 |
 	And the activity "activity1" has the employee assigned
 	And the activity "activity1" has 5 registred hours
-	Then show the project leader a list of the work hours each employee is assigned to
+	Then display a list of the work hours each employee is assigned to
 
 Scenario: the project leader requests to view total time of activities of a certain empty project, for each employee
-	Given the project leader requests to view total time of "Project1"
-	Then show the project leader an empty list of the work hours each employee is assigned to
+	Given the employee requests to view total time of "Project1"
+	Then display an empty list of the work hours each employee is assigned to
 
-#TODO senario where employee is not project leader
+Scenario: an employee who is not the project leader requests to view total time of activities of a certain project, for each employee
+	Given the project has these activities
+		| activity1 |
+		| activity2 |
+		| activity3 |
+		| activity4 |
+	When the employee logs out
+	And a second employee logs in
+	Given the employee requests to view total time of "Project1"
+	Then an error message ocurres with the text "only the project can get a project report"
