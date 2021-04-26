@@ -98,11 +98,15 @@ public class TimeRegTest {
 			String project) {
 		system.setSelectedProject(system.getProject(project));
 		system.setSelectedActivity(system.getSelectedProject().getActivity(activity));
-		system.getSelectedActivity().deleteTime(system.getLoggedInAs(), int1);
+		try {
+			system.getSelectedActivity().deleteTime(system.getLoggedInAs(), int1);
+		} catch (Exception e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
 
 	}
 
-	@Then("there is only {int} hours registered for the employee on the activity with the name {string} under the project {string}")
+	@Then("there is {int} hours registered for the employee on the activity with the name {string} under the project {string}")
 	public void there_is_only_hours_registered_for_the_employee_on_the_activity_with_the_name_under_the_project(
 			Integer int1, String activity, String project) {
 		assertTrue(system.getLoggedInAs().getTimefor(activity) == int1);

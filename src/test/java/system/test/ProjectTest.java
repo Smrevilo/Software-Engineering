@@ -55,8 +55,6 @@ public class ProjectTest {
 
 	@When("the project leader adds the activity {string}")
 	public void the_project_leader_adds_the_activity(String string) {
-		System.out.println("project: "+system.getSelectedProject());
-		System.out.println(string);
 		system.getSelectedProject().createActivty(string);
 		assertTrue(true);
 	}

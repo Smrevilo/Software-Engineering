@@ -9,7 +9,7 @@ public class Activity {
 	private int startDate;
 	private int deadline;
 	private boolean state;
-	private List<Pomodoro> pomodoro;
+	private List<Pomodoro> pomodoros;
 
 	public Activity(String name) {
 		this(name, 0, 0, 0, false);
@@ -21,7 +21,7 @@ public class Activity {
 		this.startDate = startDate;
 		this.deadline = deadline;
 		this.state = state;
-		this.pomodoro = new ArrayList<Pomodoro>();
+		this.pomodoros = new ArrayList<Pomodoro>();
 	}
 
 	public String getName() {
@@ -66,15 +66,15 @@ public class Activity {
 
 	public void addEmployee(Employee employee) {
 		Pomodoro temp = new Pomodoro(employee, this);
-		pomodoro.add(temp);
+		pomodoros.add(temp);
 		employee.addActivity(temp);
 	}
 
 	public void addTime(Employee loggedInAs, int i) throws Exception {
 		boolean found=false;
-		for (Pomodoro employee : pomodoro) {
-			if (employee.getEmployee() == loggedInAs) {
-				employee.addTime(i);
+		for (Pomodoro pomodoro : pomodoros) {
+			if (pomodoro.getEmployee() == loggedInAs) {
+				pomodoro.addTime(i);
 				found=true;
 			}
 		}
@@ -87,26 +87,26 @@ public class Activity {
 
 	public int getTotalTime() {
 		int output = 0;
-		for (Pomodoro time : pomodoro) {
-			output += time.getTime();
+		for (Pomodoro pomodoro : pomodoros) {
+			output += pomodoro.getTime();
 		}
 		return output;
 	}
 
 	public boolean isAssignedTo(Employee check) {
-		for (Pomodoro employee : pomodoro) {
-			if (employee.getEmployee() == check) {
+		for (Pomodoro pomodoro : pomodoros) {
+			if (pomodoro.getEmployee() == check) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public void deleteTime(Employee loggedInAs, int i) {
+	public void deleteTime(Employee loggedInAs, int i) throws Exception {
 
-		for (Pomodoro employee : pomodoro) {
-			if (employee.getEmployee() == loggedInAs) {
-				employee.deleteTime(i);
+		for (Pomodoro pomodoro : pomodoros) {
+			if (pomodoro.getEmployee() == loggedInAs) {
+				pomodoro.deleteTime(i);
 			}
 		}
 

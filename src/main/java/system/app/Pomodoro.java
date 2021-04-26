@@ -29,13 +29,12 @@ public class Pomodoro {
 	}
 
 
-	public void deleteTime(int i) {
+	public void deleteTime(int i) throws Exception {
 		if (this.time > i) {
-			this.time -= i;
-			
+			this.time -= i;	
+		} else {
+			throw new Exception("You cannot delete more hours than you have registered");
 		}
-		
-		
 	}
 
 }
