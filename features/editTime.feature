@@ -38,3 +38,4 @@ Scenario: Deleting more time that there is registrated for an activity
 	And there is 3 hours registered for the employee on the activity with the name "Test Developement" under the project "Project1"
 	
 #TODO add/delete time from non-exsisting activity/project
+
