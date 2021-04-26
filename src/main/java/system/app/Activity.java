@@ -6,10 +6,10 @@ public class Activity {
 
 	private String name;
 	private int workLoad;
-	private int startDate;
 	private int deadline;
 	private boolean state;
 	private List<Pomodoro> pomodoros;
+	private Calendar startDate;
 
 	public Activity(String name) {
 		this(name, 0, 0, 0, false);
@@ -18,10 +18,10 @@ public class Activity {
 	public Activity(String name, int workLoad, int startDate, int deadline, boolean state) {
 		this.name = name;
 		this.workLoad = workLoad;
-		this.startDate = startDate;
 		this.deadline = deadline;
 		this.state = state;
 		this.pomodoros = new ArrayList<Pomodoro>();
+		this.startDate = new GregorianCalendar();
 	}
 
 	public String getName() {
@@ -40,12 +40,20 @@ public class Activity {
 		this.workLoad = workLoad;
 	}
 
-	public int getStartDate() {
-		return startDate;
+
+	public int[] getStartDate() {
+		int[] output=new int[3];
+		output[0]=startDate.get(startDate.DAY_OF_MONTH);
+		output[1]=startDate.get(startDate.MONTH);
+		output[2]=startDate.get(startDate.YEAR);		
+		return output;
 	}
 
-	public void setStartDate(int startDate) {
-		this.startDate = startDate;
+	public void setStartDate(int startDate, int startMonth, int startYear) {
+		System.out.println(startDate);
+		System.out.println(startMonth);
+		System.out.println(startYear);
+		this.startDate.set(startYear, startMonth, startDate);
 	}
 
 	public int getDeadline() {

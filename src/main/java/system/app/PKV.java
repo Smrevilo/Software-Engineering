@@ -105,5 +105,24 @@ public class PKV {
 			throw new Exception("only the project leader can get a project report");
 		}
 	}
+	
+	public void setStartDateFor(String projectName, String activityName, int startDate, int startMonth, int startYear) throws Exception{		
+		setSelectedProject(getProject(projectName));
+		if (getSelectedProject().getLeader()==loggedInAs) {
+			setSelectedActivity(getSelectedProject().getActivity(activityName));
+			getSelectedActivity().setStartDate(startDate, startMonth, startYear);
+		} else {
+			throw new Exception("only the project leader can set a startdate");
+		}
+		
+		
+	}
+	
+	public int[] getStartDateFor(String projectName, String activityName) throws Exception{
+		setSelectedProject(getProject(projectName));
+		setSelectedActivity(getSelectedProject().getActivity(activityName));
+		int[] output= getSelectedActivity().getStartDate();
+		return output;
+	}
 
 }
