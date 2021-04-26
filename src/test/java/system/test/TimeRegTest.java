@@ -13,10 +13,12 @@ import system.app.*;
 
 public class TimeRegTest {
 	private PKV system;
+	private ErrorMessageHolder errorMessageHolder;
 
 	// PKV stands for projekt kordinerings værktøj
 	public TimeRegTest(PKV system, ErrorMessageHolder errorMessageHolder) {
 		this.system = system;
+		this.errorMessageHolder = errorMessageHolder;
 
 	}
 
@@ -39,7 +41,12 @@ public class TimeRegTest {
 			String string2) {
 		Project projekt = system.getProject(string2);
 		Activity activity = projekt.getActivity(string);
-		activity.addTime(system.getLoggedInAs(), 10);
+		try {
+			activity.addTime(system.getLoggedInAs(), 10);
+	    } catch (Exception e) {
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }
+		
 	}
 
 	@Then("the time is registered to the activity with the name {string} under the project {string}")
@@ -65,8 +72,8 @@ public class TimeRegTest {
 		assertTrue(activity.getTotalTime() == 0);
 	}
 
-	@When("the employee registers time to sick days")
-	public void the_employee_registers_time_to_sick_days() {
+	@When("the employee registers time to sick days") 
+	public void the_employee_registers_time_to_sick_days() throws Exception{
 		system.setSelectedProject(system.getProject(system.getLoggedInAs().getInitials()));
 		Activity activity = system.getSelectedProject().getActivity("Sick Days");
 		activity.addTime(system.getLoggedInAs(), 10);
@@ -79,7 +86,7 @@ public class TimeRegTest {
 
 	@Given("the employee has registered {int} hours to the activity with the name {string} under the project {string}")
 	public void the_employee_has_registered_hours_to_the_activity_with_the_name_under_the_project(int int1,
-			String activity, String project) {
+			String activity, String project) throws Exception {
 		system.setSelectedProject(system.getProject(project));
 		system.setSelectedActivity(system.getSelectedProject().getActivity(activity));
 		system.getSelectedActivity().addTime(system.getLoggedInAs(), int1);
@@ -100,6 +107,11 @@ public class TimeRegTest {
 			Integer int1, String activity, String project) {
 		assertTrue(system.getLoggedInAs().getTimefor(activity) == int1);
 
+	}
+	
+	@Then("an error message ocurres with the text {string}")
+	public void an_error_message_ocurres_with_the_text(String string) {
+	    assertTrue(string.equals(errorMessageHolder.getErrorMessage()));
 	}
 
 }

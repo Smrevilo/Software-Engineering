@@ -70,12 +70,18 @@ public class Activity {
 		employee.addActivity(temp);
 	}
 
-	public void addTime(Employee loggedInAs, int i) {
+	public void addTime(Employee loggedInAs, int i) throws Exception {
+		boolean found=false;
 		for (Pomodoro employee : pomodoro) {
 			if (employee.getEmployee() == loggedInAs) {
 				employee.addTime(i);
+				found=true;
 			}
 		}
+		if (!found) {
+			throw new Exception("You are not assigned to this activity");
+		}
+		
 
 	}
 

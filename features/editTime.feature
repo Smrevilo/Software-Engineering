@@ -19,7 +19,8 @@ Scenario: Registering time to an activity
 Scenario: Registering time to an activity the employee is NOT assigned to
 	Given that the employee is Not assigned to the activity with the name "Test Developement" under the project "Project1"
 	When the employee registers time to the activity with the name "Test Developement" under the project "Project1"
-	Then the time is not registered to the activity with the name "Test Developement" under the project "Project1"
+	Then an error message ocurres with the text "You are not assigned to this activity"
+	And the time is not registered to the activity with the name "Test Developement" under the project "Project1"
 
 
 Scenario: Registering time to sick days
