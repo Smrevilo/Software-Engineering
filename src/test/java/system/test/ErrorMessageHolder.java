@@ -1,4 +1,4 @@
-package dtu.calculator;
+package system.test;
 
 public class ErrorMessageHolder {
 	private String errorMessage = "";
