@@ -22,8 +22,8 @@ public class Pomodoro {
 		return employee;
 	}
 	
-	public String getActivity() {
-		return activity.getName();
+	public Activity getActivity() {
+		return activity;
 	}
 
 	public void deleteTime(int i) throws Exception {

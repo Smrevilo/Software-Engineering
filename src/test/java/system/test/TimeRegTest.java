@@ -27,48 +27,54 @@ public class TimeRegTest {
 	}
 
 	@Given("that the employee is assigned to the activity with the name {string} under the project {string}")
-	public void that_the_employee_is_assigned_to_the_activity_with_the_name_under_the_project(String string,
-			String string2) {
-		Project projekt = system.getProject(string2);
-		Activity activity = projekt.getActivity(string);
-		activity.addEmployee(system.getLoggedInAs());
-
-	}
-
-	@When("the employee registers time to the activity with the name {string} under the project {string}")
-	public void the_employee_registers_time_to_the_activity_with_the_name_under_the_project(String string,
-			String string2) {
-		Project projekt = system.getProject(string2);
-		Activity activity = projekt.getActivity(string);
+	public void that_the_employee_is_assigned_to_the_activity_with_the_name_under_the_project(String activityName,
+			String projectName) {
+		Project projekt;
 		try {
-			activity.addTime(system.getLoggedInAs(), 10);
-	    } catch (Exception e) {
+			projekt = system.getProject(projectName);
+			Activity activity = projekt.getActivity(activityName);
+			activity.addEmployee(system.getLoggedInAs());
+		} catch (Exception e) {
 	    	errorMessageHolder.setErrorMessage(e.getMessage());
-	    }
-		
+		}
 	}
 
 	@Then("the time is registered to the activity with the name {string} under the project {string}")
-	public void the_time_is_registered_to_the_activity_with_the_name_under_the_project(String string, String string2) {
-		Project projekt = system.getProject(string2);
-		Activity activity = projekt.getActivity(string);
-		assertTrue(activity.getTotalTime() == 10);
+	public void the_time_is_registered_to_the_activity_with_the_name_under_the_project(String activityName, String projectName) {
+		try {
+			Project projekt = system.getProject(projectName);
+			Activity activity = projekt.getActivity(activityName);
+			activity.addTime(system.getLoggedInAs(), 10);
+			assertTrue(activity.getTotalTime() == 10);
+	    } catch (Exception e) {
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }
 	}
 
-	@Given("that the employee is Not assigned to the activity with the name {string} under the project {string}")
-	public void that_the_employee_is_not_assigned_to_the_activity_with_the_name_under_the_project(String string,
-			String string2) {
-		Project projekt = system.getProject(string2);
-		Activity activity = projekt.getActivity(string);
-		assertFalse(activity.isAssignedTo(system.getLoggedInAs()));
+	@Given("that the employee is not assigned to the activity with the name {string} under the project {string}")
+	public void that_the_employee_is_not_assigned_to_the_activity_with_the_name_under_the_project(String activityName,
+			String projectName) {
+		try {
+			Project projekt = system.getProject(projectName);
+			Activity activity = projekt.getActivity(activityName);
+			activity.addTime(system.getLoggedInAs(), 10);
+			assertFalse(activity.isAssignedTo(system.getLoggedInAs()));
+	    } catch (Exception e) {
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }
 	}
 
 	@Then("the time is not registered to the activity with the name {string} under the project {string}")
-	public void the_time_is_not_registered_to_the_activity_with_the_name_under_the_project(String string,
-			String string2) {
-		Project projekt = system.getProject(string2);
-		Activity activity = projekt.getActivity(string);
-		assertTrue(activity.getTotalTime() == 0);
+	public void the_time_is_not_registered_to_the_activity_with_the_name_under_the_project(String activityName,
+			String projectName) {
+		try {
+			Project projekt = system.getProject(projectName);
+			Activity activity = projekt.getActivity(activityName);
+			activity.addTime(system.getLoggedInAs(), 10);
+			assertTrue(activity.getTotalTime() == 0);
+	    } catch (Exception e) {
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }
 	}
 
 	@When("the employee registers time to sick days") 
@@ -82,23 +88,25 @@ public class TimeRegTest {
 	public void the_time_is_registered_under_sick_days() {
 		assertTrue(system.getLoggedInAs().getTimefor("Sick Days") == 10);
 	}
-
-	@Given("the employee has registered {int} hours to the activity with the name {string} under the project {string}")
-	public void the_employee_has_registered_hours_to_the_activity_with_the_name_under_the_project(int int1,
-			String activity, String project) throws Exception {
-		system.setSelectedProject(system.getProject(project));
-		system.setSelectedActivity(system.getSelectedProject().getActivity(activity));
-		system.getSelectedActivity().addTime(system.getLoggedInAs(), int1);
-		assertTrue(system.getLoggedInAs().getTimefor(activity) == int1);
+	
+	@When("the employee registers {int} hours to the activity with the name {string} under the project {string}")
+	public void the_employee_registers_hours_to_the_activity_with_the_name_under_the_project(Integer hours, String activityName, String projectName) {
+		try {
+			system.setSelectedProject(system.getProject(projectName));
+			system.setSelectedActivity(system.getSelectedProject().getActivity(activityName));
+			system.getSelectedActivity().addTime(system.getLoggedInAs(), hours);
+		} catch (Exception e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
 	}
 
 	@When("the employee deletes {int} hours from the activity with the name {string} under the project {string}")
-	public void the_employee_deletes_hours_from_the_activity_with_the_name_under_the_project(int int1, String activity,
-			String project) {
-		system.setSelectedProject(system.getProject(project));
-		system.setSelectedActivity(system.getSelectedProject().getActivity(activity));
+	public void the_employee_deletes_hours_from_the_activity_with_the_name_under_the_project(int hours, String activityName,
+			String projectName) {
 		try {
-			system.getSelectedActivity().deleteTime(system.getLoggedInAs(), int1);
+			system.setSelectedProject(system.getProject(projectName));
+			system.setSelectedActivity(system.getSelectedProject().getActivity(activityName));
+			system.getSelectedActivity().deleteTime(system.getLoggedInAs(), hours);
 		} catch (Exception e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}

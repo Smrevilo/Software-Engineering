@@ -27,11 +27,11 @@ public class PKV {
 		this.selectedProject = selectedProject;
 	}
 
-	public PKV() {
+	public PKV() throws Exception {
 		this.employees = new ArrayList<Employee>();
 		this.projects = new ArrayList<Project>();
 		this.date = new DateServer();
-		EmployeeHelper temp=new EmployeeHelper();
+		EmployeeHelper temp = new EmployeeHelper();
 		this.employees.addAll(temp.getEmployeeList());
 		this.projects.addAll(temp.getProjectList());
 	}
@@ -43,7 +43,7 @@ public class PKV {
 	public void login(String initialer) {
 		for(Employee employee: employees) {
 			if(initialer.equals(employee.getInitials())) {
-				this.loggedInAs=employee;
+				this.loggedInAs = employee;
 			}
 		}
 	}
@@ -74,13 +74,24 @@ public class PKV {
 		return false;		
 	}
 	
-	public Project getProject(String name) {
+	public Project getProject(String name) throws Exception {
+		if (!hasProject(name)) {
+			throw new Exception("A project with that name doesn't exsits");
+		}
 		for (Project p : projects) {
 			if (p.getName().equals(name)) {
 				return p;
 			}
 		}
 		return null;
+	}
+
+	public void deleteProject(String name) throws Exception {
+		if (!hasProject(name)) {
+			throw new Exception("A project with that name doesn't exsits");
+		}
+		Project project = getProject(name);
+		projects.remove(project);
 	}
 
 }

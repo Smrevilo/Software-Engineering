@@ -11,15 +11,14 @@ Background: There is both an activity and a project
 
 Scenario: Registering time to an activity
 	Given that the employee is assigned to the activity with the name "Test Developement" under the project "Project1"
-	When the employee registers time to the activity with the name "Test Developement" under the project "Project1"
-	Then the time is registered to the activity with the name "Test Developement" under the project "Project1"
+	When the employee registers 10 hours to the activity with the name "Test Developement" under the project "Project1"
+	Then there is 10 hours registered for the employee on the activity with the name "Test Developement" under the project "Project1"
 
 Scenario: Registering time to an activity the employee is NOT assigned to
-	Given that the employee is Not assigned to the activity with the name "Test Developement" under the project "Project1"
-	When the employee registers time to the activity with the name "Test Developement" under the project "Project1"
+	Given that the employee is not assigned to the activity with the name "Test Developement" under the project "Project1"
+	When the employee registers 10 hours to the activity with the name "Test Developement" under the project "Project1"
 	Then an error message ocurres with the text "You are not assigned to this activity"
 	And the time is not registered to the activity with the name "Test Developement" under the project "Project1"
-
 
 Scenario: Registering time to sick days
 	When the employee registers time to sick days
@@ -27,14 +26,15 @@ Scenario: Registering time to sick days
 	
 Scenario: Deleting time registration for an activity
 	Given that the employee is assigned to the activity with the name "Test Developement" under the project "Project1"
-	And the employee has registered 5 hours to the activity with the name "Test Developement" under the project "Project1"
-	When the employee deletes 3 hours from the activity with the name "Test Developement" under the project "Project1"
+	When the employee registers 5 hours to the activity with the name "Test Developement" under the project "Project1"
+	And the employee deletes 3 hours from the activity with the name "Test Developement" under the project "Project1"
 	Then there is 2 hours registered for the employee on the activity with the name "Test Developement" under the project "Project1"
 
 Scenario: Deleting more time that there is registrated for an activity
 	Given that the employee is assigned to the activity with the name "Test Developement" under the project "Project1"
-	And the employee has registered 3 hours to the activity with the name "Test Developement" under the project "Project1"
-	When the employee deletes 4 hours from the activity with the name "Test Developement" under the project "Project1"
+	When the employee registers 3 hours to the activity with the name "Test Developement" under the project "Project1"
+	And the employee deletes 4 hours from the activity with the name "Test Developement" under the project "Project1"
 	Then an error message ocurres with the text "You cannot delete more hours than you have registered"
 	And there is 3 hours registered for the employee on the activity with the name "Test Developement" under the project "Project1"
 	
+#TODO add/delete time from non-exsisting activity/project

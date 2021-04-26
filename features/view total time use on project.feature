@@ -23,4 +23,5 @@ Scenario: the project leader requests to view total time of activities of a cert
 Scenario: the project leader requests to view total time of activities of a certain empty project, for each employee
 	Given the project leader requests to view total time of "Project1"
 	Then show the project leader an empty list of the work hours each employee is assigned to
-	
+
+#TODO senario where employee is not project leader

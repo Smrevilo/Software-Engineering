@@ -22,7 +22,7 @@ public class Project {
 		activites.add(new Activity(name));
 	}
 	
-	public boolean hasActivty(String name) {
+	public boolean hasActivity(String name) {
 		for (Activity a : activites) {
 			if (a.getName().equals(name)) {
 				return true;
@@ -39,7 +39,10 @@ public class Project {
 		this.leader = leader;
 	}
 	
-	public Activity getActivity(String name) {
+	public Activity getActivity(String name) throws Exception {
+		if (!hasActivity(name)) {
+			throw new Exception("An activity with that name doesn't exsits");
+		}
 		for (Activity a : activites) {
 			if (a.getName().equals(name)) {
 				return a;

@@ -15,10 +15,9 @@ public class ProjectTest {
 	private PKV system;
 	private Employee employee;
 	private ErrorMessageHolder errorMessageHolder;
-	private Employee dummy = new Employee("dummy");
 
 	// PKV stands for projekt kordinerings værktøj
-	public ProjectTest(PKV system, ErrorMessageHolder errorMessageHolder) {
+	public ProjectTest(PKV system, ErrorMessageHolder errorMessageHolder) throws Exception {
 		this.system = system;
 		EmployeeHelper initialer = new EmployeeHelper();
 		this.employee = new Employee(initialer.getInitials());
@@ -43,6 +42,7 @@ public class ProjectTest {
 	@Given("a project with the name {string} has been created")
 	public void a_project_with_the_name_has_been_created(String name) throws Exception {
 	    system.createProject(name);
+	    system.setSelectedProject(system.getProject(name));
 	}
 
 	@Then("an error containing {string} is displayed")
@@ -59,8 +59,8 @@ public class ProjectTest {
 	}
 
 	@Then("the project has the activity {string}")
-	public void the_project_has_the_activity(String string) {
-		assertTrue(system.getSelectedProject().hasActivty(string));
+	public void the_project_has_the_activity(String acivityName) {
+		assertTrue(system.getSelectedProject().hasActivity(acivityName));
 	}
 	
 	@Given("that the project has no project leader assigned")
@@ -70,24 +70,37 @@ public class ProjectTest {
 
 	@When("an employee is set as the project leader")
 	public void an_employee_is_set_as_the_project_leader() {
-		system.getSelectedProject().setLeader(dummy);
+		system.getSelectedProject().setLeader(system.getLoggedInAs());
 	}
 
 	@Then("the project has a project leader")
 	public void the_project_has_a_project_leader() {
-		if (system.getSelectedProject().getLeader() == dummy) {
-			assertTrue(true);
-		} else {
-			assertTrue(false);
-		}
+		assertTrue(system.getSelectedProject().getLeader().equals(system.getLoggedInAs()));
 	}
 	
 	@Given("the logged in employee is the project leader of {string}")
-	public void the_logged_in_employee_is_the_project_leader_of(String string) {
+	public void the_logged_in_employee_is_the_project_leader_of(String projectName) {
 		Employee leader = system.getLoggedInAs();
-		system.getSelectedProject().setLeader(leader);
-	   assertTrue(system.getSelectedProject().getLeader()==system.getLoggedInAs());
+		try {
+			system.getProject(projectName).setLeader(leader);
+			assertTrue(system.getProject(projectName).getLeader() == system.getLoggedInAs());
+	    } catch (Exception e) {
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }
+	}
+	
+	@When("the employee deletes the project {string}")
+	public void the_employee_deletes_the_project(String projectName) {
+	    try {
+			system.deleteProject(projectName);
+		} catch (Exception e) {
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+		}
 	}
 
-
+	@Then("the project {string} no longer exists")
+	public void the_project_no_longer_exists(String projectName) {
+	    assertFalse(system.hasProject(projectName));
+	}
+	
 }

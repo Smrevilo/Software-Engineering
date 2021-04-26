@@ -30,7 +30,11 @@ public class TimeOverviewProject {
 	
 	@Then("the activity {string} has the employee assigned")
 	public void the_activity_has_the_employee_assigned(String activityName) {
-	    system.getSelectedProject().getActivity(activityName).addEmployee(system.getLoggedInAs());
+	    try {
+			system.getSelectedProject().getActivity(activityName).addEmployee(system.getLoggedInAs());
+		} catch (Exception e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
 	}
 
 	@Then("the activity {string} has {int} registred hours")
@@ -41,7 +45,11 @@ public class TimeOverviewProject {
 	
 	@Given("the project leader requests to view total time of {string}")
 	public void the_project_leader_requests_to_view_total_time_of(String projectName) {
-	    system.setSelectedProject(system.getProject(projectName));
+	    try {
+			system.setSelectedProject(system.getProject(projectName));
+		} catch (Exception e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
 	}
 
 	@Then("show the project leader a list of the work hours each employee is assigned to")
