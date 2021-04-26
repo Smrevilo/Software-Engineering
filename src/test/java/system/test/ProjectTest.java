@@ -44,11 +44,6 @@ public class ProjectTest {
 	    system.createProject(name);
 	    system.setSelectedProject(system.getProject(name));
 	}
-
-	@Then("an error containing {string} is displayed")
-	public void an_error_containing_is_displayed(String errorMsg) {
-		assertTrue(errorMessageHolder.getErrorMessage().equals(errorMsg));
-	}
 	
 	//EDIT PROJECT ----------------------------------------------------------
 

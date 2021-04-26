@@ -16,9 +16,14 @@ Scenario: Delete a project while being the project leader
 	And the project has a project leader
 	When the employee deletes the project "FailProject"
 	Then the project "FailProject" no longer exists
-	
+
+Scenario: Delete a project while NOT being the project leader
+	Given a project with the name "FailProject" has been created
+	Then a project with the name "FailProject" exists
+	When the employee deletes the project "FailProject"
+	Then an error message ocurres with the text "Only the project leaders can delete the project"
 
 Scenario: Host new project ERROR
 	Given a project with the name "Project1" has been created
 	When the employee creates a project using the name "Project1"
-	Then an error containing "A project with that name already exsits" is displayed
+	Then an error message ocurres with the text "A project with that name already exsits"

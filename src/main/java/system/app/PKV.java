@@ -90,6 +90,9 @@ public class PKV {
 		if (!hasProject(name)) {
 			throw new Exception("A project with that name doesn't exsits");
 		}
+		if (selectedProject.getLeader() != loggedInAs) {	
+			throw new Exception("Only the project leaders can delete the project");		
+		}
 		Project project = getProject(name);
 		projects.remove(project);
 	}
