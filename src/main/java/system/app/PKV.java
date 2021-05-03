@@ -2,6 +2,8 @@ package system.app;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 public class PKV {
 	private Employee loggedInAs;
@@ -11,6 +13,7 @@ public class PKV {
 	private int id = 0;
 	private Project selectedProject;
 	private Activity selectedActivity;
+	private int threshold;
 
 	public Activity getSelectedActivity() {
 		return selectedActivity;
@@ -106,42 +109,90 @@ public class PKV {
 			throw new Exception("only the project leader can get a project report");
 		}
 	}
-	
-	public void setStartDateFor(String projectName, String activityName, int startDate, int startMonth, int startYear) throws Exception{		
+
+	public void setStartDateFor(String projectName, String activityName, int startDate, int startMonth, int startYear)
+			throws Exception {
 		setSelectedProject(getProject(projectName));
-		if (getSelectedProject().getLeader()==loggedInAs) {
+		if (getSelectedProject().getLeader() == loggedInAs) {
 			setSelectedActivity(getSelectedProject().getActivity(activityName));
 			getSelectedActivity().setStartDate(startDate, startMonth, startYear);
 		} else {
 			throw new Exception("only the project leader can set a startdate");
 		}
-		
-		
+
 	}
-	
-	public Calendar getStartDateFor(String projectName, String activityName) throws Exception{
+
+	public Calendar getStartDateFor(String projectName, String activityName) throws Exception {
 		setSelectedProject(getProject(projectName));
 		setSelectedActivity(getSelectedProject().getActivity(activityName));
-		Calendar output= getSelectedActivity().getStartDate();
+		Calendar output = getSelectedActivity().getStartDate();
 		return output;
 	}
 
-	public void setDeadlineFor(String projectName, String activityName, int deadDate, int deadMonth, int deadYear) throws Exception {
+	public void setDeadlineFor(String projectName, String activityName, int deadDay, int deadMonth, int deadYear)
+			throws Exception {
 		setSelectedProject(getProject(projectName));
-		if (getSelectedProject().getLeader()==loggedInAs) {
+		if (getSelectedProject().getLeader() == loggedInAs) {
 			setSelectedActivity(getSelectedProject().getActivity(activityName));
-			getSelectedActivity().setDeadline(deadDate, deadMonth, deadYear);
+			getSelectedActivity().setDeadline(deadDay, deadMonth, deadYear);
 		} else {
 			throw new Exception("only the project leader can set a deadline");
+			
 		}
-		
+
 	}
 
 	public Calendar getDeadlineFor(String projectName, String activityName) throws Exception {
 		setSelectedProject(getProject(projectName));
 		setSelectedActivity(getSelectedProject().getActivity(activityName));
-		Calendar output= getSelectedActivity().getDeadline();
+		Calendar output = getSelectedActivity().getDeadline();
 		return output;
 	}
+
+	public void setStatefor(String projectName, String activityName, boolean state) throws Exception {
+		setSelectedProject(getProject(projectName));
+		setSelectedActivity(getSelectedProject().getActivity(activityName));
+		getSelectedActivity().setState(state);
+
+	}
+
+	public List<Employee> getAvailableEmployee(GregorianCalendar date) {
+		List<Employee> availableEmployee = new ArrayList<Employee>();
+		for (Employee employee : employees) {
+			if (employee.getAvailablePomodoro(date) <= threshold) {
+				availableEmployee.add(employee);
+			}
+
+		}
+
+		return availableEmployee;
+	}
+
+	public void setThreshold(int threshold) {
+		this.threshold = threshold;
+	}
+
+	public int getThreshold() {
+		return threshold;
+	}
+
+	public List<Employee> getEmployeeList() {
+		return employees;		
+	}
+
+	
+
+	public void removeEmployeeFromActivity(Employee employee) throws Exception {
+		if (this.selectedProject.getLeader() == this.loggedInAs) {
+			this.selectedActivity.removeEmployee(employee);
+			
+		} else {
+			throw new Exception("Only the project leader can remove employees from activities");
+		}
+		
+		
+	}
+
+	
 
 }

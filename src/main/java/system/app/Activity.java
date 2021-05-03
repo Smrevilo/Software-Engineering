@@ -4,25 +4,29 @@ import java.util.*;
 
 public class Activity {
 
+
 	private String name;
-	private int workLoad;
 	private boolean state;
 	private List<Pomodoro> pomodoros;
 	private Calendar startDate;
 	private Calendar deadline;
 
 	public Activity(String name) {
-		this(name, 0, 0, 0, false);
+		this(name, false);
 	}
 
-	public Activity(String name, int workLoad, int startDate, int deadline, boolean state) {
+	public Activity(String name, boolean state) {
 		this.name = name;
-		this.workLoad = workLoad;
 		this.deadline = new GregorianCalendar();
 		this.state = state;
 		this.pomodoros = new ArrayList<Pomodoro>();
 		this.startDate = new GregorianCalendar();
+		
 	}
+	
+	
+
+	
 
 	public String getName() {
 		return name;
@@ -32,13 +36,7 @@ public class Activity {
 		this.name = name;
 	}
 
-	public int getWorkLoad() {
-		return workLoad;
-	}
-
-	public void setWorkLoad(int workLoad) {
-		this.workLoad = workLoad;
-	}
+	
 
 
 	public Calendar getStartDate() {
@@ -129,4 +127,17 @@ public class Activity {
 			}
 		}
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "Activity [name=" + name + ", startDate=" + startDate.get(startDate.YEAR) +"#"+startDate.get(startDate.MONTH)+"#"+startDate.get(startDate.DAY_OF_MONTH) +"#"+ ", deadline=" + deadline.YEAR +"#"+deadline.MONTH+"#"+deadline.DAY_OF_MONTH  + "]";
+	}
+
+	public void removeEmployee(Employee employee) {
+		pomodoros.remove(pomodoros.indexOf(employee));
+		employee.removeActivity(this);
+	}
+	
 }

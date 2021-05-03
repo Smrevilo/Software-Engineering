@@ -14,7 +14,6 @@ public class LoginLogout {
 	private PKV system;
 	private String employeeInitials;
 
-	// PKV stands for projekt kordinerings værktøj
 	public LoginLogout(PKV system) throws Exception {
 		this.system = system;
 		EmployeeHelper initialer = new EmployeeHelper();

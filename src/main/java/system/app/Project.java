@@ -67,4 +67,13 @@ public class Project {
 		}
 		return repport;
 	}
+	
+	public ArrayList<Activity> getAcivityList() {
+		return activites;
+		
+	}
+
+	
+
+	
 }

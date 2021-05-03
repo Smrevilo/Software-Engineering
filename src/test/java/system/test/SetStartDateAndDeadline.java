@@ -38,6 +38,7 @@ public class SetStartDateAndDeadline {
 		assertTrue(check.get(check.DAY_OF_MONTH)==startdate);
 		assertTrue(check.get(check.MONTH)==startmonth);
 		assertTrue(check.get(check.YEAR)==startyear);
+	
 	}
 	
 	@When("the employee sets the deadline of the activity {string} under the project {string} to the {int} - {int} - {int}")
