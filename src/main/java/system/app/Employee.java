@@ -75,9 +75,29 @@ public class Employee {
 		return priority;
 	}
 
-	public void removeActivity(Activity activity) {
-		pomodoros.remove(pomodoros.indexOf(activity));
+	public void removeActivity(Activity activity) throws Exception {
+		if (!hasActivity(activity)) {
+			throw new Exception("The employee is not assigned to this activity");
+		}
+		for (Pomodoro pomodoro : pomodoros) {
+			if (pomodoro.getActivity() == activity) {
+				if (pomodoro.getTime() != 0) {
+					throw new Exception("The employee has registered hours to this activity");
+				}
+				pomodoros.remove(pomodoro);
+				//activity.removeEmployee(employee);
+				return;
+			}
+		}
+	}
 
+	public boolean hasActivity(Activity activity) {
+		for (Pomodoro pomodoro : pomodoros) {
+			if (pomodoro.getActivity() == activity) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

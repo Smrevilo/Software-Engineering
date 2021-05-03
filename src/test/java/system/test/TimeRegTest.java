@@ -117,7 +117,6 @@ public class TimeRegTest {
 	public void there_is_only_hours_registered_for_the_employee_on_the_activity_with_the_name_under_the_project(
 			Integer int1, String activity, String project) {
 		assertTrue(system.getLoggedInAs().getTimefor(activity) == int1);
-
 	}
 	
 	@Then("an error message ocurres with the text {string}")

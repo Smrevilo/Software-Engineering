@@ -153,6 +153,15 @@ public class PKV {
 		}
 	}
 
+	public Employee getEmployee(String initials) throws Exception {
+		for (Employee employee : employees) {
+			if (employee.getInitials().equals(initials)) {
+				return employee;
+			}
+		}
+		throw new Exception("An employee with the initials \"" + initials + "\" does not exsit");
+	}
+
 	public void setThreshold(int threshold) {
 		this.threshold = threshold;
 	}
@@ -184,6 +193,4 @@ public class PKV {
 	public void setSelectedProject(Project selectedProject) {
 		this.selectedProject = selectedProject;
 	}
-
-
 }

@@ -106,15 +106,29 @@ public class Activity {
 		}
 	}
 
-
-	@Override
-	public String toString() {
-		return "Activity [name=" + name + ", startDate=" + startDate.get(startDate.YEAR) +"#"+startDate.get(startDate.MONTH)+"#"+startDate.get(startDate.DAY_OF_MONTH) +"#"+ ", deadline=" + deadline.YEAR +"#"+deadline.MONTH+"#"+deadline.DAY_OF_MONTH  + "]";
+	public void removeEmployee(Employee employee) throws Exception {
+		if (!hasEmployee(employee)) {
+			throw new Exception("The employee is not assigned to this activity");
+		}
+		for (Pomodoro pomodoro : pomodoros) {
+			if (pomodoro.getEmployee() == employee) {
+				if (pomodoro.getTime() != 0) {
+					throw new Exception("The employee has registered hours to this activity");
+				}
+				pomodoros.remove(pomodoro);
+				employee.removeActivity(this);
+				return;
+			}
+		}
 	}
 
-	public void removeEmployee(Employee employee) {
-		pomodoros.remove(pomodoros.indexOf(employee));
-		employee.removeActivity(this);
+	public boolean hasEmployee(Employee employee) {
+		for (Pomodoro pomodoro : pomodoros) {
+			if (pomodoro.getEmployee() == employee) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

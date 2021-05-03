@@ -25,7 +25,7 @@ Background:
 Scenario: Looking for availability at a specific date
 	When the logged in employee looks for availability at the date 25 05 2021
 	Then display a list of 0 employee that are available at that date
-	When the logged in employee looks for availability at the date 19 05 21
+	When the logged in employee looks for availability at the date 19 05 2021
 	Then display a list of 29 employee that are available at that date
 
 	
