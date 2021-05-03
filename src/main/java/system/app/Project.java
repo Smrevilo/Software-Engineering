@@ -18,7 +18,10 @@ public class Project {
 		return name;
 	}
 	
-	public void createActivty(String name) {
+	public void createActivty(String name) throws Exception {
+		if (hasActivity(name)) {
+			throw new Exception("An activity with the name \"" + name + "\" already exsits");
+		}
 		activites.add(new Activity(name));
 	}
 	

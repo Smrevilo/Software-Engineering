@@ -11,6 +11,7 @@ public class PKV {
 	private int id = 0;
 	private Project selectedProject;
 	private Activity selectedActivity;
+	private GUI gui;
 
 	public Activity getSelectedActivity() {
 		return selectedActivity;
@@ -35,18 +36,22 @@ public class PKV {
 		EmployeeHelper temp = new EmployeeHelper();
 		this.employees.addAll(temp.getEmployeeList());
 		this.projects.addAll(temp.getProjectList());
+		this.gui = new GUI(this);
 	}
 
 	public void add(Employee employee) {
 		employees.add(employee);
 	}
 
-	public void login(String initialer) {
+	public boolean login(String initials) {
+		logOut();
 		for (Employee employee : employees) {
-			if (initialer.equals(employee.getInitials())) {
+			if (initials.equals(employee.getInitials())) {
 				this.loggedInAs = employee;
+				return true;
 			}
 		}
+		return false;
 	}
 
 	public Employee getLoggedInAs() {
@@ -59,7 +64,7 @@ public class PKV {
 
 	public void createProject(String name) throws Exception {
 		if (hasProject(name)) {
-			throw new Exception("A project with that name already exsits");
+			throw new Exception("A project with the name \"" + name + "\" already exsits");
 		}
 		id++;
 		Project newProject = new Project(name, this.date.getYear() * 10000 + id);
@@ -101,9 +106,9 @@ public class PKV {
 	public String makeReportFor(String projectName) throws Exception {
 		Project temp = getProject(projectName);
 		if (temp.getLeader() == loggedInAs) {
-			return temp.makeRepport();
+			return "Project: " + projectName + "\n" + temp.makeRepport();
 		} else {
-			throw new Exception("only the project leader can get a project report");
+			throw new Exception("Only the project leader can get a project report");
 		}
 	}
 	
@@ -113,10 +118,8 @@ public class PKV {
 			setSelectedActivity(getSelectedProject().getActivity(activityName));
 			getSelectedActivity().setStartDate(startDate, startMonth, startYear);
 		} else {
-			throw new Exception("only the project leader can set a startdate");
+			throw new Exception("Only the project leader can set a startdate");
 		}
-		
-		
 	}
 	
 	public Calendar getStartDateFor(String projectName, String activityName) throws Exception{
@@ -142,6 +145,10 @@ public class PKV {
 		setSelectedActivity(getSelectedProject().getActivity(activityName));
 		Calendar output= getSelectedActivity().getDeadline();
 		return output;
+	}
+
+	public void startApp() {
+		gui.start();
 	}
 
 }

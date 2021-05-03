@@ -22,7 +22,7 @@ public class TimeRegTest {
 	}
 
 	@Given("this project has this activity {string}")
-	public void this_project_has_this_activity(String activity) {
+	public void this_project_has_this_activity(String activity) throws Exception {
 		this.system.getSelectedProject().createActivty(activity);
 	}
 

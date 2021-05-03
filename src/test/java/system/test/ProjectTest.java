@@ -48,7 +48,7 @@ public class ProjectTest {
 	//EDIT PROJECT ----------------------------------------------------------
 
 	@When("the project leader adds the activity {string}")
-	public void the_project_leader_adds_the_activity(String string) {
+	public void the_project_leader_adds_the_activity(String string) throws Exception {
 		system.getSelectedProject().createActivty(string);
 		assertTrue(true);
 	}
