@@ -4,16 +4,12 @@ import java.util.*;
 
 public class Employee {
 	private String initialer;
-<<<<<<< HEAD
 	private ArrayList<Pomodoro> pomodoros;
 	private ArrayList<String> specialActivities = new ArrayList<String>(Arrays.asList(
             "Sick Days",
             "Vacation",
             "Courses"
             ));
-=======
-	private List<Pomodoro> pomodoros;
->>>>>>> branch 'master' of https://Maxi35@github.com/Smrevilo/Software-Engineering.git
 
 	public Employee(String initialer) {
 		this.initialer = initialer;
@@ -60,7 +56,6 @@ public class Employee {
 	}
 
 	public int getAvailablePomodoro(GregorianCalendar testDate) {
-<<<<<<< HEAD
 		int priority = 0;
 		//System.out.println(testDate.YEAR + " " + testDate.MONTH + " " + testDate.DAY_OF_MONTH);
 		// If the activity is within the interval of the startdate and deadline, then increment priority 
@@ -103,32 +98,6 @@ public class Employee {
 			}
 		}
 		return false;
-=======
-		int i = 0;
-		// If the activity is within the interval of the startdate and deadline, then increment business 
-		for (Pomodoro pomodoro : pomodoros) {
-			
-			if ((pomodoro.getActivity().getStartDate().YEAR >= testDate.YEAR && pomodoro.getActivity().getDeadline().YEAR <= testDate.YEAR)) {
-				if ((pomodoro.getActivity().getStartDate().MONTH >= testDate.MONTH && pomodoro.getActivity().getDeadline().MONTH <= testDate.MONTH)) {	
-					if ((pomodoro.getActivity().getStartDate().DAY_OF_MONTH >= testDate.DAY_OF_MONTH && pomodoro.getActivity().getDeadline().DAY_OF_MONTH <= testDate.DAY_OF_MONTH)) {
-						i++;
-					}
-				}
-			}
-		}
-		System.out.println("initialer: "+initialer +" ||getAbiablePomodoro: "+i);
-		return i;
-	}
-
-	@Override
-	public String toString() {
-		return "Employee [initialer=" + initialer + "]";
-	}
-
-	public void removeActivity(Activity activity) {
-		pomodoros.remove(pomodoros.indexOf(activity));
-
->>>>>>> branch 'master' of https://Maxi35@github.com/Smrevilo/Software-Engineering.git
 	}
 	
 }

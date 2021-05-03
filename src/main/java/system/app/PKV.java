@@ -13,28 +13,8 @@ public class PKV {
 	private int id = 0;
 	private Project selectedProject;
 	private Activity selectedActivity;
-<<<<<<< HEAD
 	private GUI gui;
 	private int threshold;
-=======
-	private int threshold;
-
-	public Activity getSelectedActivity() {
-		return selectedActivity;
-	}
-
-	public void setSelectedActivity(Activity selectedActivity) {
-		this.selectedActivity = selectedActivity;
-	}
-
-	public Project getSelectedProject() {
-		return selectedProject;
-	}
-
-	public void setSelectedProject(Project selectedProject) {
-		this.selectedProject = selectedProject;
-	}
->>>>>>> branch 'master' of https://Maxi35@github.com/Smrevilo/Software-Engineering.git
 
 	public PKV() throws Exception {
 		this.employees = new ArrayList<Employee>();
@@ -115,84 +95,42 @@ public class PKV {
 		}
 	}
 
-<<<<<<< HEAD
 	public void setStartDateFor(String projectName, String activityName, int startDay, int startMonth, int startYear)
 			throws Exception {
 		Project project = getProject(projectName);
 		if (project.getLeader() == loggedInAs) {
 			Activity activity = project.getActivity(activityName);
 			activity.setStartDate(startDay, startMonth, startYear);
-=======
-	public void setStartDateFor(String projectName, String activityName, int startDate, int startMonth, int startYear)
-			throws Exception {
-		setSelectedProject(getProject(projectName));
-		if (getSelectedProject().getLeader() == loggedInAs) {
-			setSelectedActivity(getSelectedProject().getActivity(activityName));
-			getSelectedActivity().setStartDate(startDate, startMonth, startYear);
->>>>>>> branch 'master' of https://Maxi35@github.com/Smrevilo/Software-Engineering.git
 		} else {
 			throw new Exception("Only the project leader can set a startdate");
 		}
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://Maxi35@github.com/Smrevilo/Software-Engineering.git
 	}
 
 	public Calendar getStartDateFor(String projectName, String activityName) throws Exception {
-<<<<<<< HEAD
 		Project project = getProject(projectName);
 		Activity activity = project.getActivity(activityName);
 		Calendar output = activity.getStartDate();
-=======
-		setSelectedProject(getProject(projectName));
-		setSelectedActivity(getSelectedProject().getActivity(activityName));
-		Calendar output = getSelectedActivity().getStartDate();
->>>>>>> branch 'master' of https://Maxi35@github.com/Smrevilo/Software-Engineering.git
 		return output;
 	}
 
 	public void setDeadlineFor(String projectName, String activityName, int deadDay, int deadMonth, int deadYear)
 			throws Exception {
-<<<<<<< HEAD
 		Project project = getProject(projectName);
 		if (project.getLeader() == loggedInAs) {
 			Activity activity = project.getActivity(activityName);
 			activity.setDeadline(deadDay, deadMonth, deadYear);
-=======
-		setSelectedProject(getProject(projectName));
-		if (getSelectedProject().getLeader() == loggedInAs) {
-			setSelectedActivity(getSelectedProject().getActivity(activityName));
-			getSelectedActivity().setDeadline(deadDay, deadMonth, deadYear);
->>>>>>> branch 'master' of https://Maxi35@github.com/Smrevilo/Software-Engineering.git
 		} else {
-<<<<<<< HEAD
 			throw new Exception("Only the project leader can set a deadline");
-=======
-			throw new Exception("only the project leader can set a deadline");
-			
->>>>>>> branch 'master' of https://Maxi35@github.com/Smrevilo/Software-Engineering.git
 		}
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://Maxi35@github.com/Smrevilo/Software-Engineering.git
 	}
 
 	public Calendar getDeadlineFor(String projectName, String activityName) throws Exception {
-<<<<<<< HEAD
 		Project project = getProject(projectName);
 		Activity activity = project.getActivity(activityName);
 		Calendar output = activity.getDeadline();
-=======
-		setSelectedProject(getProject(projectName));
-		setSelectedActivity(getSelectedProject().getActivity(activityName));
-		Calendar output = getSelectedActivity().getDeadline();
->>>>>>> branch 'master' of https://Maxi35@github.com/Smrevilo/Software-Engineering.git
 		return output;
 	}
 
-<<<<<<< HEAD
 	public void startApp() {
 		gui.start();
 	}
@@ -255,52 +193,4 @@ public class PKV {
 	public void setSelectedProject(Project selectedProject) {
 		this.selectedProject = selectedProject;
 	}
-=======
-	public void setStatefor(String projectName, String activityName, boolean state) throws Exception {
-		setSelectedProject(getProject(projectName));
-		setSelectedActivity(getSelectedProject().getActivity(activityName));
-		getSelectedActivity().setState(state);
-
-	}
-
-	public List<Employee> getAvailableEmployee(GregorianCalendar date) {
-		List<Employee> availableEmployee = new ArrayList<Employee>();
-		for (Employee employee : employees) {
-			if (employee.getAvailablePomodoro(date) <= threshold) {
-				availableEmployee.add(employee);
-			}
-
-		}
-
-		return availableEmployee;
-	}
-
-	public void setThreshold(int threshold) {
-		this.threshold = threshold;
-	}
-
-	public int getThreshold() {
-		return threshold;
-	}
-
-	public List<Employee> getEmployeeList() {
-		return employees;		
-	}
-
-	
-
-	public void removeEmployeeFromActivity(Employee employee) throws Exception {
-		if (this.selectedProject.getLeader() == this.loggedInAs) {
-			this.selectedActivity.removeEmployee(employee);
-			
-		} else {
-			throw new Exception("Only the project leader can remove employees from activities");
-		}
-		
-		
-	}
-
-	
-
->>>>>>> branch 'master' of https://Maxi35@github.com/Smrevilo/Software-Engineering.git
 }
