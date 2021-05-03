@@ -14,3 +14,8 @@ Scenario: A project leader sets a startdate for an activity
 	When the employee sets the startdate of the activity "activity1" under the project "Project1" to the 20 - 05 - 21
 	Then the acitivity "activity1" under the project "Project1" has a startdate that says 20 - 05 - 21
 
+Scenario: A project leader sets a deadline for an activity
+	Given the project has these activities
+		| activity1 |
+	When the employee sets the deadline of the activity "activity1" under the project "Project1" to the 30 - 05 - 21
+	Then the acitivity "activity1" under the project "Project1" has a deadline that says 30 - 05 - 21

@@ -1,6 +1,7 @@
 package system.app;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class PKV {
 	private Employee loggedInAs;
@@ -118,10 +119,28 @@ public class PKV {
 		
 	}
 	
-	public int[] getStartDateFor(String projectName, String activityName) throws Exception{
+	public Calendar getStartDateFor(String projectName, String activityName) throws Exception{
 		setSelectedProject(getProject(projectName));
 		setSelectedActivity(getSelectedProject().getActivity(activityName));
-		int[] output= getSelectedActivity().getStartDate();
+		Calendar output= getSelectedActivity().getStartDate();
+		return output;
+	}
+
+	public void setDeadlineFor(String projectName, String activityName, int deadDate, int deadMonth, int deadYear) throws Exception {
+		setSelectedProject(getProject(projectName));
+		if (getSelectedProject().getLeader()==loggedInAs) {
+			setSelectedActivity(getSelectedProject().getActivity(activityName));
+			getSelectedActivity().setDeadline(deadDate, deadMonth, deadYear);
+		} else {
+			throw new Exception("only the project leader can set a deadline");
+		}
+		
+	}
+
+	public Calendar getDeadlineFor(String projectName, String activityName) throws Exception {
+		setSelectedProject(getProject(projectName));
+		setSelectedActivity(getSelectedProject().getActivity(activityName));
+		Calendar output= getSelectedActivity().getDeadline();
 		return output;
 	}
 
