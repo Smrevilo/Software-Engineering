@@ -26,4 +26,4 @@ Scenario: Delete a project while NOT being the project leader
 Scenario: Host new project ERROR
 	Given a project with the name "Project1" has been created
 	When the employee creates a project using the name "Project1"
-	Then an error message ocurres with the text "A project with that name already exsits"
+	Then an error message ocurres with the text "A project with the name \"Project1\" already exsits"

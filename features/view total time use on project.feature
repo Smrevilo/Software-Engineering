@@ -33,4 +33,4 @@ Scenario: an employee who is not the project leader requests to view total time 
 	When the employee logs out
 	And a second employee logs in
 	Given the employee requests to view total time of "Project1"
-	Then an error message ocurres with the text "only the project leader can get a project report"
+	Then an error message ocurres with the text "Only the project leader can get a project report"

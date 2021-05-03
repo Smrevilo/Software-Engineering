@@ -14,10 +14,6 @@ public class Project {
 		activites = new ArrayList<Activity>();
 	}
 	
-	public String getName() {
-		return name;
-	}
-	
 	public void createActivty(String name) throws Exception {
 		if (hasActivity(name)) {
 			throw new Exception("An activity with the name \"" + name + "\" already exsits");
@@ -32,14 +28,6 @@ public class Project {
 			}
 		}
 		return false;		
-	}
-	
-	public Employee getLeader() {
-		return leader;
-	}
-	
-	public void setLeader(Employee leader) {
-		this.leader = leader;
 	}
 	
 	public Activity getActivity(String name) throws Exception {
@@ -70,4 +58,22 @@ public class Project {
 		}
 		return repport;
 	}
+	
+	public ArrayList<Activity> getActivities() {
+		return activites;
+	}
+	
+	public Employee getLeader() {
+		return leader;
+	}
+	
+	public void setLeader(Employee leader) {
+		this.leader = leader;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	
 }

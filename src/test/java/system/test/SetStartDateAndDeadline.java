@@ -35,9 +35,10 @@ public class SetStartDateAndDeadline {
 	public void the_acitivity_under_the_project_has_a_startdate_that_says(String activityName, String projectName, int startdate, int startmonth,int startyear) throws Exception {
 		Calendar check = system.getStartDateFor(projectName, activityName);
 
-		assertTrue(check.get(check.DAY_OF_MONTH)==startdate);
-		assertTrue(check.get(check.MONTH)==startmonth);
-		assertTrue(check.get(check.YEAR)==startyear);
+		assertTrue(check.get(check.DAY_OF_MONTH) == startdate);
+		assertTrue(check.get(check.MONTH) == startmonth);
+		assertTrue(check.get(check.YEAR) == startyear);
+	
 	}
 	
 	@When("the employee sets the deadline of the activity {string} under the project {string} to the {int} - {int} - {int}")
@@ -53,9 +54,9 @@ public class SetStartDateAndDeadline {
 	public void the_acitivity_under_the_project_has_a_deadline_that_says(String activityName, String projectName, int deadDate, int deadMonth,int deadYear) throws Exception {
 		Calendar check = system.getDeadlineFor(projectName, activityName);
 
-		assertTrue(check.get(check.DAY_OF_MONTH)==deadDate);
-		assertTrue(check.get(check.MONTH)==deadMonth);
-		assertTrue(check.get(check.YEAR)==deadYear);
+		assertTrue(check.get(check.DAY_OF_MONTH) == deadDate);
+		assertTrue(check.get(check.MONTH) == deadMonth);
+		assertTrue(check.get(check.YEAR) == deadYear);
 	}
 
 
