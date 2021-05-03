@@ -9,6 +9,7 @@ Background:
 	And an employee is set as the project leader
 	Then the project has a project leader
 	And The threshold for the amount of activities that decides if a empolyee is available is 10
+<<<<<<< HEAD
 	And every employee has theese activities assigned, with the start date 20 05 2021 , and the deadline 27 05 2021, for the project "Project1" 
 		| activity0 |
 		| activity1 | 
@@ -29,3 +30,31 @@ Scenario: Looking for availability at a specific date
 	Then display a list of 29 employee that are available at that date
 
 	
+=======
+	And every employee has theese activities assigned, with the start date 20 05 21 , and the deadline 27 05 21 and they are acitve, for the project "Project1" 
+		| activity0 |
+		| activity1 | 
+		| activity2 | 
+		| activity3 |
+		| activity4 | 
+		| activity5 | 
+		| activity6 |
+		| activity7 | 
+		| activity8 | 
+		| activity9 | 
+		| activity10 |
+	
+Scenario: Looking for availability at a specific date
+	Given another employee is assigned to nine activities, with the start date 20 05 21 , and the deadline 27 05 21 and the project name "Project1" 
+		| activityA |
+		| activityB | 
+		| activityC | 
+		| activityD |
+		| activityE | 
+		| activityF | 
+		| activityG |
+		| activityH | 
+		| activityI | 
+	When the logged in employee looks for availability at the date 25 05 21
+	Then display a list of 1 employee that are available at that date
+>>>>>>> branch 'master' of https://Maxi35@github.com/Smrevilo/Software-Engineering.git

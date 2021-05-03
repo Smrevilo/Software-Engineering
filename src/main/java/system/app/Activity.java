@@ -6,17 +6,44 @@ public class Activity {
 
 
 	private String name;
+<<<<<<< HEAD
+=======
+	private boolean state;
+>>>>>>> branch 'master' of https://Maxi35@github.com/Smrevilo/Software-Engineering.git
 	private List<Pomodoro> pomodoros;
 	private Calendar startDate;
 	private Calendar deadline;
 
 	public Activity(String name) {
+<<<<<<< HEAD
+=======
+		this(name, false);
+	}
+
+	public Activity(String name, boolean state) {
+>>>>>>> branch 'master' of https://Maxi35@github.com/Smrevilo/Software-Engineering.git
 		this.name = name;
+<<<<<<< HEAD
+=======
+		this.deadline = new GregorianCalendar();
+		this.state = state;
+>>>>>>> branch 'master' of https://Maxi35@github.com/Smrevilo/Software-Engineering.git
 		this.pomodoros = new ArrayList<Pomodoro>();
 		this.startDate = new GregorianCalendar();
+<<<<<<< HEAD
 		this.deadline = new GregorianCalendar();
+=======
+		
+>>>>>>> branch 'master' of https://Maxi35@github.com/Smrevilo/Software-Engineering.git
 	}
 	
+<<<<<<< HEAD
+=======
+	
+
+	
+
+>>>>>>> branch 'master' of https://Maxi35@github.com/Smrevilo/Software-Engineering.git
 	public String getName() {
 		return name;
 	}
@@ -25,6 +52,12 @@ public class Activity {
 		this.name = name;
 	}
 
+<<<<<<< HEAD
+=======
+	
+
+
+>>>>>>> branch 'master' of https://Maxi35@github.com/Smrevilo/Software-Engineering.git
 	public Calendar getStartDate() {
 		return this.startDate;
 	}
@@ -106,6 +139,7 @@ public class Activity {
 		}
 	}
 
+<<<<<<< HEAD
 	public void removeEmployee(Employee employee) throws Exception {
 		if (!hasEmployee(employee)) {
 			throw new Exception("The employee is not assigned to this activity");
@@ -129,6 +163,18 @@ public class Activity {
 			}
 		}
 		return false;
+=======
+
+
+	@Override
+	public String toString() {
+		return "Activity [name=" + name + ", startDate=" + startDate.get(startDate.YEAR) +"#"+startDate.get(startDate.MONTH)+"#"+startDate.get(startDate.DAY_OF_MONTH) +"#"+ ", deadline=" + deadline.YEAR +"#"+deadline.MONTH+"#"+deadline.DAY_OF_MONTH  + "]";
+	}
+
+	public void removeEmployee(Employee employee) {
+		pomodoros.remove(pomodoros.indexOf(employee));
+		employee.removeActivity(this);
+>>>>>>> branch 'master' of https://Maxi35@github.com/Smrevilo/Software-Engineering.git
 	}
 	
 }

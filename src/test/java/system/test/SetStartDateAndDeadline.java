@@ -35,9 +35,15 @@ public class SetStartDateAndDeadline {
 	public void the_acitivity_under_the_project_has_a_startdate_that_says(String activityName, String projectName, int startdate, int startmonth,int startyear) throws Exception {
 		Calendar check = system.getStartDateFor(projectName, activityName);
 
+<<<<<<< HEAD
 		assertTrue(check.get(check.DAY_OF_MONTH) == startdate);
 		assertTrue(check.get(check.MONTH) == startmonth);
 		assertTrue(check.get(check.YEAR) == startyear);
+=======
+		assertTrue(check.get(check.DAY_OF_MONTH)==startdate);
+		assertTrue(check.get(check.MONTH)==startmonth);
+		assertTrue(check.get(check.YEAR)==startyear);
+>>>>>>> branch 'master' of https://Maxi35@github.com/Smrevilo/Software-Engineering.git
 	
 	}
 	

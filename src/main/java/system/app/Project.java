@@ -59,6 +59,7 @@ public class Project {
 		return repport;
 	}
 	
+<<<<<<< HEAD
 	public ArrayList<Activity> getActivities() {
 		return activites;
 	}
@@ -74,6 +75,14 @@ public class Project {
 	public String getName() {
 		return name;
 	}
+=======
+	public ArrayList<Activity> getAcivityList() {
+		return activites;
+		
+	}
+
+	
+>>>>>>> branch 'master' of https://Maxi35@github.com/Smrevilo/Software-Engineering.git
 
 	
 }
