@@ -1,5 +1,6 @@
 package system.app;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class GUI {
@@ -38,12 +39,110 @@ public class GUI {
 					case "make report":
 						makeReport();
 						break;
+					case "edit time":
+						editTime();
+						break;
 				}
 			}
 		}
 			
 	}
 	
+	private void editTime() {
+		while (true) {
+			System.out.print("Name of project to add time to(q to stop): ");
+			String projectName = in.nextLine();
+			if (projectName.toLowerCase().equals("q")) {
+				return;
+			}
+			try {
+				pkv.setSelectedProject(pkv.getProject(projectName));
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				continue;
+			}
+
+			while (true) {
+				System.out.print("Name of activity to add time to (q to stop): ");
+				String activityName = in.nextLine();
+				if (activityName.toLowerCase().equals("q")) {
+					return;
+
+				}
+				try { 
+					pkv.setSelectedActivity(pkv.getSelectedProject().getActivity(activityName));
+					if(!pkv.getSelectedActivity().isAssignedTo(pkv.getLoggedInAs())) {
+						throw new Exception("You are not assigned to this activity");
+					}
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					continue;
+				}
+				while (true) {
+					System.out.print("To add time write \"Add time\" and to delete time write \"Delete time\" (q to stop): ");
+					String edit = in.nextLine();
+					if (edit.toLowerCase().equals("q")) {
+						return;
+						
+					} else if (edit.toLowerCase().equals("add time")){
+						try { 
+							addTime();
+						} catch (Exception e) {
+							System.out.println(e.getMessage());
+							continue;
+						}
+					} else if (edit.toLowerCase().equals("delete time")){
+						try { 
+							deleteTime();
+						} catch (Exception e) {
+							System.out.println(e.getMessage());
+							continue;
+						}
+
+					System.out.println("Time has been succesfully added to activity");
+					return;
+				}
+			}
+		}
+		}
+
+	}
+
+	private void deleteTime() throws Exception {
+		while (true) {
+			System.out.print("How many hours do you want to delete (-1 to stop)?: ");
+			try { 
+				int time = in.nextInt();
+				if (time==-1) {
+					return;	
+				} 
+				pkv.getSelectedActivity().deleteTime(pkv.getLoggedInAs(), time);
+			} catch (InputMismatchException e) {
+				System.out.println("error NAN");
+				continue;
+			}
+		}
+		
+	}
+
+	private void addTime() throws Exception {
+		while (true) {
+			System.out.print("How many hours do you want to registre (-1 to stop)?: ");
+			try { 
+				int time = in.nextInt();
+				if (time==-1) {
+					return;	
+				} 
+				pkv.getSelectedActivity().addTime(pkv.getLoggedInAs(), time);
+			} catch (InputMismatchException e) {
+				System.out.println("error NAN");
+				continue;
+			}
+		}
+	}
+
+
 	private void setProjectLeader() {
 		while (true) {
 			System.out.print("Name of project to set project leader (q to stop): ");
@@ -136,6 +235,8 @@ public class GUI {
 		System.out.println("Help: Displays this");
 		System.out.println("Create Project: Creates a project");
 		System.out.println("Create Activity: Creates an activity");
+		System.out.println("Make report");
+		System.out.println("Set project leader");
 	}
 
 	private void login() {
