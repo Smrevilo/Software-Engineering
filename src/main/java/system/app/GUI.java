@@ -88,6 +88,7 @@ public class GUI {
 					} else if (edit.toLowerCase().equals("add time")){
 						try { 
 							addTime();
+							
 						} catch (Exception e) {
 							System.out.println(e.getMessage());
 							continue;
@@ -95,6 +96,7 @@ public class GUI {
 					} else if (edit.toLowerCase().equals("delete time")){
 						try { 
 							deleteTime();
+							
 						} catch (Exception e) {
 							System.out.println(e.getMessage());
 							continue;
@@ -118,6 +120,7 @@ public class GUI {
 					return;	
 				} 
 				pkv.getSelectedActivity().deleteTime(pkv.getLoggedInAs(), time);
+				return;
 			} catch (InputMismatchException e) {
 				System.out.println("error NAN");
 				continue;
@@ -135,6 +138,7 @@ public class GUI {
 					return;	
 				} 
 				pkv.getSelectedActivity().addTime(pkv.getLoggedInAs(), time);
+				return;
 			} catch (InputMismatchException e) {
 				System.out.println("error NAN");
 				continue;
@@ -235,8 +239,10 @@ public class GUI {
 		System.out.println("Help: Displays this");
 		System.out.println("Create Project: Creates a project");
 		System.out.println("Create Activity: Creates an activity");
-		System.out.println("Make report");
-		System.out.println("Set project leader");
+		System.out.println("Make report: prints an overview of a project");
+		System.out.println("Set project leader: sets a project leader");
+		System.out.println("Edit time: add og remove time to an activity");
+		
 	}
 
 	private void login() {
