@@ -107,7 +107,7 @@ public class Activity {
 	}
 
 	public void removeEmployee(Employee employee) throws Exception {
-		if (!isAssignedTo(employee)) {
+		if (!hasEmployee(employee)) {
 			throw new Exception("The employee is not assigned to this activity");
 		}
 		for (Pomodoro pomodoro : pomodoros) {
@@ -122,6 +122,13 @@ public class Activity {
 		}
 	}
 
-	
+	public boolean hasEmployee(Employee employee) {
+		for (Pomodoro pomodoro : pomodoros) {
+			if (pomodoro.getEmployee() == employee) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 }

@@ -74,6 +74,18 @@ public class PKV {
 		}
 		return null;
 	}
+	
+	public List<Project> getProjectForEmployee(Employee user) throws Exception {
+		System.out.println("create project list for employee...");
+		List<Project> userProjects = new ArrayList<Project>();
+		for (Project p : projects) {
+			if (p.getLeader() == user || p.getLeader() == null) {
+				userProjects.add(p);
+				System.out.println(p.getName());
+			}
+		}
+		return userProjects;
+	}
 
 	public void deleteProject(String name) throws Exception {
 		if (!hasProject(name)) {

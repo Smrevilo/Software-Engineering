@@ -11,14 +11,15 @@ public class EmployeeHelper {
 		String[] initialer = { "ABCD", "ABCE", "ABCF", "ABCG", "ABCH", "ABCI", "ABCJ", "ABCK", "ABCL", "ABCM", "ABCN",
 				"ABCO", "ABCP", "ABCQ", "ABCR", "ABCS", "ABCT", "ABCU", "ABCV", "ABCX", "ABCY", "ABCZ", "EBCD", "FBCD",
 				"GBCD", "HBCD", "IBCD", "JBCD", "KBCD", "LBCD" };
-		for (String in : initialer) {
-			employeeList.add(new Employee(in));
-		}
 
 		projects = new ArrayList<>();
 
 		for (String in : initialer) {
-			projects.add(new Project(in, 999999));
+			Employee tempE = new Employee(in);
+			employeeList.add(tempE);
+			Project tempP = new Project(in, 999999);
+			projects.add(tempP);
+			tempP.setLeader(tempE);
 		}
 
 		for (int i = 0; i < initialer.length; i++) {

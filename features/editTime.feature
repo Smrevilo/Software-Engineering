@@ -39,4 +39,3 @@ Scenario: Deleting more time that there is registrated for an activity
 	
 #TODO add/delete time from non-exsisting activity/project
 
-#TODO adding negative time to activity

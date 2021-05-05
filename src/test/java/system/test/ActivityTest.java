@@ -39,7 +39,7 @@ public class ActivityTest {
 		Project project = system.getProject(projectName);
 		Activity activity = project.getActivity(activityName);
 		assertTrue(employee.hasActivity(activity));
-		assertTrue(activity.isAssignedTo(employee));
+		assertTrue(activity.hasEmployee(employee));
 	}
 	
 	@When("the employee removes the other employee with the initials {string} from the activity {string} under project {string}")
@@ -61,6 +61,6 @@ public class ActivityTest {
 		Project project = system.getProject(projectName);
 		Activity activity = project.getActivity(activityName);
 		assertFalse(employee.hasActivity(activity));
-		assertFalse(activity.isAssignedTo(employee));
+		assertFalse(activity.hasEmployee(employee));
 	}
 }
