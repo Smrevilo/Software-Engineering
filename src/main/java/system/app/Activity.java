@@ -31,7 +31,7 @@ public class Activity {
 
 	public void setStartDate(int startDay, int startMonth, int startYear) throws Exception {
 		if (!isEditable) {
-			throw new Exception("This activity can not be edited");
+			throw new Exception("This activity can not be modified");
 		}
 		this.startDate = new GregorianCalendar();
 		this.startDate.set(startYear, startMonth, startDay);

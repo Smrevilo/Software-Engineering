@@ -23,7 +23,10 @@ public class Project {
 			throw new Exception("Only the project leader can create an new activity");
 		}
 		if (!isEditable) {
-			throw new Exception("This project can not be edited");
+			throw new Exception("This project can not be modified");
+		}
+		if (name.equals("")) {
+			throw new Exception("The activity's name must be at least 1 charecter long");
 		}
 		activites.add(new Activity(name));
 	}

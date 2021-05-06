@@ -49,6 +49,9 @@ public class PKV {
 		if (hasProject(name)) {
 			throw new Exception("A project with the name \"" + name + "\" already exsits");
 		}
+		if (name.equals("")) {
+			throw new Exception("The project's name must be at least 1 charecter long");
+		}
 		id++;
 		Project newProject = new Project(name, this.date.getYear() * 10000 + id);
 		projects.add(newProject);
@@ -65,7 +68,7 @@ public class PKV {
 
 	public Project getProject(String name) throws Exception {
 		if (!hasProject(name)) {
-			throw new Exception("A project with that name doesn't exsits");
+			throw new Exception("A project with that name doesn't exits");
 		}
 		for (Project p : projects) {
 			if (p.getName().equals(name)) {

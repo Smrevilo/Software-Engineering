@@ -164,7 +164,7 @@ public class GUI {
 				continue;
 			}
 			if (!pkv.getSelectedProject().getEditable()) {
-				System.out.println("Project is not editable");
+				System.out.println("Project is not modifiable");
 				continue;
 			}
  			while (true) {

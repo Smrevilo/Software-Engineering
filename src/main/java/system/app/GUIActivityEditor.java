@@ -99,15 +99,11 @@ private static final long serialVersionUID = 1L;
 		 txtCreateActivty.setAlignmentX(Component.CENTER_ALIGNMENT);
 		 
 		 
+		 String startDate = "startDate";//selectedActivty.getStartDate().get(Calendar.YEAR)+"/"+selectedActivty.getStartDate().get(Calendar.MONTH)+"/"+selectedActivty.getStartDate().get(Calendar.DAY_OF_MONTH)+"";
+		 String deadline = "deadline";//selectedActivty.getDeadline().get(Calendar.YEAR)+"/"+selectedActivty.getDeadline().get(Calendar.MONTH)+"/"+selectedActivty.getDeadline().get(Calendar.DAY_OF_MONTH)+"";
+		 String report = "report";//new String(selectedActivty.getReport());
 		 
-		 
-		 
-		 
-		 String startDate = selectedActivty.getStartDate().get(Calendar.YEAR)+"/"+selectedActivty.getStartDate().get(Calendar.MONTH)+"/"+selectedActivty.getStartDate().get(Calendar.DAY_OF_MONTH)+"";
-		 String deadline = selectedActivty.getDeadline().get(Calendar.YEAR)+"/"+selectedActivty.getDeadline().get(Calendar.MONTH)+"/"+selectedActivty.getDeadline().get(Calendar.DAY_OF_MONTH)+"";
-		 String report = new String(selectedActivty.getReport());
-		 
-		 labelSelectedActivty = new JLabel("Selected Activty is: " + selectedActivty.getName());
+		 labelSelectedActivty = new JLabel("Selected Activty is: " + "YES");
 		 labelSelectedActivty.setMaximumSize(new Dimension(400, 30));
 		 labelSelectedActivty.setAlignmentX(Component.LEFT_ALIGNMENT);
 		 labelSelectedActivty.setFont(new Font("", Font.PLAIN, 16));
@@ -139,9 +135,6 @@ private static final long serialVersionUID = 1L;
 		 txtSetDeadline = new JTextField(deadline);
 		 txtSetDeadline.setMaximumSize(txtfldsize);
 		 txtSetDeadline.setAlignmentX(Component.CENTER_ALIGNMENT);
-		 
-		 
-		 
 		 
 		 
 		
