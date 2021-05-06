@@ -44,7 +44,7 @@ public class AvailabilityTest {
 			List<String> activityNames) throws Exception {
 		system.setSelectedProject(system.getProject(projectName));
 		for (String activityName : activityNames) {
-			system.getSelectedProject().createActivty(activityName);
+			system.getSelectedProject().createActivty(system.getLoggedInAs(), activityName);
 			system.setStartDateFor(projectName, activityName, startDay, startMonth, startYear);
 			system.setDeadlineFor(projectName, activityName, deadDay, deadMonth, deadYear);
 		}

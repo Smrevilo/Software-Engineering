@@ -1,12 +1,12 @@
-Feature: Edit time registration
+Feature: Edit time
 	Description: An employee (either an ordinary employee or a project leader) 
 				 registers time by providing an activity for it to be added to
 	Actors: employee
 				
 Background: There is both an activity and a project
 	Given that an employee is logged in
-	When the employee creates a project using the name "Project1"
-	Then a project with the name "Project1" exists
+	And the employee creates a project using the name "Project1"
+	And the logged in employee is the project leader of "Project1"
 	And this project has this activity "Test Developement"
 
 Scenario: Registering time to an activity

@@ -25,7 +25,7 @@ public class TimeOverviewProject {
 	@Then("the project has these activities")
 	public void the_project_has_these_activities(List<String> activityNames) throws Exception {
 		for (String name : activityNames) {
-			system.getSelectedProject().createActivty(name);
+			system.getSelectedProject().createActivty(system.getLoggedInAs(), name);
 		}
 	}
 	

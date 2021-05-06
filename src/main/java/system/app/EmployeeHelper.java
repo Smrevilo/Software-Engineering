@@ -25,15 +25,15 @@ public class EmployeeHelper {
 		for (int i = 0; i < initialer.length; i++) {
 			Activity temp;
 
-			projects.get(i).createActivty("Sick Days");
+			projects.get(i).createActivty(employeeList.get(i), "Sick Days");
 			temp = projects.get(i).getActivity("Sick Days");
 			temp.addEmployee(employeeList.get(i));
 
-			projects.get(i).createActivty("Vacation");
+			projects.get(i).createActivty(employeeList.get(i), "Vacation");
 			temp = projects.get(i).getActivity("Vacation");
 			temp.addEmployee(employeeList.get(i));
 
-			projects.get(i).createActivty("Courses");
+			projects.get(i).createActivty(employeeList.get(i), "Courses");
 			temp = projects.get(i).getActivity("Courses");
 			temp.addEmployee(employeeList.get(i));
 		}

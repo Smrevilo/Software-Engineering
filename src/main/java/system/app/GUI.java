@@ -249,7 +249,7 @@ public class GUI {
 				return;
 			}
 			try {
-				pkv.getSelectedProject().createActivty(activityName);
+				pkv.getSelectedProject().createActivty(pkv.getLoggedInAs(), activityName);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				continue;

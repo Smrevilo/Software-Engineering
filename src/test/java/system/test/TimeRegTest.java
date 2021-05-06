@@ -23,7 +23,7 @@ public class TimeRegTest {
 
 	@Given("this project has this activity {string}")
 	public void this_project_has_this_activity(String activity) throws Exception {
-		this.system.getSelectedProject().createActivty(activity);
+		this.system.getSelectedProject().createActivty(system.getLoggedInAs(), activity);
 	}
 
 	@Given("that the employee is assigned to the activity with the name {string} under the project {string}")

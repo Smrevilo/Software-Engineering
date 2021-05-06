@@ -49,7 +49,7 @@ public class ProjectTest {
 
 	@When("the project leader adds the activity {string}")
 	public void the_project_leader_adds_the_activity(String string) throws Exception {
-		system.getSelectedProject().createActivty(string);
+		system.getSelectedProject().createActivty(system.getLoggedInAs(), string);
 		assertTrue(true);
 	}
 

@@ -14,9 +14,12 @@ public class Project {
 		activites = new ArrayList<Activity>();
 	}
 	
-	public void createActivty(String name) throws Exception {
+	public void createActivty(Employee employee, String name) throws Exception {
 		if (hasActivity(name)) {
 			throw new Exception("An activity with the name \"" + name + "\" already exsits");
+		}
+		if (leader != employee) {
+			throw new Exception("Only the project leader can create an new activity");
 		}
 		activites.add(new Activity(name));
 	}

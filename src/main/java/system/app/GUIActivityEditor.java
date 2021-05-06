@@ -219,7 +219,7 @@ private static final long serialVersionUID = 1L;
         		
         		String createActivty = txtCreateActivty.getText();
         		if (!createActivty.equals("")) {
-        			project.createActivty(createActivty);
+        			project.createActivty(system.getLoggedInAs(), createActivty);
 				}
         		
         		//edit deadline

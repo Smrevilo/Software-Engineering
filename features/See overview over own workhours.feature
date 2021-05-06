@@ -6,7 +6,8 @@ Actors: employee
 Background:
 	Given that an employee is logged in
 	And the employee creates a project using the name "Project1"
-	Given the project has these activities
+	And the logged in employee is the project leader of "Project1"
+	And the project has these activities
 		| activity1 |
 		| activity2 |
 
