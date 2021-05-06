@@ -107,39 +107,37 @@ public class PKV {
 		}
 	}
 
-	public void setStartDateFor(String projectName, String activityName, int startDay, int startMonth, int startYear)
-			throws Exception {
-		Project project = getProject(projectName);
-		if (project.getLeader() == loggedInAs) {
-			Activity activity = project.getActivity(activityName);
-			activity.setStartDate(startDay, startMonth, startYear);
-		} else {
+	public void setStartDate(int startDay, int startMonth, int startYear) throws Exception {
+		if (selectedProject.getLeader() != loggedInAs) {
 			throw new Exception("Only the project leader can set a startdate");
+		}
+		checkValid(startDay, startMonth, startYear);
+		selectedActivity.setStartDate(startDay, startMonth, startYear);
+	}
+
+	private void checkValid(int day, int month, int year) throws Exception {
+		Calendar checker = new GregorianCalendar();
+		checker.set(year, month, day);
+		if (!(checker.get(Calendar.DATE) == day && checker.get(Calendar.MONTH) == month && checker.get(Calendar.YEAR) == year)) {
+			throw new Exception("Must be a valid date");
 		}
 	}
 
-	public Calendar getStartDateFor(String projectName, String activityName) throws Exception {
-		Project project = getProject(projectName);
-		Activity activity = project.getActivity(activityName);
-		Calendar output = activity.getStartDate();
+	public Calendar getStartDate() throws Exception {
+		Calendar output = selectedActivity.getStartDate();
 		return output;
 	}
 
-	public void setDeadlineFor(String projectName, String activityName, int deadDay, int deadMonth, int deadYear)
-			throws Exception {
-		Project project = getProject(projectName);
-		if (project.getLeader() == loggedInAs) {
-			Activity activity = project.getActivity(activityName);
-			activity.setDeadline(deadDay, deadMonth, deadYear);
-		} else {
+	public void setDeadline(int deadDay, int deadMonth, int deadYear) throws Exception {
+		if (selectedProject.getLeader() != loggedInAs) {
 			throw new Exception("Only the project leader can set a deadline");
 		}
+		checkValid(deadDay, deadMonth, deadYear);
+		selectedActivity.setDeadline(deadDay, deadMonth, deadYear);
 	}
 
-	public Calendar getDeadlineFor(String projectName, String activityName) throws Exception {
-		Project project = getProject(projectName);
-		Activity activity = project.getActivity(activityName);
-		Calendar output = activity.getDeadline();
+	public Calendar getDeadline() throws Exception {
+		Calendar output = selectedActivity.getDeadline();
 		return output;
 	}
 

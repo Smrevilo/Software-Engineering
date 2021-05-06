@@ -1,6 +1,7 @@
 package system.app;
 
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class GUI {
@@ -13,7 +14,11 @@ public class GUI {
 		in = new Scanner(System.in);
 		this.pkv = pkv;
 	}
-	
+	//TODO:
+		//Set workload
+		//Check project leader before asking for activity name
+		//Make start project uneditable
+		//Make report show start date and deadline
 	public void start() {
 		while (true) {
 			login();
@@ -46,10 +51,128 @@ public class GUI {
 					case "add employee":
 						addEmployee();
 						break;
+					case "set date":
+						setDate();
+						break;
 					default:
 						System.out.println("<"+cmd+"> is not a known command");
 						break;
 				}
+			}
+		}
+	}
+	
+	private void setDate() {
+		while (true) {
+			System.out.print("Name of project to set date for (q to stop): ");
+			String projectName = in.nextLine();
+			if (projectName.toLowerCase().equals("q")) {
+				return;
+			}
+			try {
+				pkv.setSelectedProject(pkv.getProject(projectName));
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				continue;
+			}
+
+			while (true) {
+				System.out.print("Name of activity to set date for (q to stop): ");
+				String activityName = in.nextLine();
+				if (activityName.toLowerCase().equals("q")) {
+					return;
+				}
+				try { 
+					pkv.setSelectedActivity(pkv.getSelectedProject().getActivity(activityName));
+					if (!pkv.getSelectedActivity().isAssignedTo(pkv.getLoggedInAs())) {
+						throw new Exception("You are not assigned to this activity");
+					}
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					continue;
+				}
+				
+				while (true) {
+					System.out.print("To set start date write \"Set Start Date\" and to set deadline write \"Set Deadline\" (q to stop): ");
+					String edit = in.nextLine();
+					if (edit.toLowerCase().equals("q")) {
+						return;
+					} else if (edit.toLowerCase().equals("set start date")){
+						try { 
+							setStartDate();
+						} catch (Exception e) {
+							System.out.println(e.getMessage());
+							continue;
+						}
+					} else if (edit.toLowerCase().equals("set deadline")){
+						try { 
+							setDeadline();
+						} catch (Exception e) {
+							System.out.println(e.getMessage());
+							continue;
+						}
+					}
+					System.out.println("Date has been succesfully edited");
+					return;
+				}
+			}
+		}
+	}
+	
+	private void setStartDate() {
+		while (true) {
+			System.out.print("Date dd/mm/yyyy (q to stop): ");
+			String date = in.nextLine();
+			if (date.equals("q")) {
+				return;
+			}
+			Scanner dateScanner = new Scanner(date.replace('/', ' '));
+			try {
+				int day = dateScanner.nextInt();
+				int month = dateScanner.nextInt();
+				int year = dateScanner.nextInt();
+				try {
+					pkv.setStartDate(day, month, year);
+					return;
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					continue;
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("error NAN");
+				continue;
+			} catch (NoSuchElementException e) {
+				System.out.println("Date must contains 3 numbers");
+				continue;
+			}
+		}
+	}
+
+	private void setDeadline() {
+		while (true) {
+			System.out.print("Date dd/mm/yyyy (q to stop): ");
+			String date = in.nextLine();
+			if (date.equals("q")) {
+				return;
+			}
+			Scanner dateScanner = new Scanner(date.replace('/', ' '));
+			try {
+				int day = dateScanner.nextInt();
+				int month = dateScanner.nextInt();
+				int year = dateScanner.nextInt();
+				try {
+					pkv.setDeadline(day, month, year);
+					return;
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					continue;
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("error NAN");
+				continue;
+			} catch (NoSuchElementException e) {
+				System.out.println("Date must contains 3 numbers");
+				continue;
 			}
 		}
 	}
@@ -155,7 +278,6 @@ public class GUI {
 				}
 			}
 		}
-
 	}
 
 	private void deleteTime() throws Exception {
@@ -193,7 +315,6 @@ public class GUI {
 			}
 		}
 	}
-
 
 	private void setProjectLeader() {
 		while (true) {

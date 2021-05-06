@@ -45,8 +45,9 @@ public class AvailabilityTest {
 		system.setSelectedProject(system.getProject(projectName));
 		for (String activityName : activityNames) {
 			system.getSelectedProject().createActivty(system.getLoggedInAs(), activityName);
-			system.setStartDateFor(projectName, activityName, startDay, startMonth, startYear);
-			system.setDeadlineFor(projectName, activityName, deadDay, deadMonth, deadYear);
+			system.setSelectedActivity(system.getSelectedProject().getActivity(activityName));
+			system.setStartDate(startDay, startMonth, startYear);
+			system.setDeadline(deadDay, deadMonth, deadYear);
 		}
 		ArrayList<Activity> activityList = system.getSelectedProject().getActivities();
 
