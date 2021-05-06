@@ -28,14 +28,19 @@ public class EmployeeHelper {
 			projects.get(i).createActivty(employeeList.get(i), "Sick Days");
 			temp = projects.get(i).getActivity("Sick Days");
 			temp.addEmployee(employeeList.get(i));
+			temp.setEditable(false);
 
 			projects.get(i).createActivty(employeeList.get(i), "Vacation");
 			temp = projects.get(i).getActivity("Vacation");
 			temp.addEmployee(employeeList.get(i));
+			temp.setEditable(false);
 
 			projects.get(i).createActivty(employeeList.get(i), "Courses");
 			temp = projects.get(i).getActivity("Courses");
 			temp.addEmployee(employeeList.get(i));
+			temp.setEditable(false);
+			
+			projects.get(i).setEditable(false);
 		}
 	}
 

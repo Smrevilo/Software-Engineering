@@ -16,9 +16,8 @@ public class GUI {
 	}
 	//TODO:
 		//Set workload
-		//Check project leader before asking for activity name
-		//Make start project uneditable
-		//Make report show start date and deadline
+			//Make report show start date and deadline
+		//Make report show info to non project leaders(very low priority)
 	public void start() {
 		while (true) {
 			login();
@@ -75,8 +74,15 @@ public class GUI {
 				System.out.println(e.getMessage());
 				continue;
 			}
-
-			while (true) {
+			if (!(pkv.getSelectedProject().getLeader() == pkv.getLoggedInAs())) {
+				System.out.println("You must be project leader of the project to set dates");
+				continue;
+			}
+			if (pkv.getSelectedProject().getEditable()) {
+				System.out.println("Project is not editable");
+				continue;
+			}
+ 			while (true) {
 				System.out.print("Name of activity to set date for (q to stop): ");
 				String activityName = in.nextLine();
 				if (activityName.toLowerCase().equals("q")) {
@@ -188,6 +194,14 @@ public class GUI {
 				pkv.setSelectedProject(pkv.getProject(projectName));
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
+				continue;
+			}
+			if (!(pkv.getSelectedProject().getLeader() == pkv.getLoggedInAs())) {
+				System.out.println("You must be project leader of the project to set dates");
+				continue;
+			}
+			if (pkv.getSelectedProject().getEditable()) {
+				System.out.println("Project is not editable");
 				continue;
 			}
 			break;
@@ -362,6 +376,14 @@ public class GUI {
 				pkv.setSelectedProject(pkv.getProject(projectName));
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
+				continue;
+			}
+			if (!(pkv.getSelectedProject().getLeader() == pkv.getLoggedInAs())) {
+				System.out.println("You must be project leader of the project to set dates");
+				continue;
+			}
+			if (pkv.getSelectedProject().getEditable()) {
+				System.out.println("Project is not editable");
 				continue;
 			}
 			System.out.print("Name of activity (q to stop): ");

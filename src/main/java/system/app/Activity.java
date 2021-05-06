@@ -9,6 +9,7 @@ public class Activity {
 	private List<Pomodoro> pomodoros;
 	private Calendar startDate;
 	private Calendar deadline;
+	private boolean isEditable = true;
 
 	public Activity(String name) {
 		this.name = name;
@@ -29,7 +30,10 @@ public class Activity {
 		return this.startDate;
 	}
 
-	public void setStartDate(int startDay, int startMonth, int startYear) {
+	public void setStartDate(int startDay, int startMonth, int startYear) throws Exception {
+		if (!isEditable) {
+			throw new Exception("This activity can not be edited");
+		}
 		this.startDate.set(startYear, startMonth, startDay);
 	}
 
@@ -37,7 +41,10 @@ public class Activity {
 		return this.deadline;
 	}
 
-	public void setDeadline(int deadDay, int deadMonth, int deadYear) {
+	public void setDeadline(int deadDay, int deadMonth, int deadYear) throws Exception {
+		if (!isEditable) {
+			throw new Exception("This activity can not be edited");
+		}
 		this.deadline.set(deadYear, deadMonth, deadDay);
 	}
 
@@ -131,4 +138,11 @@ public class Activity {
 		return false;
 	}
 	
+	public void setEditable(boolean editable) {
+		isEditable = editable;
+	}
+	
+	public boolean getEditable() {
+		return isEditable;
+	}
 }

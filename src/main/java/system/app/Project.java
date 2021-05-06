@@ -7,6 +7,7 @@ public class Project {
 	private int id;
 	private ArrayList<Activity> activites;
 	private Employee leader = null;
+	private boolean isEditable = true;
 	
 	public Project(String name, int id) {
 		this.name = name;
@@ -20,6 +21,9 @@ public class Project {
 		}
 		if (leader != employee) {
 			throw new Exception("Only the project leader can create an new activity");
+		}
+		if (!isEditable) {
+			throw new Exception("This project can not be edited");
 		}
 		activites.add(new Activity(name));
 	}
@@ -77,6 +81,12 @@ public class Project {
 	public String getName() {
 		return name;
 	}
-
 	
+	public void setEditable(boolean editable) {
+		isEditable = editable;
+	}
+	
+	public boolean getEditable() {
+		return isEditable;
+	}
 }
