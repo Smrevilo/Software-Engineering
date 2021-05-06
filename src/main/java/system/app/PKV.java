@@ -173,6 +173,13 @@ public class PKV {
 		}
 		throw new Exception("An employee with the initials \"" + initials + "\" does not exsit");
 	}
+	
+	public void addEmployeeToActivity(Employee employee) throws Exception {
+		if (selectedProject.getLeader() != loggedInAs) {
+			throw new Exception("Only the project leader can add the employee to the activity");
+		}
+		selectedActivity.addEmployee(employee);
+	}
 
 	public void setThreshold(int threshold) {
 		this.threshold = threshold;

@@ -25,12 +25,21 @@ public class ActivityTest {
 		this.errorMessageHolder = errorMessageHolder;
 	}
 	
+	@Given("the logged in employee is not the project leader of {string}")
+	public void the_logged_in_employee_is_not_the_project_leader_of(String projectName) throws Exception {
+		system.getProject(projectName).setLeader(null);
+	}
+	
 	@When("the employee adds another employee with the initials {string} to the activity {string} under project {string}")
 	public void the_employee_adds_another_employee_with_the_initials_to_the_activity_under_project(String initials, String activityName, String projectName) throws Exception {
 		Employee employee = system.getEmployee(initials);
-		Project project = system.getProject(projectName);
-		Activity activity = project.getActivity(activityName);
-		activity.addEmployee(employee);
+		system.setSelectedProject(system.getProject(projectName));
+		system.setSelectedActivity(system.getSelectedProject().getActivity(activityName));
+		try {
+			system.addEmployeeToActivity(employee);
+		} catch (Exception e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
 	}
 
 	@Then("the employee with the initials {string} is assigned to the activity {string} under project {string}")

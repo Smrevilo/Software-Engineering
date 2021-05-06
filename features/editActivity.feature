@@ -14,6 +14,11 @@ Scenario: Project leader adds employee to activity
 	When the employee adds another employee with the initials "ABCE" to the activity "activity1" under project "Project1"
 	Then the employee with the initials "ABCE" is assigned to the activity "activity1" under project "Project1"
 
+Scenario: Non project leader adds employee to activity
+	Given the logged in employee is not the project leader of "Project1"
+	When the employee adds another employee with the initials "ABCE" to the activity "activity1" under project "Project1"
+	Then an error message ocurres with the text "Only the project leader can add the employee to the activity"
+
 Scenario: Project leader removes an employee from an activity
 	When the employee adds another employee with the initials "ABCE" to the activity "activity1" under project "Project1"
 	Then the employee with the initials "ABCE" is assigned to the activity "activity1" under project "Project1"
@@ -36,5 +41,3 @@ Scenario: Project leader removes an employee from an activity which they already
 	When the employee removes the other employee with the initials "ABCE" from the activity "activity1" under project "Project1"
 	Then the employee with the initials "ABCE" is assigned to the activity "activity1" under project "Project1"
 	And an error message ocurres with the text "The employee has registered hours to this activity"
-#
-#TODO make checks if employee is project leader first

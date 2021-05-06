@@ -42,9 +42,9 @@ public class Activity {
 	}
 
 	public void addEmployee(Employee employee) {
-		Pomodoro temp = new Pomodoro(employee, this);
-		pomodoros.add(temp);
-		employee.addActivity(temp);
+		Pomodoro pomodoro = new Pomodoro(employee, this);
+		pomodoros.add(pomodoro);
+		employee.addActivity(pomodoro);
 	}
 
 	public void addTime(Employee employee, int i) throws Exception {
