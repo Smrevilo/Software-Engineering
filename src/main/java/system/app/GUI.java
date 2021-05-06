@@ -17,7 +17,6 @@ public class GUI {
 		this.pkv = pkv;
 	}
 	//TODO:
-		//Set workload
 		//Make report show info to non project leaders(very low priority)
 	public void start() {
 		while (true) {
@@ -519,6 +518,7 @@ public class GUI {
 		System.out.println("Add Employee: Adds an employee to an activity");
 		System.out.println("Set Date: Set start date or deadline of an activity");
 		System.out.println("Search Available: Shows who are available on a specified date");
+		System.out.println("Set Workload: Sets workload for an activity");
 	}
 
 	private void login() {
