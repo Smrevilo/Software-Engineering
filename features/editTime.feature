@@ -36,6 +36,7 @@ Scenario: Deleting more time that there is registrated for an activity
 	And the employee deletes 4 hours from the activity with the name "Test Developement" under the project "Project1"
 	Then an error message ocurres with the text "You cannot delete more hours than you have registered"
 	And there is 3 hours registered for the employee on the activity with the name "Test Developement" under the project "Project1"
-	
-#TODO add/delete time from non-exsisting activity/project
 
+Scenario: Registering time to an non-existing activity
+	When the employee registers 10 hours to the activity with the name "Test Developement2" under the project "Project1"
+	Then an error message ocurres with the text "An activity with that name doesn't exsits"
