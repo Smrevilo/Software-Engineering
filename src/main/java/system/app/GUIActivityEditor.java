@@ -105,7 +105,7 @@ private static final long serialVersionUID = 1L;
 		 
 		 String startDate = selectedActivty.getStartDate().get(Calendar.YEAR)+"/"+selectedActivty.getStartDate().get(Calendar.MONTH)+"/"+selectedActivty.getStartDate().get(Calendar.DAY_OF_MONTH)+"";
 		 String deadline = selectedActivty.getDeadline().get(Calendar.YEAR)+"/"+selectedActivty.getDeadline().get(Calendar.MONTH)+"/"+selectedActivty.getDeadline().get(Calendar.DAY_OF_MONTH)+"";
-		 String report = new String(selectedActivty.getRepport());
+		 String report = new String(selectedActivty.getReport());
 		 
 		 labelSelectedActivty = new JLabel("Selected Activty is: " + selectedActivty.getName());
 		 labelSelectedActivty.setMaximumSize(new Dimension(400, 30));
@@ -192,7 +192,7 @@ private static final long serialVersionUID = 1L;
 		labelSelectedActivty.setText("Selected Activty is: " + selectedActivty.getName());
 		String startDate = selectedActivty.getStartDate().get(Calendar.YEAR)+"/"+selectedActivty.getStartDate().get(Calendar.MONTH)+"/"+selectedActivty.getStartDate().get(Calendar.DAY_OF_MONTH)+"";
 		String deadline = selectedActivty.getDeadline().get(Calendar.YEAR)+"/"+selectedActivty.getDeadline().get(Calendar.MONTH)+"/"+selectedActivty.getDeadline().get(Calendar.DAY_OF_MONTH)+"";
-		String report = new String(selectedActivty.getRepport());
+		String report = new String(selectedActivty.getReport());
 		labelSelectedAcitvtyStats.setText(report);
 		txtAddEmployee.setText("");
 		txtSetStartdate.setText(startDate);

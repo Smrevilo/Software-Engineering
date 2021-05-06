@@ -61,8 +61,8 @@ public class TimeOverviewProject {
 	
 	@Then("display an empty list of the work hours each employee is assigned to")
 	public void display_an_empty_list_of_the_work_hours_each_employee_is_assigned_to() {
-		String repport = system.getSelectedProject().makeRepport();
-	    System.out.println(repport);
-	    assertTrue(repport.equals("There is no activites"));
+		String report = system.getSelectedProject().makeReport();
+	    System.out.println(report);
+	    assertTrue(report.equals("There is no activites"));
 	}
 }

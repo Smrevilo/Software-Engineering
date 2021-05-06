@@ -89,7 +89,7 @@ public class PKV {
 	public String makeReportFor(String projectName) throws Exception {
 		Project project = getProject(projectName);
 		if (project.getLeader() == loggedInAs) {
-			return "Project: " + projectName + "\n" + project.makeRepport();
+			return "Project: " + projectName + "\n" + project.makeReport();
 		} else {
 			throw new Exception("Only the project leader can get a project report");
 		}
@@ -158,6 +158,13 @@ public class PKV {
 			}
 		}
 		throw new Exception("An employee with the initials \"" + initials + "\" does not exsit");
+	}
+
+	public void setWorkload(int workload) throws Exception {
+		if (selectedProject.getLeader() != loggedInAs) {
+			throw new Exception("Only the project leader can set the workload");
+		}
+		selectedActivity.setWorkload(workload);
 	}
 	
 	public void addEmployeeToActivity(Employee employee) throws Exception {

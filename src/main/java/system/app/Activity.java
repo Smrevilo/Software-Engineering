@@ -10,6 +10,7 @@ public class Activity {
 	private Calendar startDate;
 	private Calendar deadline;
 	private boolean isEditable = true;
+	private int workload;
 
 	public Activity(String name) {
 		this.name = name;
@@ -88,7 +89,7 @@ public class Activity {
 		return output;
 	}
 	
-	public String getRepport() {
+	public String getReport() {
 		String output = "";
 		for (Pomodoro pomodoro : pomodoros) {
 			output += "Employee: " + pomodoro.getEmployee().getInitials() + ", hours: " + pomodoro.getTime() + "\n";
@@ -156,5 +157,13 @@ public class Activity {
 		}
 
 		return out;
+	}
+
+	public void setWorkload(int workload) {
+		this.workload = workload;
+	}
+
+	public int getWorkload() {
+		return workload;
 	}
 }

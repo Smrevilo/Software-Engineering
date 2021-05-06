@@ -49,21 +49,23 @@ public class Project {
 		return null;
 	}
 	
-	public String makeRepport() {
-		String repport = "";
+	public String makeReport() {
+		String report = "";
 		for (Activity activity : activites) {
-			repport += "Activity " + activity.getName() + " " + activity.printTime() +  "\n";
-			String activityRepport = activity.getRepport();
-			if (activityRepport.equals("")) {
-				repport += "\tThis activity has no registred hours\n\n";
+			report += "Activity " + activity.getName() + " " + activity.printTime() +  "\n";
+			report += "Hours registred so far: " + activity.getTotalTime() + "\n";
+			report += "Expected workload: " + activity.getWorkload() + "\n";
+			String activityReport = activity.getReport();
+			if (activityReport.equals("")) {
+				report += "\tThis activity has no registred hours\n\n";
 			} else {
-				repport += "\t"+activityRepport + "\n";
+				report += "\t"+activityReport + "\n";
 			}
 		}
-		if (repport.equals("")) {
-			repport = "There is no activites";
+		if (report.equals("")) {
+			report = "There is no activites";
 		}
-		return repport;
+		return report;
 	}
 	
 	public ArrayList<Activity> getActivities() {

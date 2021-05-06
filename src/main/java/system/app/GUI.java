@@ -57,6 +57,9 @@ public class GUI {
 					case "search available":
 						searchAvailable();
 						break;
+					case "set workload":
+						setWorkload();
+						break;
 					default:
 						System.out.println("<"+cmd+"> is not a known command");
 						break;
@@ -65,6 +68,52 @@ public class GUI {
 		}
 	}
 	
+	private void setWorkload() {
+		while (true) {
+			System.out.print("Name of project to set workload for (q to stop): ");
+			String projectName = in.nextLine();
+			if (projectName.toLowerCase().equals("q")) {
+				return;
+			}
+			try {
+				pkv.setSelectedProject(pkv.getProject(projectName));
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				continue;
+			}
+			if (!(pkv.getSelectedProject().getLeader() == pkv.getLoggedInAs())) {
+				System.out.println("You must be project leader of the project to set workload");
+				continue;
+			}
+			if (!pkv.getSelectedProject().getEditable()) {
+				System.out.println("Project is not editable");
+				continue;
+			}
+ 			while (true) {
+				System.out.print("Name of activity to set workload for (q to stop): ");
+				String activityName = in.nextLine();
+				if (activityName.toLowerCase().equals("q")) {
+					return;
+				}
+				try { 
+					pkv.setSelectedActivity(pkv.getSelectedProject().getActivity(activityName));
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					continue;
+				}
+				try {
+					pkv.setWorkload(in.nextInt());
+					in.nextLine();
+				} catch (InputMismatchException e) {
+					System.out.println("error NAN");
+					continue;
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					continue;
+				}
+ 			}
+		}
+	}
 	private void searchAvailable() {
 		while (true) {
 			System.out.print("Date dd/mm/yyyy (q to stop): ");
