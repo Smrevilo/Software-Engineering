@@ -10,7 +10,10 @@ public class Pomodoro {
 		this.activity = activity;
 	}
 	
-	public void addTime(int time) {
+	public void addTime(int time) throws Exception {
+		if (time < 0) {
+			throw new Exception("You cannot add negative hours");		
+		}
 		this.time += time;
 	}
 	
@@ -26,9 +29,12 @@ public class Pomodoro {
 		return activity;
 	}
 
-	public void deleteTime(int i) throws Exception {
-		if (this.time > i) {
-			this.time -= i;	
+	public void deleteTime(int time) throws Exception {
+		if (time < 0) {
+			throw new Exception("You cannot delete negative hours");		
+		}
+		if (this.time > time) {
+			this.time -= time;	
 		} else {
 			throw new Exception("You cannot delete more hours than you have registered");
 		}
