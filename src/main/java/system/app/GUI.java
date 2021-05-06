@@ -20,7 +20,8 @@ public class GUI {
 		
 			while (isLoggedIn) {
 				System.out.print("Command (write \"help\" to get help): ");
-				switch (in.nextLine().toLowerCase()) {
+				String cmd = in.nextLine().toLowerCase();
+				switch (cmd) {
 					case "logout":
 						logOut();
 						break;
@@ -42,12 +43,64 @@ public class GUI {
 					case "edit time":
 						editTime();
 						break;
+					case "add employee":
+						addEmployee();
+						break;
+					default:
+						System.out.println("<"+cmd+"> is not a known command");
+						break;
 				}
 			}
 		}
 			
 	}
 	
+	private void addEmployee() {
+		while (true) {
+			System.out.println("Name of project to add employee to (q to stop): ");
+			String projectName = in.nextLine();
+			if (projectName.toLowerCase().equals("q")) {
+				return;
+			}
+			try {
+				pkv.setSelectedProject(pkv.getProject(projectName));
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				continue;
+			}
+			break;
+		}
+		while (true) {
+			System.out.println("Name of activity to add employee to (q to stop): ");
+			String activityName = in.nextLine();
+			if (activityName.toLowerCase().equals("q")) {
+				return;
+			}
+			try {
+				pkv.setSelectedActivity(pkv.getSelectedProject().getActivity(activityName));
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				continue;
+			}
+			break;
+		}
+		while (true) {
+			System.out.println("Name of employee to add (q to stop): ");
+			String name = in.nextLine();
+			if (name.toLowerCase().equals("q")) {
+				return;
+			}
+			try {
+				Employee employee = pkv.getEmployee(name);
+				pkv.getSelectedActivity().addEmployee(employee);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				continue;
+			}
+			return;
+		}
+	}
+
 	private void editTime() {
 		while (true) {
 			System.out.print("Name of project to edit time for (q to stop): ");
@@ -57,7 +110,6 @@ public class GUI {
 			}
 			try {
 				pkv.setSelectedProject(pkv.getProject(projectName));
-
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				continue;
@@ -68,7 +120,6 @@ public class GUI {
 				String activityName = in.nextLine();
 				if (activityName.toLowerCase().equals("q")) {
 					return;
-
 				}
 				try { 
 					pkv.setSelectedActivity(pkv.getSelectedProject().getActivity(activityName));
@@ -79,16 +130,15 @@ public class GUI {
 					System.out.println(e.getMessage());
 					continue;
 				}
+				
 				while (true) {
 					System.out.print("To add time write \"Add time\" and to delete time write \"Delete time\" (q to stop): ");
 					String edit = in.nextLine();
 					if (edit.toLowerCase().equals("q")) {
 						return;
-						
 					} else if (edit.toLowerCase().equals("add time")){
 						try { 
 							addTime();
-							
 						} catch (Exception e) {
 							System.out.println(e.getMessage());
 							continue;
@@ -96,17 +146,15 @@ public class GUI {
 					} else if (edit.toLowerCase().equals("delete time")){
 						try { 
 							deleteTime();
-							
 						} catch (Exception e) {
 							System.out.println(e.getMessage());
 							continue;
 						}
-
-					System.out.println("Time has been succesfully added to activity");
+					}
+					System.out.println("Time has been succesfully edited");
 					return;
 				}
 			}
-		}
 		}
 
 	}
@@ -116,7 +164,8 @@ public class GUI {
 			System.out.print("How many hours do you want to delete (-1 to stop)?: ");
 			try { 
 				int time = in.nextInt();
-				if (time==-1) {
+				in.nextLine();
+				if (time == -1) {
 					return;	
 				} 
 				pkv.getSelectedActivity().deleteTime(pkv.getLoggedInAs(), time);
@@ -126,7 +175,6 @@ public class GUI {
 				continue;
 			}
 		}
-		
 	}
 
 	private void addTime() throws Exception {
@@ -134,7 +182,8 @@ public class GUI {
 			System.out.print("How many hours do you want to registre (-1 to stop)?: ");
 			try { 
 				int time = in.nextInt();
-				if (time==-1) {
+				in.nextLine();
+				if (time == -1) {
 					return;	
 				} 
 				pkv.getSelectedActivity().addTime(pkv.getLoggedInAs(), time);
@@ -239,9 +288,10 @@ public class GUI {
 		System.out.println("Help: Displays this");
 		System.out.println("Create Project: Creates a project");
 		System.out.println("Create Activity: Creates an activity");
-		System.out.println("Make report: prints an overview of a project");
-		System.out.println("Set project leader: sets a project leader");
-		System.out.println("Edit time: add og remove time to an activity");
+		System.out.println("Make Report: Prints an overview of a project");
+		System.out.println("Set Project leader: Sets a project leader");
+		System.out.println("Edit Time: Add og remove time to an activity");
+		System.out.println("Add Employee: Adds an employee to an activity");
 		
 	}
 

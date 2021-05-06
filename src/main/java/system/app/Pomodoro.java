@@ -33,7 +33,7 @@ public class Pomodoro {
 		if (time < 0) {
 			throw new Exception("You cannot delete negative hours");		
 		}
-		if (this.time > time) {
+		if (this.time >= time) {
 			this.time -= time;	
 		} else {
 			throw new Exception("You cannot delete more hours than you have registered");
