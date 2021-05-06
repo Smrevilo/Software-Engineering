@@ -75,18 +75,6 @@ public class PKV {
 		return null;
 	}
 	
-	public List<Project> getProjectForEmployee(Employee user) throws Exception {
-		System.out.println("create project list for employee...");
-		List<Project> userProjects = new ArrayList<Project>();
-		for (Project p : projects) {
-			if (p.getLeader() == user || p.getLeader() == null) {
-				userProjects.add(p);
-				System.out.println(p.getName());
-			}
-		}
-		return userProjects;
-	}
-
 	public void deleteProject(String name) throws Exception {
 		if (!hasProject(name)) {
 			throw new Exception("A project with that name doesn't exsits");
@@ -115,7 +103,7 @@ public class PKV {
 		selectedActivity.setStartDate(startDay, startMonth, startYear);
 	}
 
-	private void checkValid(int day, int month, int year) throws Exception {
+	public void checkValid(int day, int month, int year) throws Exception {
 		Calendar checker = new GregorianCalendar();
 		checker.set(year, month, day);
 		if (!(checker.get(Calendar.DATE) == day && checker.get(Calendar.MONTH) == month && checker.get(Calendar.YEAR) == year)) {
@@ -145,8 +133,8 @@ public class PKV {
 		gui.start();
 	}
 
-	public List<Employee> getAvailableEmployees(GregorianCalendar date) {
-		List<Employee> availableEmployees = new ArrayList<Employee>();
+	public ArrayList<Employee> getAvailableEmployees(GregorianCalendar date) {
+		ArrayList<Employee> availableEmployees = new ArrayList<Employee>();
 		for (Employee employee : employees) {
 			if (employee.getAvailablePomodoro(date) <= threshold && employee != loggedInAs) {
 				availableEmployees.add(employee);
@@ -201,6 +189,10 @@ public class PKV {
 
 	public void setSelectedActivity(Activity selectedActivity) {
 		this.selectedActivity = selectedActivity;
+	}
+
+	public ArrayList<Project> getProjects() {
+		return projects;
 	}
 
 	public Project getSelectedProject() {

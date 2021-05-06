@@ -24,10 +24,10 @@ public class Employee {
 		return initialer;
 	}
 
-	public int getTimefor(String check) {
+	public int getTimefor(String activityName) {
 		int time = 0;
 		for (Pomodoro pomodoro : pomodoros) {
-			if (pomodoro.getActivity().getName().equals(check)) {
+			if (pomodoro.getActivity().getName().equals(activityName)) {
 				time = pomodoro.getTime();
 			}
 		}

@@ -1,5 +1,7 @@
 package system.app;
 
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -52,10 +54,46 @@ public class GUI {
 					case "set date":
 						setDate();
 						break;
+					case "search available":
+						searchAvailable();
+						break;
 					default:
 						System.out.println("<"+cmd+"> is not a known command");
 						break;
 				}
+			}
+		}
+	}
+	
+	private void searchAvailable() {
+		while (true) {
+			System.out.print("Date dd/mm/yyyy (q to stop): ");
+			String date = in.nextLine();
+			if (date.equals("q")) {
+				return;
+			}
+			Scanner dateScanner = new Scanner(date.replace('/', ' '));
+			try {
+				int day = dateScanner.nextInt();
+				int month = dateScanner.nextInt();
+				int year = dateScanner.nextInt();
+				pkv.checkValid(day, month, year);
+				ArrayList<Employee> available = pkv.getAvailableEmployees(new GregorianCalendar(year, month, day));
+				int numAvailable = available.size();
+				System.out.println("On that day there " + (numAvailable == 1 ? "is" : "are") + " " + numAvailable + " available employee" + (numAvailable == 1 ? "" : "s") + ":");
+				for (int i = 0; i < numAvailable; i++) {
+					System.out.println(available.get(i).getInitials());
+				}
+				return;
+			} catch (InputMismatchException e) {
+				System.out.println("error NAN");
+				continue;
+			} catch (NoSuchElementException e) {
+				System.out.println("Date must contains 3 numbers");
+				continue;
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				continue;
 			}
 		}
 	}
@@ -431,7 +469,7 @@ public class GUI {
 		System.out.println("Edit Time: Add og remove time to an activity");
 		System.out.println("Add Employee: Adds an employee to an activity");
 		System.out.println("Set Date: Set start date or deadline of an activity");
-		
+		System.out.println("Search Available: Shows who are available on a specified date");
 	}
 
 	private void login() {

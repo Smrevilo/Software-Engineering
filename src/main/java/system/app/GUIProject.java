@@ -16,8 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class GUIProject extends JFrame implements ActionListener{
-private static final long serialVersionUID = 1L;
+public class GUIProject extends JFrame implements ActionListener {
 	
 	public JButton[] bProjectList;
 	private JButton bCreateProject;
@@ -31,7 +30,7 @@ private static final long serialVersionUID = 1L;
 		this.system = system;
 		getContentPane().setLayout(new BorderLayout());
 		
-		projects = (ArrayList<Project>) system.getProjectForEmployee(user);
+		projects = (ArrayList<Project>) system.getProjects();
 		
 		bProjectList = new JButton[projects.size()];
 		
