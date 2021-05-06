@@ -52,7 +52,7 @@ public class Project {
 	public String makeRepport() {
 		String repport = "";
 		for (Activity activity : activites) {
-			repport += "Activity " + activity.getName() + "\n";
+			repport += "Activity " + activity.getName() + " " + activity.printTime() +  "\n";
 			String activityRepport = activity.getRepport();
 			if (activityRepport.equals("")) {
 				repport += "\tThis activity has no registred hours\n\n";

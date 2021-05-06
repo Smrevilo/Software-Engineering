@@ -99,9 +99,9 @@ public class PKV {
 	}
 
 	public String makeReportFor(String projectName) throws Exception {
-		Project temp = getProject(projectName);
-		if (temp.getLeader() == loggedInAs) {
-			return "Project: " + projectName + "\n" + temp.makeRepport();
+		Project project = getProject(projectName);
+		if (project.getLeader() == loggedInAs) {
+			return "Project: " + projectName + "\n" + project.makeRepport();
 		} else {
 			throw new Exception("Only the project leader can get a project report");
 		}

@@ -16,7 +16,6 @@ public class GUI {
 	}
 	//TODO:
 		//Set workload
-			//Make report show start date and deadline
 		//Make report show info to non project leaders(very low priority)
 	public void start() {
 		while (true) {
@@ -78,7 +77,7 @@ public class GUI {
 				System.out.println("You must be project leader of the project to set dates");
 				continue;
 			}
-			if (pkv.getSelectedProject().getEditable()) {
+			if (!pkv.getSelectedProject().getEditable()) {
 				System.out.println("Project is not editable");
 				continue;
 			}
@@ -90,9 +89,6 @@ public class GUI {
 				}
 				try { 
 					pkv.setSelectedActivity(pkv.getSelectedProject().getActivity(activityName));
-					if (!pkv.getSelectedActivity().isAssignedTo(pkv.getLoggedInAs())) {
-						throw new Exception("You are not assigned to this activity");
-					}
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 					continue;
@@ -200,7 +196,7 @@ public class GUI {
 				System.out.println("You must be project leader of the project to set dates");
 				continue;
 			}
-			if (pkv.getSelectedProject().getEditable()) {
+			if (!pkv.getSelectedProject().getEditable()) {
 				System.out.println("Project is not editable");
 				continue;
 			}
@@ -382,7 +378,7 @@ public class GUI {
 				System.out.println("You must be project leader of the project to set dates");
 				continue;
 			}
-			if (pkv.getSelectedProject().getEditable()) {
+			if (!pkv.getSelectedProject().getEditable()) {
 				System.out.println("Project is not editable");
 				continue;
 			}
@@ -434,6 +430,7 @@ public class GUI {
 		System.out.println("Set Project leader: Sets a project leader");
 		System.out.println("Edit Time: Add og remove time to an activity");
 		System.out.println("Add Employee: Adds an employee to an activity");
+		System.out.println("Set Date: Set start date or deadline of an activity");
 		
 	}
 

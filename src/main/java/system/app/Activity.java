@@ -14,8 +14,6 @@ public class Activity {
 	public Activity(String name) {
 		this.name = name;
 		this.pomodoros = new ArrayList<Pomodoro>();
-		this.startDate = new GregorianCalendar();
-		this.deadline = new GregorianCalendar();
 	}
 	
 	public String getName() {
@@ -34,6 +32,7 @@ public class Activity {
 		if (!isEditable) {
 			throw new Exception("This activity can not be edited");
 		}
+		this.startDate = new GregorianCalendar();
 		this.startDate.set(startYear, startMonth, startDay);
 	}
 
@@ -45,6 +44,7 @@ public class Activity {
 		if (!isEditable) {
 			throw new Exception("This activity can not be edited");
 		}
+		this.deadline = new GregorianCalendar();
 		this.deadline.set(deadYear, deadMonth, deadDay);
 	}
 
@@ -144,5 +144,17 @@ public class Activity {
 	
 	public boolean getEditable() {
 		return isEditable;
+	}
+
+	public String printTime() {
+		String out = "";
+		if (startDate != null) {
+			out += "Start: " + startDate.get(startDate.DAY_OF_MONTH) + "/" + startDate.get(startDate.MONTH) + "/" + startDate.get(startDate.YEAR) + (deadline == null ? "" : " ");
+		}
+		if (deadline != null) {
+			out += "Deadline: " + deadline.get(deadline.DAY_OF_MONTH) + "/" + deadline.get(deadline.MONTH) + "/" + deadline.get(deadline.YEAR);
+		}
+
+		return out;
 	}
 }
