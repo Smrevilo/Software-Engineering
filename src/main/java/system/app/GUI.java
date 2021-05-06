@@ -52,7 +52,6 @@ public class GUI {
 				}
 			}
 		}
-			
 	}
 	
 	private void addEmployee() {
@@ -92,7 +91,7 @@ public class GUI {
 			}
 			try {
 				Employee employee = pkv.getEmployee(name);
-				pkv.getSelectedActivity().addEmployee(employee);
+				pkv.addEmployeeToActivity(employee);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				continue;
