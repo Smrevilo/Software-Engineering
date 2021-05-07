@@ -56,6 +56,7 @@ public class Project {
 		String report = "";
 		for (Activity activity : activites) {
 			report += "Activity " + activity.getName() + " " + activity.printTime() +  "\n";
+			report += "Is the project finished: " + activity.getStatusOfActivity() + "\n";
 			report += "Hours registred so far: " + activity.getTotalTime() + "\n";
 			report += "Expected workload: " + activity.getWorkload() + "\n";
 			String activityReport = activity.getReport();
