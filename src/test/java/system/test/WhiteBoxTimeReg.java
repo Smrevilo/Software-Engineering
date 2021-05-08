@@ -26,33 +26,31 @@ class WhiteBoxTimeReg {
 	
 	@Test
 	void path1() {
-		assertTrue(selectedActivty.getTotalTimeForEmployee(eUser) == 0);
+		assertTrue(selectedActivty.getTotalTime() == 0);
 		try {
 			selectedActivty.addTime(eUser, 10);
 		} catch (Exception e) {}
-		assertTrue(selectedActivty.getTotalTimeForEmployee(eUser) == 10);
+		assertTrue(selectedActivty.getTotalTime() == 10);
 	}
 	
-	//negative test
 	@Test
-	void path2() {
-		assertTrue(selectedActivty.getTotalTimeForEmployee(eUser) == 0);
+	void negativeArg() {
+		assertTrue(selectedActivty.getTotalTime() == 0);
 		try {
 			selectedActivty.addTime(eUser, -10);
 		} catch (Exception e) {}
-		assertTrue(selectedActivty.getTotalTimeForEmployee(eUser) == 0);
+		assertTrue(selectedActivty.getTotalTime() == 0);
 	}
 	
-	//Gauss test
 	@Test
-	void path3() {
-		assertTrue(selectedActivty.getTotalTimeForEmployee(eUser) == 0);
+	void gaussTest() {
+		assertTrue(selectedActivty.getTotalTime() == 0);
 		for (int i = 1; i <= 100; i++) {
 			try {
 				selectedActivty.addTime(eUser, i);
 			} catch (Exception e) {}
 		}
-		assertTrue(selectedActivty.getTotalTimeForEmployee(eUser) == 5050);
+		assertTrue(selectedActivty.getTotalTime() == 5050);
 	}
 
 }
