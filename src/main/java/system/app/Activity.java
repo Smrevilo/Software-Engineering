@@ -11,6 +11,7 @@ public class Activity {
 	private Calendar deadline;
 	private boolean isEditable = true;
 	private int workload;
+	private boolean activityisDone;
 
 	public Activity(String name) {
 		this.name = name;
@@ -160,5 +161,22 @@ public class Activity {
 
 	public int getWorkload() {
 		return workload;
+	}
+
+	public void setStatusOfActivity(String status) throws Exception {
+		if (status.equals("Done")) {
+			this.activityisDone = true;
+			
+		} else if (status.equals("Not Done")) {
+			this.activityisDone = false;
+		} else {
+			throw new Exception("Error: An activity can only either be Done or Not Done");
+		}
+		
+	}
+
+	public boolean getStatusOfActivity() {
+		return this.activityisDone;
+		
 	}
 }
