@@ -1,4 +1,4 @@
-package system.test;
+package WhiteboxTests;
 
 import static org.junit.jupiter.api.Assertions.*;
 

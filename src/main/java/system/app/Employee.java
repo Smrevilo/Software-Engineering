@@ -57,20 +57,15 @@ public class Employee {
 
 	public int getAvailablePomodoro(GregorianCalendar testDate) {
 		int numAvailable = 0;
-		
+
 		for (Pomodoro pomodoro : pomodoros) {
 			if (specialActivities.contains(pomodoro.getActivity().getName())) {
 				continue;
 			}
-			if (pomodoro.getActivity().getStartDate().get(Calendar.YEAR) <= testDate.get(Calendar.YEAR) && pomodoro.getActivity().getDeadline().get(Calendar.YEAR) >= testDate.get(Calendar.YEAR)) {
-				if (pomodoro.getActivity().getStartDate().get(Calendar.MONTH) <= testDate.get(Calendar.MONTH) && pomodoro.getActivity().getDeadline().get(Calendar.MONTH) >= testDate.get(Calendar.MONTH)) {	
-					if (pomodoro.getActivity().getStartDate().get(Calendar.DAY_OF_MONTH) <= testDate.get(Calendar.DAY_OF_MONTH) && pomodoro.getActivity().getDeadline().get(Calendar.DAY_OF_MONTH) >= testDate.get(Calendar.DAY_OF_MONTH)) {
-						numAvailable++;
-					}
-				}
+			if (pomodoro.getActivity().getStartDate().before(testDate) && pomodoro.getActivity().getDeadline().after(testDate)) {
+				numAvailable++;
 			}
 		}
-
 		return numAvailable;
 	}
 
