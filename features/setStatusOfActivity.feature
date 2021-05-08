@@ -15,3 +15,9 @@ Scenario: Set Status to Done
 Scenario: Set Status to Not Done
 	When the project leader sets the status of the activity "activity1" under the project "Project1" to "Not Done"
 	Then the activity "activity1" under the project "Project1" has the status "Not Done"	
+
+	
+Scenario: Set Status to an invalid state
+	When the project leader sets the status of the activity "activity1" under the project "Project1" to "WRONG"
+	Then an error message ocurres with the text "Error: An activity can only either be Done or Not Done"	
+	
