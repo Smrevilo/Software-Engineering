@@ -1,4 +1,4 @@
-Feature: set the status of the projectt
+Feature: set the status of the project
 Description: A project leader edits the statuts for an activity
 Actors: Employee
 

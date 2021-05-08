@@ -1,6 +1,7 @@
 package system.test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -38,20 +39,16 @@ public class StatusOfActivityTest {
 
 	@Then("the activity {string} under the project {string} has the status {string}")
 	public void the_activity_under_the_project_has_the_status(String activity, String project, String status) throws Exception {
+		system.setSelectedProject(system.getProject(project));
+		system.setSelectedActivity(system.getSelectedProject().getActivity(activity));
 		boolean activityStatus = false;
+		System.out.println(status);
 		if (status.equals("Done")) {
-			activityStatus = true;
+			assertThat(system.getSelectedActivity().getStatusOfActivity(), is(true));
 		} else if (status.equals("Not Done")) {
-			activityStatus = false;
-		} else {
-			throw new Exception("A status can either be done or not done");
-		}
-		
-		try {
-			assertTrue(system.getProject(project).getActivity(activity).getStatusOfActivity()==activityStatus);
-		} catch (Exception e) {
-			errorMessageHolder.setErrorMessage(e.getMessage());
-		}
+			assertThat(system.getSelectedActivity().getStatusOfActivity(), is(false));
+		} 
+
 		
 	}
 }
