@@ -2,10 +2,10 @@ package system.test;
 
 import static org.junit.Assert.assertTrue;
 
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import system.app.Employee;
-import system.app.EmployeeHelper;
 import system.app.PKV;
 
 public class StatusOfActivityTest {
@@ -14,10 +14,15 @@ public class StatusOfActivityTest {
 	private Employee employee;
 	private ErrorMessageHolder errorMessageHolder;
 
-	// PKV stands for projekt kordinerings værktøj
+	
 	public StatusOfActivityTest(PKV system, ErrorMessageHolder errorMessageHolder) throws Exception {
 		this.system = system;
 		this.errorMessageHolder = errorMessageHolder;
+	}
+	@Given("the project leader adds the activity {string}")
+	public void the_project_leader_adds_the_activity(String activity) throws Exception {
+		system.getSelectedProject().createActivty(system.getSelectedProject().getLeader(), activity);
+		
 	}
 
 	@When("the project leader sets the status of the activity {string} under the project {string} to {string}")

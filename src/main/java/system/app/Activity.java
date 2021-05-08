@@ -164,10 +164,10 @@ public class Activity {
 	}
 
 	public void setStatusOfActivity(String status) throws Exception {
-		if (status.equals("Done")) {
+		if (status.toLowerCase().equals("done")) {
 			this.activityisDone = true;
 			
-		} else if (status.equals("Not Done")) {
+		} else if (status.toLowerCase().equals("not done")) {
 			this.activityisDone = false;
 		} else {
 			throw new Exception("Error: An activity can only either be Done or Not Done");
