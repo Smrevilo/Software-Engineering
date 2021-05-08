@@ -29,8 +29,12 @@ public class Activity {
 		if (!isEditable) {
 			throw new Exception("This activity can not be modified");
 		}
-		this.startDate = new GregorianCalendar();
-		this.startDate.set(startYear, startMonth, startDay);
+		Calendar temp = new GregorianCalendar();
+		temp.set(startYear, startMonth, startDay);
+		if (deadline != null && deadline.before(temp)) {
+			throw new Exception("Startdate can not be later than deadline");
+		}
+		this.startDate = temp;
 	}
 
 	public Calendar getDeadline() {
@@ -41,8 +45,12 @@ public class Activity {
 		if (!isEditable) {
 			throw new Exception("This activity can not be modified");
 		}
-		this.deadline = new GregorianCalendar();
-		this.deadline.set(deadYear, deadMonth, deadDay);
+		Calendar temp = new GregorianCalendar();
+		temp.set(deadYear, deadMonth, deadDay);
+		if (startDate != null && startDate.after(temp)) {
+			throw new Exception("Deadline can not be before start date");
+		}
+		this.deadline = temp;
 	}
 
 	public void addEmployee(Employee employee) throws Exception {

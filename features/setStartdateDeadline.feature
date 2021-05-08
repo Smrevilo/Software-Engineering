@@ -46,6 +46,20 @@ Scenario: A employee sets startDate of project which they are not a project lead
 	When the employee sets the startdate of the activity "activity1" under the project "Project1" to the 14 - 13 - 2021
 	Then an error message ocurres with the text "Only the project leader can set a startdate"
 	
+Scenario: A employee sets startDate later than deadline
+	Given the project has these activities
+		| activity1 |
+	When the employee sets the deadline of the activity "activity1" under the project "Project1" to the 14 - 5 - 2021
+	And the employee sets the startdate of the activity "activity1" under the project "Project1" to the 16 - 5 - 2021
+	Then an error message ocurres with the text "Startdate can not be later than deadline"
+	
+Scenario: A employee sets deadline earlier than startdate
+	Given the project has these activities
+		| activity1 |
+	And the employee sets the startdate of the activity "activity1" under the project "Project1" to the 16 - 5 - 2021
+	When the employee sets the deadline of the activity "activity1" under the project "Project1" to the 14 - 5 - 2021
+	Then an error message ocurres with the text "Deadline can not be before start date"
+	
 Scenario: A employee sets startDate of an activity which is not editable
 	When the employee sets the startdate of the activity "Sick Days" under the project "ABCD" to the 14 - 5 - 2021
 	Then an error message ocurres with the text "This activity can not be modified"
