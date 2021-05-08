@@ -26,19 +26,15 @@ public class PKV {
 		this.gui = new GUI(this);
 	}
 
-	public void add(Employee employee) {
-		employees.add(employee);
-	}
-
-	public boolean login(String initials) {
+	public void login(String initials) throws Exception {
 		logOut();
 		for (Employee employee : employees) {
 			if (initials.equals(employee.getInitials())) {
 				this.loggedInAs = employee;
-				return true;
+				return;
 			}
 		}
-		return false;
+		throw new Exception("Wrong initials");
 	}
 
 	public void logOut() {
@@ -67,20 +63,17 @@ public class PKV {
 	}
 
 	public Project getProject(String name) throws Exception {
-		if (!hasProject(name)) {
-			throw new Exception("A project with that name doesn't exits");
-		}
 		for (Project p : projects) {
 			if (p.getName().equals(name)) {
 				return p;
 			}
 		}
-		return null;
+		throw new Exception("A project with that name doesn't exits");
 	}
 	
 	public void deleteProject(String name) throws Exception {
 		if (!hasProject(name)) {
-			throw new Exception("A project with that name doesn't exsits");
+			throw new Exception("A project with that name doesn't exits");
 		}
 		if (selectedProject.getLeader() != loggedInAs) {
 			throw new Exception("Only the project leaders can delete the project");
@@ -144,14 +137,6 @@ public class PKV {
 			}
 		}
 		return availableEmployees;
-	}
-	
-	public void removeEmployeeFromActivity(Employee employee) throws Exception {
-		if (this.selectedProject.getLeader() == this.loggedInAs) {
-			this.selectedActivity.removeEmployee(employee);
-		} else {
-			throw new Exception("Only the project leader can remove employees from activities");
-		}
 	}
 
 	public Employee getEmployee(String initials) throws Exception {

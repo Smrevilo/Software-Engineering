@@ -1,7 +1,7 @@
 package system.test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -66,6 +66,6 @@ public class AvailabilityTest {
 	
 	@Then("display a list of {int} employee that are available at that date")
 	public void display_a_list_of_employee_that_are_available_at_that_date(int numAvailable) {
-		assertTrue(availableEmployee.size() == numAvailable);
+		assertThat(availableEmployee.size(), is(numAvailable));
 	}
 }

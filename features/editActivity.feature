@@ -7,12 +7,18 @@ Background: The system has a project
 	When the employee creates a project using the name "Project1"
 	Then a project with the name "Project1" exists
 	Given the logged in employee is the project leader of "Project1"
-	When the project leader adds the activity "activity1"
+	When the logged in employee adds the activity "activity1"
 	Then the project has the activity "activity1"
 
 Scenario: Project leader adds employee to activity
 	When the employee adds another employee with the initials "ABCE" to the activity "activity1" under project "Project1"
 	Then the employee with the initials "ABCE" is assigned to the activity "activity1" under project "Project1"
+
+Scenario: Project leader adds employee to activity twice
+	When the employee adds another employee with the initials "ABCE" to the activity "activity1" under project "Project1"
+	Then the employee with the initials "ABCE" is assigned to the activity "activity1" under project "Project1"
+	When the employee adds another employee with the initials "ABCE" to the activity "activity1" under project "Project1"
+	Then an error message ocurres with the text "Employee is already assigned to this activity"
 
 Scenario: Non project leader adds employee to activity
 	Given the logged in employee is not the project leader of "Project1"
@@ -24,6 +30,10 @@ Scenario: Project leader removes an employee from an activity
 	Then the employee with the initials "ABCE" is assigned to the activity "activity1" under project "Project1"
 	When the employee removes the other employee with the initials "ABCE" from the activity "activity1" under project "Project1"
 	Then the employee with the initials "ABCE" is not assigned to the activity "activity1" under project "Project1"
+
+Scenario: Project leader adds non-existing employee to activity
+	When the employee adds another employee with the initials "WRONG" to the activity "activity1" under project "Project1"
+	Then an error message ocurres with the text 'An employee with the initials "WRONG" does not exsit'
 
 Scenario: Project leader removes an employee from an activity which they are not assigned to
 	When the employee removes the other employee with the initials "ABCE" from the activity "activity1" under project "Project1"

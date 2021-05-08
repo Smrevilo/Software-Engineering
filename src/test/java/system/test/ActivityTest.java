@@ -32,10 +32,11 @@ public class ActivityTest {
 	
 	@When("the employee adds another employee with the initials {string} to the activity {string} under project {string}")
 	public void the_employee_adds_another_employee_with_the_initials_to_the_activity_under_project(String initials, String activityName, String projectName) throws Exception {
-		Employee employee = system.getEmployee(initials);
-		system.setSelectedProject(system.getProject(projectName));
-		system.setSelectedActivity(system.getSelectedProject().getActivity(activityName));
+		Employee employee = null;
 		try {
+			employee = system.getEmployee(initials);
+			system.setSelectedProject(system.getProject(projectName));
+			system.setSelectedActivity(system.getSelectedProject().getActivity(activityName));
 			system.addEmployeeToActivity(employee);
 		} catch (Exception e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
@@ -65,7 +66,6 @@ public class ActivityTest {
 
 	@Then("the employee with the initials {string} is not assigned to the activity {string} under project {string}")
 	public void the_employee_with_the_initials_is_not_assigned_to_the_activity_under_project(String initials, String activityName, String projectName) throws Exception {
-		assertTrue(errorMessageHolder.getErrorMessage().equals(""));
 		Employee employee = system.getEmployee(initials);
 		Project project = system.getProject(projectName);
 		Activity activity = project.getActivity(activityName);

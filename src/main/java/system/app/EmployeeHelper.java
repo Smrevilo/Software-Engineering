@@ -59,8 +59,4 @@ public class EmployeeHelper {
 	public String getInitials2() {
 		return employeeList.get(1).getInitials();
 	}
-
-	public List<Employee> getEmployees() {
-		return this.employeeList;
-	}
 }

@@ -179,11 +179,11 @@ public class GUILogin extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginButton) {
         	String initials = initialsField.getText();
-			boolean success = pkv.login(initials);
-			if (success) {
+			try {
+				pkv.login(initials);
 				makeFrontpage();
-			} else {
-				errorLabel.setText("Wrong initials");
+			} catch (Exception e1) {
+				errorLabel.setText(e1.getMessage());
 			}
         } else if (e.getSource() == logOut) {
         	pkv.logOut();

@@ -1,7 +1,7 @@
 package system.test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 
 import java.util.Calendar;
 import java.util.List;
@@ -41,9 +41,9 @@ public class SetStartDateAndDeadline {
 		
 		Calendar check = system.getStartDate();
 
-		assertTrue(check.get(check.DAY_OF_MONTH) == startdate);
-		assertTrue(check.get(check.MONTH) == startmonth);
-		assertTrue(check.get(check.YEAR) == startyear);
+		assertThat(check.get(check.DAY_OF_MONTH), is(startdate));
+		assertThat(check.get(check.MONTH), is(startmonth));
+		assertThat(check.get(check.YEAR), is(startyear));
 	
 	}
 	
@@ -64,9 +64,9 @@ public class SetStartDateAndDeadline {
 		system.setSelectedActivity(system.getSelectedProject().getActivity(activityName));
 		Calendar check = system.getDeadline();
 
-		assertTrue(check.get(check.DAY_OF_MONTH) == deadDate);
-		assertTrue(check.get(check.MONTH) == deadMonth);
-		assertTrue(check.get(check.YEAR) == deadYear);
+		assertThat(check.get(check.DAY_OF_MONTH), is(deadDate));
+		assertThat(check.get(check.MONTH), is(deadMonth));
+		assertThat(check.get(check.YEAR), is(deadYear));
 	}
 
 

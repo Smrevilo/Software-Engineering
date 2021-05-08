@@ -56,9 +56,8 @@ public class Employee {
 	}
 
 	public int getAvailablePomodoro(GregorianCalendar testDate) {
-		int priority = 0;
-		//System.out.println(testDate.YEAR + " " + testDate.MONTH + " " + testDate.DAY_OF_MONTH);
-		// If the activity is within the interval of the startdate and deadline, then increment priority 
+		int numAvailable = 0;
+		
 		for (Pomodoro pomodoro : pomodoros) {
 			if (specialActivities.contains(pomodoro.getActivity().getName())) {
 				continue;
@@ -66,29 +65,23 @@ public class Employee {
 			if (pomodoro.getActivity().getStartDate().get(Calendar.YEAR) <= testDate.get(Calendar.YEAR) && pomodoro.getActivity().getDeadline().get(Calendar.YEAR) >= testDate.get(Calendar.YEAR)) {
 				if (pomodoro.getActivity().getStartDate().get(Calendar.MONTH) <= testDate.get(Calendar.MONTH) && pomodoro.getActivity().getDeadline().get(Calendar.MONTH) >= testDate.get(Calendar.MONTH)) {	
 					if (pomodoro.getActivity().getStartDate().get(Calendar.DAY_OF_MONTH) <= testDate.get(Calendar.DAY_OF_MONTH) && pomodoro.getActivity().getDeadline().get(Calendar.DAY_OF_MONTH) >= testDate.get(Calendar.DAY_OF_MONTH)) {
-						priority++;
+						numAvailable++;
 					}
 				}
 			}
 		}
-		//System.out.println("initialer: "+initialer +" ||getAbiablePomodoro: "+priority);
-		return priority;
+
+		return numAvailable;
 	}
 
 	public void removeActivity(Activity activity) throws Exception {
-		if (!hasActivity(activity)) {
-			throw new Exception("The employee is not assigned to this activity");
-		}
+		Pomodoro toRemove = null;
 		for (Pomodoro pomodoro : pomodoros) {
 			if (pomodoro.getActivity() == activity) {
-				if (pomodoro.getTime() != 0) {
-					throw new Exception("The employee has registered hours to this activity");
-				}
-				pomodoros.remove(pomodoro);
-				//activity.removeEmployee(employee);
-				return;
+				toRemove = pomodoro;
 			}
 		}
+		pomodoros.remove(toRemove);
 	}
 
 	public boolean hasActivity(Activity activity) {

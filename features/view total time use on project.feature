@@ -6,7 +6,7 @@ Background: there is a project leader of a project
 	Given that an employee is logged in
 	And the employee creates a project using the name "Project1"
 	And that the project has no project leader assigned
-	When an employee is set as the project leader
+	When an employee is set as the project leader of the project "Project1"
 	Then the project has a project leader
 
 Scenario: the project leader requests to view total time of activities of a certain project, for each employee
@@ -17,6 +17,8 @@ Scenario: the project leader requests to view total time of activities of a cert
 		| activity4 |
 	And the activity "activity1" has the employee assigned
 	And the activity "activity1" has 5 registred hours
+	And the employee sets the startdate of the activity "activity1" under the project "Project1" to the 20 - 05 - 2021
+	And the employee sets the deadline of the activity "activity1" under the project "Project1" to the 30 - 05 - 2021
 	And the employee requests to view total time of "Project1"
 	Then display a list of the work hours each employee is assigned to
 

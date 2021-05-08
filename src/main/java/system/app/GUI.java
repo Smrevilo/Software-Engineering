@@ -525,11 +525,11 @@ public class GUI {
 		while (!isLoggedIn) {
 			System.out.println("Write your initials to login: ");
 			String initials = in.nextLine();
-			boolean success = pkv.login(initials);
-			if (success) {
+			try {
+				pkv.login(initials);
 				System.out.println("Successfully logged in as " + initials);
 				isLoggedIn = true;
-			} else {
+			} catch (Exception e) {
 				System.out.println("No user with those initials exists");
 			}
 		}

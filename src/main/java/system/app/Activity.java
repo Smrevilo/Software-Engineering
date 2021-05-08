@@ -21,10 +21,6 @@ public class Activity {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public Calendar getStartDate() {
 		return this.startDate;
 	}
@@ -43,13 +39,16 @@ public class Activity {
 
 	public void setDeadline(int deadDay, int deadMonth, int deadYear) throws Exception {
 		if (!isEditable) {
-			throw new Exception("This activity can not be edited");
+			throw new Exception("This activity can not be modified");
 		}
 		this.deadline = new GregorianCalendar();
 		this.deadline.set(deadYear, deadMonth, deadDay);
 	}
 
-	public void addEmployee(Employee employee) {
+	public void addEmployee(Employee employee) throws Exception {
+		if (isAssignedTo(employee)) {
+			throw new Exception("Employee is already assigned to this activity");
+		}
 		Pomodoro pomodoro = new Pomodoro(employee, this);
 		pomodoros.add(pomodoro);
 		employee.addActivity(pomodoro);
@@ -59,9 +58,6 @@ public class Activity {
 		boolean found = false;
 		for (Pomodoro pomodoro : pomodoros) {
 			if (pomodoro.getEmployee() == employee) {
-				if (found) {
-					throw new Exception("Employee assigned twice to same activity");
-				}
 				pomodoro.addTime(i);
 				found=true;
 			}
@@ -75,16 +71,6 @@ public class Activity {
 		int output = 0;
 		for (Pomodoro pomodoro : pomodoros) {
 			output += pomodoro.getTime();
-		}
-		return output;
-	}
-
-	public int getTotalTimeForEmployee(Employee employee) {
-		int output = 0;
-		for (Pomodoro pomodoro : pomodoros) {
-			if (pomodoro.getEmployee() == employee) {
-				output += pomodoro.getTime();
-			}
 		}
 		return output;
 	}
@@ -118,16 +104,17 @@ public class Activity {
 		if (!hasEmployee(employee)) {
 			throw new Exception("The employee is not assigned to this activity");
 		}
+		Pomodoro toRemove = null;
 		for (Pomodoro pomodoro : pomodoros) {
 			if (pomodoro.getEmployee() == employee) {
 				if (pomodoro.getTime() != 0) {
 					throw new Exception("The employee has registered hours to this activity");
 				}
-				pomodoros.remove(pomodoro);
-				employee.removeActivity(this);
-				return;
+				toRemove = pomodoro;
 			}
 		}
+		pomodoros.remove(toRemove);
+		employee.removeActivity(this);
 	}
 
 	public boolean hasEmployee(Employee employee) {
@@ -150,10 +137,10 @@ public class Activity {
 	public String printTime() {
 		String out = "";
 		if (startDate != null) {
-			out += "Start: " + startDate.get(startDate.DAY_OF_MONTH) + "/" + startDate.get(startDate.MONTH) + "/" + startDate.get(startDate.YEAR) + (deadline == null ? "" : " ");
+			out += "Start: " + startDate.get(Calendar.DAY_OF_MONTH) + "/" + startDate.get(Calendar.MONTH) + "/" + startDate.get(Calendar.YEAR) + (deadline == null ? "" : " ");
 		}
 		if (deadline != null) {
-			out += "Deadline: " + deadline.get(deadline.DAY_OF_MONTH) + "/" + deadline.get(deadline.MONTH) + "/" + deadline.get(deadline.YEAR);
+			out += "Deadline: " + deadline.get(Calendar.DAY_OF_MONTH) + "/" + deadline.get(Calendar.MONTH) + "/" + deadline.get(Calendar.YEAR);
 		}
 
 		return out;

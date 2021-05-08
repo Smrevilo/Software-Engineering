@@ -1,7 +1,7 @@
 package system.test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -47,9 +47,13 @@ public class ProjectTest {
 	
 	//EDIT PROJECT ----------------------------------------------------------
 
-	@When("the project leader adds the activity {string}")
-	public void the_project_leader_adds_the_activity(String string) throws Exception {
-		system.getSelectedProject().createActivty(system.getLoggedInAs(), string);
+	@When("the logged in employee adds the activity {string}")
+	public void the_project_leader_adds_the_activity(String string) {
+		try {
+			system.getSelectedProject().createActivty(system.getLoggedInAs(), string);
+	    } catch (Exception e) {
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }
 	}
 
 	@Then("the project has the activity {string}")
@@ -59,12 +63,16 @@ public class ProjectTest {
 	
 	@Given("that the project has no project leader assigned")
 	public void that_the_project_has_no_project_leader_assigned() {
-		assert system.getSelectedProject().getLeader() == null;
+		system.getSelectedProject().setLeader(null);
 	}
 
-	@When("an employee is set as the project leader")
-	public void an_employee_is_set_as_the_project_leader() {
-		system.getSelectedProject().setLeader(system.getLoggedInAs());
+	@When("an employee is set as the project leader of the project {string}")
+	public void an_employee_is_set_as_the_project_leader_of_the_project(String projectName) {
+		try {
+			system.getProject(projectName).setLeader(system.getLoggedInAs());
+	    } catch (Exception e) {
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }
 	}
 
 	@Then("the project has a project leader")
@@ -73,14 +81,11 @@ public class ProjectTest {
 	}
 	
 	@Given("the logged in employee is the project leader of {string}")
-	public void the_logged_in_employee_is_the_project_leader_of(String projectName) {
+	public void the_logged_in_employee_is_the_project_leader_of(String projectName) throws Exception {
 		Employee leader = system.getLoggedInAs();
-		try {
-			system.getProject(projectName).setLeader(leader);
-			assertTrue(system.getProject(projectName).getLeader() == system.getLoggedInAs());
-	    } catch (Exception e) {
-	    	errorMessageHolder.setErrorMessage(e.getMessage());
-	    }
+		system.getProject(projectName).setLeader(leader);
+		system.setSelectedProject(system.getProject(projectName));
+		assertThat(system.getProject(projectName).getLeader(), is(system.getLoggedInAs()));
 	}
 	
 	@When("the employee deletes the project {string}")

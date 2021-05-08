@@ -41,15 +41,12 @@ public class Project {
 	}
 	
 	public Activity getActivity(String name) throws Exception {
-		if (!hasActivity(name)) {
-			throw new Exception("An activity with that name doesn't exsits");
-		}
 		for (Activity a : activites) {
 			if (a.getName().equals(name)) {
 				return a;
 			}
 		}
-		return null;
+		throw new Exception("An activity with that name doesn't exsits");
 	}
 	
 	public String makeReport() {

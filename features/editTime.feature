@@ -40,3 +40,13 @@ Scenario: Deleting more time that there is registrated for an activity
 Scenario: Registering time to an non-existing activity
 	When the employee registers 10 hours to the activity with the name "Test Developement2" under the project "Project1"
 	Then an error message ocurres with the text "An activity with that name doesn't exsits"
+
+Scenario: Registering negative time to an activity
+	Given that the employee is assigned to the activity with the name "Test Developement" under the project "Project1"
+	When the employee registers -10 hours to the activity with the name "Test Developement" under the project "Project1"
+	Then an error message ocurres with the text "You cannot add negative hours"
+
+Scenario: Deleting negative time to an activity
+	Given that the employee is assigned to the activity with the name "Test Developement" under the project "Project1"
+	When the employee deletes -10 hours from the activity with the name "Test Developement" under the project "Project1"
+	Then an error message ocurres with the text "You cannot delete negative hours"

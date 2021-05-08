@@ -6,7 +6,7 @@ Actors: employee/project leader
 Background: 
 	Given that an employee is logged in 
 	When the employee creates a project using the name "Project1" 
-	And an employee is set as the project leader
+	And an employee is set as the project leader of the project "Project1"
 	Then the project has a project leader
 	And The threshold for the amount of activities that decides if a empolyee is available is 10
 	And every employee has theese activities assigned, with the start date 20 05 2021 , and the deadline 27 05 2021, for the project "Project1" 

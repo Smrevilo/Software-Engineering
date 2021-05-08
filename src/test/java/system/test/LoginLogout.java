@@ -1,7 +1,7 @@
 package system.test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -13,18 +13,27 @@ import system.app.PKV;
 public class LoginLogout {
 	private PKV system;
 	private String employeeInitials;
+	private ErrorMessageHolder errorMessageHolder;
 
-	public LoginLogout(PKV system) throws Exception {
+	public LoginLogout(PKV system, ErrorMessageHolder errorMessageHolder) throws Exception {
 		this.system = system;
 		EmployeeHelper initialer = new EmployeeHelper();
 		this.employeeInitials = initialer.getInitials();
+		this.errorMessageHolder = errorMessageHolder;
 	}
-
-
+	
 	@Given("that an employee is logged in")
-	public void that_an_employee_is_logged_in() {
+	public void that_an_employee_is_logged_in() throws Exception {
 		this.system.login(employeeInitials);
-		assertTrue(this.system.getLoggedInAs().getInitials().equals(employeeInitials));
+	}
+	
+	@When("the employee logs in with the initials {string}")
+	public void the_employee_logs_in_with_the_initials(String initials) {
+		try {
+			this.system.login(initials);
+		} catch (Exception e) {
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+		}
 	}
 
 	@When("the employee logs out")
@@ -34,7 +43,7 @@ public class LoginLogout {
 
 	@Then("the employee is logged out")
 	public void the_employee_is_logged_out() {
-		assert this.system.getLoggedInAs() == null;
+		assertThat(this.system.getLoggedInAs(), is(nullValue()));
 	}
 	
 	@When("a second employee logs in")

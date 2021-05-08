@@ -29,13 +29,9 @@ public class TimeOverviewProject {
 		}
 	}
 	
-	@Then("the activity {string} has the employee assigned")
-	public void the_activity_has_the_employee_assigned(String activityName) {
-	    try {
-			system.getSelectedProject().getActivity(activityName).addEmployee(system.getLoggedInAs());
-		} catch (Exception e) {
-			errorMessageHolder.setErrorMessage(e.getMessage());
-		}
+	@Given("the activity {string} has the employee assigned")
+	public void the_activity_has_the_employee_assigned(String activityName) throws Exception {
+	    system.getSelectedProject().getActivity(activityName).addEmployee(system.getLoggedInAs());
 	}
 
 	@Then("the activity {string} has {int} registred hours")

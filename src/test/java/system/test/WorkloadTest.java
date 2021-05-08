@@ -1,7 +1,7 @@
 package system.test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -24,18 +24,22 @@ public class WorkloadTest {
 		this.errorMessageHolder = errorMessageHolder;
 	}
 	
-	@When("the project leader sets the workload of the activity {string} under the project {string} to {int}")
-	public void the_project_leader_sets_the_workload_of_the_activity_under_the_project_to_s(String activityName, String projectName, int workload) throws Exception {
+	@When("the logged in employee sets the workload of the activity {string} under the project {string} to {int}")
+	public void the_logged_in_employee_sets_the_workload_of_the_activity_under_the_project_to_s(String activityName, String projectName, int workload) throws Exception {
 	    system.setSelectedProject(system.getProject(projectName));
 	    system.setSelectedActivity(system.getSelectedProject().getActivity(activityName));
-	    system.setWorkload(workload);
+	    try {
+	    	system.setWorkload(workload);
+	    } catch (Exception e) {
+	    	this.errorMessageHolder.setErrorMessage(e.getMessage());
+	    }
 	}
 
 	@Then("the activity {string} under the project {string} has the workload set to {int}")
 	public void the_activity_under_the_project_has_the_workload_set_to(String activityName, String projectName, int workload) throws Exception {
 		system.setSelectedProject(system.getProject(projectName));
 	    system.setSelectedActivity(system.getSelectedProject().getActivity(activityName));
-	    assertTrue(system.getSelectedActivity().getWorkload() == workload);
+	    assertThat(system.getSelectedActivity().getWorkload(), is(workload));
 	}
 
 }
