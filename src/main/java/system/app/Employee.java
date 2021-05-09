@@ -56,17 +56,17 @@ public class Employee {
 	}
 
 	public int getAvailablePomodoro(GregorianCalendar testDate) {
-		int numAvailable = 0;
+		int activActivities = 0;
 
 		for (Pomodoro pomodoro : pomodoros) {
 			if (specialActivities.contains(pomodoro.getActivity().getName())) {
 				continue;
 			}
 			if (pomodoro.getActivity().getStartDate().before(testDate) && pomodoro.getActivity().getDeadline().after(testDate)) {
-				numAvailable++;
+				activActivities++;
 			}
 		}
-		return numAvailable;
+		return activActivities;
 	}
 
 	public void removeActivity(Activity activity) throws Exception {
