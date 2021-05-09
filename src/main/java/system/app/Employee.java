@@ -59,19 +59,12 @@ public class Employee {
 			if (specialActivities.contains(pomodoro.getActivity().getName())) {
 				continue;
 			}
-
-			Calendar startDate = pomodoro.getActivity().getStartDate();
-			if (startDate == null) {
-				activActivities++;
-				continue;
-			}
-			Calendar deadline = pomodoro.getActivity().getDeadline();
-			if (deadline == null) {
-				activActivities++;
-				continue;
-			}
-			if (pomodoro.getActivity().getStartDate().before(testDate)
-					&& pomodoro.getActivity().getDeadline().after(testDate)) {
+			try {
+				if (pomodoro.getActivity().getStartDate().before(testDate)
+						&& pomodoro.getActivity().getDeadline().after(testDate)) {
+					activActivities++;
+				}
+			} catch (NullPointerException e) {
 				activActivities++;
 			}
 
