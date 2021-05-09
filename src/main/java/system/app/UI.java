@@ -761,6 +761,7 @@ public class UI {
 		System.out.println("Make Report: Prints an overview of a project");
 		System.out.println("Set Project leader: Sets a project leader");
 		System.out.println("Edit Time: Add og remove time to an activity");
+		System.out.println("Edit Threshhold for Availability: Set new Threshhold for availability");
 		System.out.println("Add Employee: Adds an employee to an activity");
 		System.out.println("Set Date: Set start date or deadline of an activity");
 		System.out.println("Search Available: Shows who are available on a specified date");
@@ -769,6 +770,7 @@ public class UI {
 		System.out.println("Get Time Overview: gets an overview of all activities");
 		System.out.println("Remove Employee From Activity: Removes an employee from an activity");
 		System.out.println("Delete Project: Deletes a project");
+		System.out.println("Delete Activity: Deletes an activity");
 	}
 
 	private void login() {
