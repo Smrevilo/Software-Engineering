@@ -6,13 +6,13 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class GUI {
+public class UI {
 
 	private Scanner in;
 	private PKV pkv;
 	private boolean isLoggedIn = false;
 	
-	public GUI(PKV pkv) {
+	public UI(PKV pkv) {
 		in = new Scanner(System.in);
 		this.pkv = pkv;
 	}
@@ -62,12 +62,26 @@ public class GUI {
 					case "set status":
 						setStatusofActivity();
 						break;
+					case "get time overview":
+						getTimeOverview();
+						break;
 
 					default:
 						System.out.println("<"+cmd+"> is not a known command");
 						break;
 				}
 			}
+		}
+	}
+	private void getTimeOverview() {
+		while (true) {
+			try {
+				System.out.println(pkv.getLoggedInAs().makeRepport());
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				continue;
+			}
+			return;
 		}
 	}
 	private void setStatusofActivity() {
@@ -332,7 +346,7 @@ public class GUI {
 				continue;
 			}
 			if (!(pkv.getSelectedProject().getLeader() == pkv.getLoggedInAs())) {
-				System.out.println("You must be project leader of the project to set dates");
+				System.out.println("You must be project leader of the project to add employees");
 				continue;
 			}
 			if (!pkv.getSelectedProject().getEditable()) {
@@ -572,6 +586,8 @@ public class GUI {
 		System.out.println("Set Date: Set start date or deadline of an activity");
 		System.out.println("Search Available: Shows who are available on a specified date");
 		System.out.println("Set Workload: Sets workload for an activity");
+		System.out.println("Set Status: Sets the status of an activity, ie if its done or not done");
+		System.out.println("Get Time Overview: gets an overview of all activities");
 	}
 
 	private void login() {

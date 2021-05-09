@@ -13,7 +13,7 @@ public class PKV {
 	private int id = 0;
 	private Project selectedProject;
 	private Activity selectedActivity;
-	private GUI gui;
+	private UI gui;
 	private int threshold;
 
 	public PKV() throws Exception {
@@ -23,7 +23,7 @@ public class PKV {
 		EmployeeHelper temp = new EmployeeHelper();
 		this.employees.addAll(temp.getEmployeeList());
 		this.projects.addAll(temp.getProjectList());
-		this.gui = new GUI(this);
+		this.gui = new UI(this);
 	}
 
 	public void login(String initials) throws Exception {
