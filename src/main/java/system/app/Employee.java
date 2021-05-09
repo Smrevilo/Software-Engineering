@@ -59,31 +59,25 @@ public class Employee {
 			if (specialActivities.contains(pomodoro.getActivity().getName())) {
 				continue;
 			}
-			boolean flag = true;
-			try {
-				Calendar startDate = pomodoro.getActivity().getStartDate();
-				if (startDate.before(testDate)) {}
-			} catch (NullPointerException e) {
-				flag = false;
+
+			Calendar startDate = pomodoro.getActivity().getStartDate();
+			if (startDate == null) {
+				activActivities++;
+				continue;
+			}
+			Calendar deadline = pomodoro.getActivity().getDeadline();
+			if (deadline == null) {
+				activActivities++;
+				continue;
+			}
+			if (pomodoro.getActivity().getStartDate().before(testDate)
+					&& pomodoro.getActivity().getDeadline().after(testDate)) {
 				activActivities++;
 			}
-			if (flag) {
-				try {
-					Calendar deadline = pomodoro.getActivity().getDeadline();
-					if (deadline.before(testDate)) {}
-				} catch (NullPointerException e) {
-					flag = false;
-					activActivities++;
-				}
-				if (flag) {
-					if (pomodoro.getActivity().getStartDate().before(testDate)
-							&& pomodoro.getActivity().getDeadline().after(testDate)) {
-						activActivities++;
-					}
-				}
-			}
+
 		}
 		return activActivities;
+
 	}
 
 	public void removeActivity(Activity activity) throws Exception {
