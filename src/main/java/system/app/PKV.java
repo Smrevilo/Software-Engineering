@@ -71,18 +71,21 @@ public class PKV {
 		throw new Exception("A project with that name doesn't exits");
 	}
 	
-	public void deleteProject(String name) throws Exception {
-		if (!hasProject(name)) { 
+	public void deleteProject(String projectName) throws Exception {
+		assert(projectName!=null);
+		if (!hasProject(projectName)) { 
 			throw new Exception("A project with that name doesn't exits"); // 1
 		}
-		Project project = getProject(name); 
+		assert(getProject(projectName)!=null);
+		Project project = getProject(projectName); 
 		if (selectedProject.getLeader() != loggedInAs) {
 			throw new Exception("Only the project leaders can delete the project"); // 2
 		}
-		if (project.getActivities().size() > 0) {
+		assert(project.getActivities().size() >= 0);
+		if (project.getActivities().size() > 0) { // 3
 			throw new Exception("The project contains activities and can not be deleted");
 		}
-		projects.remove(project); // 3
+		projects.remove(project); // 4
 	}
 
 	public String makeReportFor(String projectName) throws Exception {

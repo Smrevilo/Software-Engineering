@@ -21,7 +21,7 @@ public class WhiteBoxDeleteProject {
 	void deleteSuccessfully() throws Exception {
 		system.createProject("FailProject");
 		system.setSelectedProject(system.getProject("FailProject"));
-		system.getProject("FailProject").setLeader(employee);
+		system.getSelectedProject().setLeader(employee);
 		system.deleteProject("FailProject");
 		assertFalse(system.hasProject("FailProject"));
 	}
@@ -38,4 +38,13 @@ public class WhiteBoxDeleteProject {
 		system.setSelectedProject(system.getProject("FailProject"));
 		assertThrows(Exception.class, () -> system.deleteProject("FailProject"));
 	}	
+	@Test
+	void deleteProjectWithAcivities() throws Exception {
+		system.createProject("FailProject");
+		system.setSelectedProject(system.getProject("FailProject"));
+		system.getSelectedProject().setLeader(employee);
+		system.getSelectedProject().createActivty(system.getLoggedInAs(), "TestActivity");
+		assertThrows(Exception.class, () -> system.deleteProject("FailProject"));
+	}
+	
 }
