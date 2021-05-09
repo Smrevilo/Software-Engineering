@@ -53,9 +53,15 @@ public class Employee {
 	}
 
 	public int getAvailablePomodoro(GregorianCalendar testDate) {
+		assert(testDate!=null);
+		ArrayList<String> check = new ArrayList<String>(Arrays.asList("Sick Days", "Vacation", "Courses"));
+		assert(specialActivities.containsAll(check));
+		assert(pomodoros.size()>=3);
+		
 		int activActivities = 0;
 
 		for (Pomodoro pomodoro : pomodoros) {
+			assert(pomodoro.getActivity()!=null);
 			if (specialActivities.contains(pomodoro.getActivity().getName())) {
 				continue;
 			}
@@ -69,6 +75,7 @@ public class Employee {
 			}
 
 		}
+		assert(activActivities>=0);
 		return activActivities;
 
 	}

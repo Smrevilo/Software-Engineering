@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -22,26 +23,34 @@ import system.app.Project;
 class WhiteBoxIsAvailable {
 	
 //	public int getAvailablePomodoro(GregorianCalendar testDate) {
-//	int activActivities = 0;
+//		assert(testDate!=null);
+//		ArrayList<String> check = new ArrayList<String>(Arrays.asList("Sick Days", "Vacation", "Courses"));
+//		assert(specialActivities.containsAll(check));
+//		assert(pomodoros.size()>=3);
+//		
+//		int activActivities = 0;
 //
-//	for (Pomodoro pomodoro : pomodoros) {
-//		if (specialActivities.contains(pomodoro.getActivity().getName())) {
-//			continue;
-//		}
-//		try {
-//			if (pomodoro.getActivity().getStartDate().before(testDate)
-//					&& pomodoro.getActivity().getDeadline().after(testDate)) {
+//		for (Pomodoro pomodoro : pomodoros) {
+//			assert(pomodoro.getActivity()!=null);
+//			if (specialActivities.contains(pomodoro.getActivity().getName())) {
+//				continue;
+//			}
+//			try {
+//				if (pomodoro.getActivity().getStartDate().before(testDate)
+//						&& pomodoro.getActivity().getDeadline().after(testDate)) {
+//					activActivities++;
+//				}
+//			} catch (NullPointerException e) {
 //				activActivities++;
 //			}
-//		} catch (NullPointerException e) {
-//			activActivities++;
+//
 //		}
+//		assert(activActivities>=0);
+//		return activActivities;
 //
 //	}
-//	return activActivities;
-//
-//}
-
+	
+	
 	PKV pkvSystem;
 	Employee eUser;
 	Project selectedProject;
