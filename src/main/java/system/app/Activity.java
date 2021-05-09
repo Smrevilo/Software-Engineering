@@ -1,9 +1,10 @@
 package system.app;
 
 import java.util.*;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 
 public class Activity {
-
 
 	private String name;
 	private List<Pomodoro> pomodoros;
@@ -116,6 +117,7 @@ public class Activity {
 	}
 
 	public void removeEmployee(Employee employee) throws Exception {
+		assertThat(employee, not(nullValue()));
 		if (!hasEmployee(employee)) {
 			throw new Exception("The employee is not assigned to this activity");
 		}
@@ -128,8 +130,12 @@ public class Activity {
 				toRemove = pomodoro;
 			}
 		}
+		assertTrue(hasEmployee(employee));
+		assertThat(toRemove.getTime(), is(0));
 		pomodoros.remove(toRemove);
 		employee.removeActivity(this);
+		assertFalse(hasEmployee(employee));
+		assertThat(toRemove.getEmployee(), is(employee));
 	}
 
 	public boolean hasEmployee(Employee employee) {
