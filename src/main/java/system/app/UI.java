@@ -18,7 +18,7 @@ public class UI {
 	}
 
 	// TODO:
-	// Make report show info to non project leaders(very low priority)
+	// create delete activity method (it does not exist in the program yet)
 	public void start() {
 		while (true) {
 			login();
@@ -38,9 +38,6 @@ public class UI {
 					break;
 				case "create activity":
 					createActivity();
-					break;
-				case "delete activity":
-					deleteActivity();
 					break;
 				case "remove employee from activity":
 					removeActivityFromEmployee();
@@ -81,14 +78,11 @@ public class UI {
 		}
 	}
 
-	private void deleteActivity() {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 	private void removeActivityFromEmployee() {
 		while (true) {
-			System.out.print("Name of project to remove activity to (q to stop): ");
+			System.out.print("Give a Name of a project to remove activity from employee (q to stop): ");
 			String projectName = in.nextLine();
 			if (projectName.toLowerCase().equals("q")) {
 				return;
@@ -650,6 +644,7 @@ public class UI {
 		System.out.println("Set Workload: Sets workload for an activity");
 		System.out.println("Set Status: Sets the status of an activity, ie if its done or not done");
 		System.out.println("Get Time Overview: gets an overview of all activities");
+		System.out.println("Remove Employee From Activity: Removes an employee from an activity");
 	}
 
 	private void login() {
