@@ -74,16 +74,6 @@ class WhiteBoxTimeReg {
 	}
 	
 	@Test
-	void newAssigned() throws Exception {
-		Employee eUser2 = pkvSystem.getEmployee("ABCE");
-		selectedActivty.addEmployee(eUser2);
-		
-		assertTrue(selectedActivty.getTotalTime() == 0);
-		assertDoesNotThrow(() -> selectedActivty.addTime(eUser2, 123));
-		assertTrue(selectedActivty.getTotalTime() == 123);
-	}
-	
-	@Test
 	void multipleAssigned() throws Exception {
 		Employee eUser2 = pkvSystem.getEmployee("ABCE");
 		selectedActivty.addEmployee(eUser2);
@@ -92,6 +82,13 @@ class WhiteBoxTimeReg {
 		assertTrue(selectedActivty.getTotalTime() == 1);
 		assertDoesNotThrow(() -> selectedActivty.addTime(eUser2, 10));
 		assertTrue(selectedActivty.getTotalTime() == 11);
+	}
+	
+	@Test
+	void intOverload() {
+		assertTrue(selectedActivty.getTotalTime() == 0);
+		assertThrows(Exception.class,() -> selectedActivty.addTime(eUser, 2147483647));
+		assertTrue(selectedActivty.getTotalTime() == 0);
 	}
 
 }

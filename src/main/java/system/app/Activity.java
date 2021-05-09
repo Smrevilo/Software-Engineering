@@ -12,6 +12,7 @@ public class Activity {
 	private boolean isEditable = true;
 	private int workload;
 	private boolean activityisDone;
+	private int maxTimePerUser = 10000;
 
 	public Activity(String name) {
 		this.name = name;
@@ -67,6 +68,11 @@ public class Activity {
 		boolean found = false;
 		for (Pomodoro pomodoro : pomodoros) {
 			if (pomodoro.getEmployee() == employee) {
+				
+				if ((pomodoro.getTime() + i) >= maxTimePerUser) {
+					throw new Exception("You can't register more than " + maxTimePerUser + "pomodoros to this activity");
+				}
+				
 				pomodoro.addTime(i);
 				found=true;
 			}
