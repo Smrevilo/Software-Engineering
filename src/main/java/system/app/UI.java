@@ -72,6 +72,12 @@ public class UI {
 				case "get time overview":
 					getTimeOverview();
 					break;
+				case "edit threshhold for availability":
+					editThreshhold();
+					break;
+				case "delete activity":
+					deleteActivity();
+					break;
 
 				default:
 					System.out.println("<" + cmd + "> is not a known command");
@@ -79,6 +85,70 @@ public class UI {
 				}
 			}
 		}
+	}
+
+	private void deleteActivity() {
+		while (true) {
+			System.out.print("Give name of a project to delete activity from (q to stop): ");
+			String projectName = in.nextLine();
+			if (projectName.toLowerCase().equals("q")) {
+				return;
+			}
+			try {
+				pkv.setSelectedProject(pkv.getProject(projectName));
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				continue;
+			}
+			if (!(pkv.getSelectedProject().getLeader() == pkv.getLoggedInAs())) {
+				System.out.println("You must be project leader to delete an activity");
+				continue;
+			}
+			if (!pkv.getSelectedProject().getEditable()) {
+				System.out.println("Project is not editable");
+				continue;
+			}
+			break;
+		}
+		while (true) {
+			System.out.print("Give name of a activity to delete it (q to stop): ");
+			String activityName = in.nextLine();
+			if (activityName.toLowerCase().equals("q")) {
+				return;
+			}
+			try {
+				pkv.getSelectedProject().deleteActivity(activityName);
+				System.out.println("Successfully deleted: "+activityName);
+				return;
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				continue;
+			}
+		}
+		
+	}
+
+	private void editThreshhold() {
+		while (true) {
+			System.out.println("Threshhold is currently :"+pkv.getThreshold());
+			System.out.print("Give a new integer to change the threshhold for availability to (q to stop): ");
+			try{
+				int threshhold=in.nextInt();
+				in.nextLine();
+				if(threshhold<0) {
+					System.out.println("threshhold for availability must be a positiv integer");
+					continue;
+				}
+				pkv.setThreshold(threshhold);
+				System.out.println("Threshhold is succesfully set to :"+pkv.getThreshold());
+				return;
+			} catch (InputMismatchException e) {
+					System.out.println("error NAN");
+					in.nextLine();
+					continue;
+			}
+		}
+		
 	}
 
 	private void deleteProject() {
@@ -115,7 +185,7 @@ public class UI {
 
 	private void removeActivityFromEmployee() {
 		while (true) {
-			System.out.print("Give a Name of a project to remove activity from employee (q to stop): ");
+			System.out.print("Give a name of the project under which the activity, that you want to remove the employee from, is (q to stop): ");
 			String projectName = in.nextLine();
 			if (projectName.toLowerCase().equals("q")) {
 				return;
@@ -252,14 +322,28 @@ public class UI {
 					System.out.println(e.getMessage());
 					continue;
 				}
+				break;
+			}
+			while(true) {
+				System.out.print("Enter an integer to set workload to (q to stop): ");
 				try {
-					pkv.setWorkload(in.nextInt());
+					int workload=in.nextInt();
+					if(workload<0) {
+						System.out.println("Workload must be a positiv integer");
+						in.nextLine();
+						continue;
+					}
+					pkv.setWorkload(workload);
 					in.nextLine();
+					System.out.println("Workload succesfully set!");
+					return;
 				} catch (InputMismatchException e) {
 					System.out.println("error NAN");
+					in.nextLine();
 					continue;
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
+					in.nextLine();
 					continue;
 				}
 			}
