@@ -180,6 +180,10 @@ public class Activity {
 		}
 		
 	}
+	
+	public List<Pomodoro> getPomodoros(){
+		return pomodoros;
+	}
 
 	public boolean getStatusOfActivity() {
 		return this.activityisDone;

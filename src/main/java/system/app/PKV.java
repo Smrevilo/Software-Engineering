@@ -75,10 +75,13 @@ public class PKV {
 		if (!hasProject(name)) { 
 			throw new Exception("A project with that name doesn't exits"); // 1
 		}
+		Project project = getProject(name); 
 		if (selectedProject.getLeader() != loggedInAs) {
 			throw new Exception("Only the project leaders can delete the project"); // 2
 		}
-		Project project = getProject(name); 
+		if (project.getActivities().size() > 0) {
+			throw new Exception("The project contains activities and can not be deleted");
+		}
 		projects.remove(project); // 3
 	}
 

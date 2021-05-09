@@ -41,3 +41,23 @@ Scenario: Set leader of project
 	Given that the project has no project leader assigned
 	When an employee is set as the project leader of the project "Project1"
 	Then the project has a project leader
+	
+Scenario: Delete activity as project leader
+	Given the logged in employee is the project leader of "Project1"
+	When the logged in employee adds the activity "activity1"
+	And the logged in employee deletes the activity "activity1"
+	Then the project don't have the activity "activity1"
+	
+Scenario: Delete non-existing activity as project leader
+	Given the logged in employee is the project leader of "Project1"
+	When the logged in employee adds the activity "activity1"
+	And the logged in employee deletes the activity "activityDoesNotExists"
+	Then an error message ocurres with the text "activityDoesNotExists activty does not exists"
+	
+Scenario: Delete activity with employees as project leader and fail
+	Given the logged in employee is the project leader of "Project1"
+	When the logged in employee adds the activity "activity1"
+	Given that the employee is assigned to the activity with the name "activity1" under the project "Project1"
+	When the employee registers 10 hours to the activity with the name "activity1" under the project "Project1"
+	And the logged in employee deletes the activity "activity1"
+	Then an error message ocurres with the text "The activity have employees assigned and can not be deleted"

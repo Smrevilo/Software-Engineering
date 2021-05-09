@@ -16,6 +16,15 @@ Scenario: Delete a project while being the project leader
 	And the project has a project leader
 	When the employee deletes the project "FailProject"
 	Then the project "FailProject" no longer exists
+	
+Scenario: Delete a project with activities while being the project leader and fail
+	Given a project with the name "FailProject" has been created
+	And the logged in employee is the project leader of "FailProject"
+	Then a project with the name "FailProject" exists
+	And the project has a project leader
+	When the logged in employee adds the activity "activity1"
+	When the employee deletes the project "FailProject"
+	Then an error message ocurres with the text "The project contains activities and can not be deleted"
 
 Scenario: Delete a non-existing project
 	When the employee deletes the project "NonProject"

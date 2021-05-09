@@ -31,6 +31,20 @@ public class Project {
 		activites.add(new Activity(name));
 	}
 	
+	public void deleteActivity(String name) throws Exception {
+		for (Activity a : activites) {
+			if (a.getName().equals(name)) {
+				if(a.getPomodoros().size() > 0) {
+					throw new Exception("The activity have employees assigned and can not be deleted");
+				} else {
+					activites.remove(a);
+					return;
+				}
+			}
+		}
+		throw new Exception(name +" activty does not exists");
+	}
+	
 	public boolean hasActivity(String name) {
 		for (Activity a : activites) {
 			if (a.getName().equals(name)) {

@@ -1,6 +1,7 @@
 package system.test;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.hamcrest.CoreMatchers.*;
 
 import io.cucumber.java.en.Given;
@@ -100,6 +101,20 @@ public class ProjectTest {
 	@Then("the project {string} no longer exists")
 	public void the_project_no_longer_exists(String projectName) {
 	    assertFalse(system.hasProject(projectName));
+	}
+	
+	@When("the logged in employee deletes the activity {string}")
+	public void the_logged_in_employee_deletes_the_activity(String string){
+		try {
+			system.getSelectedProject().deleteActivity(string);
+		} catch (Exception e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+
+	@Then("the project don't have the activity {string}")
+	public void the_project_don_t_have_the_activity(String string) {
+		assertThrows(Exception.class,() -> system.getSelectedProject().getActivity(string));
 	}
 	
 }
