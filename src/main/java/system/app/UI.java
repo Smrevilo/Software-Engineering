@@ -597,6 +597,8 @@ public class UI {
 					} else if (edit.toLowerCase().equals("add time")) {
 						try {
 							addTime();
+							System.out.println("Time has been succesfully edited");
+							return;
 						} catch (Exception e) {
 							System.out.println(e.getMessage());
 							continue;
@@ -604,12 +606,13 @@ public class UI {
 					} else if (edit.toLowerCase().equals("delete time")) {
 						try {
 							deleteTime();
+							System.out.println("Time has been succesfully edited");
+							return;
 						} catch (Exception e) {
 							System.out.println(e.getMessage());
 							continue;
 						}
 					}
-					System.out.println("Time has been succesfully edited");
 					return;
 				}
 			}
@@ -629,6 +632,7 @@ public class UI {
 				return;
 			} catch (InputMismatchException e) {
 				System.out.println("error NAN");
+				in.nextLine();
 				continue;
 			}
 		}
@@ -647,8 +651,10 @@ public class UI {
 				return;
 			} catch (InputMismatchException e) {
 				System.out.println("error NAN");
+				in.nextLine();
 				continue;
 			}
+			
 		}
 	}
 
