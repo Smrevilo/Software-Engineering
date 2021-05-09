@@ -11,68 +11,126 @@ public class UI {
 	private Scanner in;
 	private PKV pkv;
 	private boolean isLoggedIn = false;
-	
+
 	public UI(PKV pkv) {
 		in = new Scanner(System.in);
 		this.pkv = pkv;
 	}
-	//TODO:
-		//Make report show info to non project leaders(very low priority)
+
+	// TODO:
+	// Make report show info to non project leaders(very low priority)
 	public void start() {
 		while (true) {
 			login();
-		
+
 			while (isLoggedIn) {
 				System.out.print("Command (write \"help\" to get help): ");
 				String cmd = in.nextLine().toLowerCase();
 				switch (cmd) {
-					case "logout":
-						logOut();
-						break;
-					case "help":
-						displayHelp();
-						break;
-					case "create project":
-						createProject();
-						break;
-					case "create activity":
-						createActivity();
-						break;
-					case "set project leader":
-						setProjectLeader();
-						break;
-					case "make report":
-						makeReport();
-						break;
-					case "edit time":
-						editTime();
-						break;
-					case "add employee":
-						addEmployee();
-						break;
-					case "set date":
-						setDate();
-						break;
-					case "search available":
-						searchAvailable();
-						break;
-					case "set workload":
-						setWorkload();
-						break;
-					case "set status":
-						setStatusofActivity();
-						break;
-					case "get time overview":
-						getTimeOverview();
-						break;
+				case "logout":
+					logOut();
+					break;
+				case "help":
+					displayHelp();
+					break;
+				case "create project":
+					createProject();
+					break;
+				case "create activity":
+					createActivity();
+					break;
+				case "delete activity":
+					deleteActivity();
+					break;
+				case "remove employee from activity":
+					removeEmployeeFromActivity();
+					break;
+				case "set project leader":
+					setProjectLeader();
+					break;
+				case "make report":
+					makeReport();
+					break;
+				case "edit time":
+					editTime();
+					break;
+				case "add employee":
+					addEmployee();
+					break;
+				case "set date":
+					setDate();
+					break;
+				case "search available":
+					searchAvailable();
+					break;
+				case "set workload":
+					setWorkload();
+					break;
+				case "set status":
+					setStatusofActivity();
+					break;
+				case "get time overview":
+					getTimeOverview();
+					break;
 
-					default:
-						System.out.println("<"+cmd+"> is not a known command");
-						break;
+				default:
+					System.out.println("<" + cmd + "> is not a known command");
+					break;
 				}
 			}
 		}
 	}
+
+	private void deleteActivity() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void removeEmployeeFromActivity() {
+		while (true) {
+			System.out.print("Name of project to remove activity to (q to stop): ");
+			String projectName = in.nextLine();
+			if (projectName.toLowerCase().equals("q")) {
+				return;
+			}
+			try {
+				pkv.setSelectedProject(pkv.getProject(projectName));
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				continue;
+			}
+			if (!(pkv.getSelectedProject().getLeader() == pkv.getLoggedInAs())) {
+				System.out.println("You must be project leader of the project to set dates");
+				continue;
+			}
+			if (!pkv.getSelectedProject().getEditable()) {
+				System.out.println("Project is not editable");
+				continue;
+			}
+			System.out.println("Name of employee to remove activity (q to stop): ");
+			String name = in.nextLine();
+			if (name.toLowerCase().equals("q")) {
+				return;
+			}
+
+			System.out.print("Name of activity (q to stop): ");
+			String activityName = in.nextLine();
+			if (activityName.toLowerCase().equals("q")) {
+				return;
+			}
+			try {
+				pkv.getSelectedProject().getActivity(activityName).removeEmployee(pkv.getEmployee(name));
+				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				continue;
+			}
+			System.out.println(activityName+" successfully removed from "+name);
+			return;
+		}
+
+	}
+
 	private void getTimeOverview() {
 		while (true) {
 			try {
@@ -84,6 +142,7 @@ public class UI {
 			return;
 		}
 	}
+
 	private void setStatusofActivity() {
 		while (true) {
 			System.out.print("Name of project to set status for (q to stop): ");
@@ -105,13 +164,13 @@ public class UI {
 				System.out.println("Project is not editable");
 				continue;
 			}
- 			while (true) {
+			while (true) {
 				System.out.print("Name of activity to set status for (q to stop): ");
 				String activityName = in.nextLine();
 				if (activityName.toLowerCase().equals("q")) {
 					return;
 				}
-				try { 
+				try {
 					pkv.setSelectedActivity(pkv.getSelectedProject().getActivity(activityName));
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
@@ -128,10 +187,9 @@ public class UI {
 					System.out.println(e.getMessage());
 					continue;
 				}
- 			}
+			}
 		}
-		
-		
+
 	}
 
 	private void setWorkload() {
@@ -155,13 +213,13 @@ public class UI {
 				System.out.println("Project is not editable");
 				continue;
 			}
- 			while (true) {
+			while (true) {
 				System.out.print("Name of activity to set workload for (q to stop): ");
 				String activityName = in.nextLine();
 				if (activityName.toLowerCase().equals("q")) {
 					return;
 				}
-				try { 
+				try {
 					pkv.setSelectedActivity(pkv.getSelectedProject().getActivity(activityName));
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
@@ -177,9 +235,10 @@ public class UI {
 					System.out.println(e.getMessage());
 					continue;
 				}
- 			}
+			}
 		}
 	}
+
 	private void searchAvailable() {
 		while (true) {
 			System.out.print("Date dd/mm/yyyy (q to stop): ");
@@ -195,7 +254,8 @@ public class UI {
 				pkv.checkValid(day, month, year);
 				ArrayList<Employee> available = pkv.getAvailableEmployees(new GregorianCalendar(year, month, day));
 				int numAvailable = available.size();
-				System.out.println("On that day there " + (numAvailable == 1 ? "is" : "are") + " " + numAvailable + " available employee" + (numAvailable == 1 ? "" : "s") + ":");
+				System.out.println("On that day there " + (numAvailable == 1 ? "is" : "are") + " " + numAvailable
+						+ " available employee" + (numAvailable == 1 ? "" : "s") + ":");
 				for (int i = 0; i < numAvailable; i++) {
 					System.out.println(available.get(i).getInitials());
 				}
@@ -212,7 +272,7 @@ public class UI {
 			}
 		}
 	}
-	
+
 	private void setDate() {
 		while (true) {
 			System.out.print("Name of project to set date for (q to stop): ");
@@ -234,33 +294,34 @@ public class UI {
 				System.out.println("Project is not modifiable");
 				continue;
 			}
- 			while (true) {
+			while (true) {
 				System.out.print("Name of activity to set date for (q to stop): ");
 				String activityName = in.nextLine();
 				if (activityName.toLowerCase().equals("q")) {
 					return;
 				}
-				try { 
+				try {
 					pkv.setSelectedActivity(pkv.getSelectedProject().getActivity(activityName));
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 					continue;
 				}
-				
+
 				while (true) {
-					System.out.print("To set start date write \"Set Start Date\" and to set deadline write \"Set Deadline\" (q to stop): ");
+					System.out.print(
+							"To set start date write \"Set Start Date\" and to set deadline write \"Set Deadline\" (q to stop): ");
 					String edit = in.nextLine();
 					if (edit.toLowerCase().equals("q")) {
 						return;
-					} else if (edit.toLowerCase().equals("set start date")){
-						try { 
+					} else if (edit.toLowerCase().equals("set start date")) {
+						try {
 							setStartDate();
 						} catch (Exception e) {
 							System.out.println(e.getMessage());
 							continue;
 						}
-					} else if (edit.toLowerCase().equals("set deadline")){
-						try { 
+					} else if (edit.toLowerCase().equals("set deadline")) {
+						try {
 							setDeadline();
 						} catch (Exception e) {
 							System.out.println(e.getMessage());
@@ -273,7 +334,7 @@ public class UI {
 			}
 		}
 	}
-	
+
 	private void setStartDate() {
 		while (true) {
 			System.out.print("Date dd/mm/yyyy (q to stop): ");
@@ -331,7 +392,7 @@ public class UI {
 			}
 		}
 	}
-	
+
 	private void addEmployee() {
 		while (true) {
 			System.out.println("Name of project to add employee to (q to stop): ");
@@ -406,7 +467,7 @@ public class UI {
 				if (activityName.toLowerCase().equals("q")) {
 					return;
 				}
-				try { 
+				try {
 					pkv.setSelectedActivity(pkv.getSelectedProject().getActivity(activityName));
 					if (!pkv.getSelectedActivity().isAssignedTo(pkv.getLoggedInAs())) {
 						throw new Exception("You are not assigned to this activity");
@@ -415,21 +476,22 @@ public class UI {
 					System.out.println(e.getMessage());
 					continue;
 				}
-				
+
 				while (true) {
-					System.out.print("To add time write \"Add time\" and to delete time write \"Delete time\" (q to stop): ");
+					System.out.print(
+							"To add time write \"Add time\" and to delete time write \"Delete time\" (q to stop): ");
 					String edit = in.nextLine();
 					if (edit.toLowerCase().equals("q")) {
 						return;
-					} else if (edit.toLowerCase().equals("add time")){
-						try { 
+					} else if (edit.toLowerCase().equals("add time")) {
+						try {
 							addTime();
 						} catch (Exception e) {
 							System.out.println(e.getMessage());
 							continue;
 						}
-					} else if (edit.toLowerCase().equals("delete time")){
-						try { 
+					} else if (edit.toLowerCase().equals("delete time")) {
+						try {
 							deleteTime();
 						} catch (Exception e) {
 							System.out.println(e.getMessage());
@@ -446,12 +508,12 @@ public class UI {
 	private void deleteTime() throws Exception {
 		while (true) {
 			System.out.print("How many hours do you want to delete (-1 to stop)?: ");
-			try { 
+			try {
 				int time = in.nextInt();
 				in.nextLine();
 				if (time == -1) {
-					return;	
-				} 
+					return;
+				}
 				pkv.getSelectedActivity().deleteTime(pkv.getLoggedInAs(), time);
 				return;
 			} catch (InputMismatchException e) {
@@ -464,12 +526,12 @@ public class UI {
 	private void addTime() throws Exception {
 		while (true) {
 			System.out.print("How many hours do you want to registre (-1 to stop)?: ");
-			try { 
+			try {
 				int time = in.nextInt();
 				in.nextLine();
 				if (time == -1) {
-					return;	
-				} 
+					return;
+				}
 				pkv.getSelectedActivity().addTime(pkv.getLoggedInAs(), time);
 				return;
 			} catch (InputMismatchException e) {
