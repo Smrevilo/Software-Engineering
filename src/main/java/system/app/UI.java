@@ -36,6 +36,9 @@ public class UI {
 				case "create project":
 					createProject();
 					break;
+				case "delete project":
+					deleteProject();
+					break;
 				case "create activity":
 					createActivity();
 					break;
@@ -78,7 +81,37 @@ public class UI {
 		}
 	}
 
-	
+	private void deleteProject() {
+		while (true) {
+			System.out.print("Give name of a project to delete it (q to stop): ");
+			String projectName = in.nextLine();
+			if (projectName.toLowerCase().equals("q")) {
+				return;
+			}
+			try {
+				pkv.setSelectedProject(pkv.getProject(projectName));
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				continue;
+			}
+			if (!(pkv.getSelectedProject().getLeader() == pkv.getLoggedInAs())) {
+				System.out.println("You must be project leader to delete a project");
+				continue;
+			}
+			if (!pkv.getSelectedProject().getEditable()) {
+				System.out.println("Project is not editable");
+				continue;
+			}
+			try {
+				pkv.deleteProject(projectName);
+				System.out.println("Successfully deleted: "+projectName);
+				return;
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				continue;
+			}
+		}
+	}
 
 	private void removeActivityFromEmployee() {
 		while (true) {
@@ -645,6 +678,7 @@ public class UI {
 		System.out.println("Set Status: Sets the status of an activity, ie if its done or not done");
 		System.out.println("Get Time Overview: gets an overview of all activities");
 		System.out.println("Remove Employee From Activity: Removes an employee from an activity");
+		System.out.println("Delete Project: Deletes a project");
 	}
 
 	private void login() {
