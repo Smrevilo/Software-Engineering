@@ -5,11 +5,8 @@ import java.util.*;
 public class Employee {
 	private String initialer;
 	private ArrayList<Pomodoro> pomodoros;
-	private ArrayList<String> specialActivities = new ArrayList<String>(Arrays.asList(
-            "Sick Days",
-            "Vacation",
-            "Courses"
-            ));
+	private ArrayList<String> specialActivities = new ArrayList<String>(
+			Arrays.asList("Sick Days", "Vacation", "Courses"));
 
 	public Employee(String initialer) {
 		this.initialer = initialer;
@@ -62,8 +59,28 @@ public class Employee {
 			if (specialActivities.contains(pomodoro.getActivity().getName())) {
 				continue;
 			}
-			if (pomodoro.getActivity().getStartDate().before(testDate) && pomodoro.getActivity().getDeadline().after(testDate)) {
+			boolean flag = true;
+			try {
+				Calendar startDate = pomodoro.getActivity().getStartDate();
+				if (startDate.before(testDate)) {}
+			} catch (NullPointerException e) {
+				flag = false;
 				activActivities++;
+			}
+			if (flag) {
+				try {
+					Calendar deadline = pomodoro.getActivity().getDeadline();
+					if (deadline.before(testDate)) {}
+				} catch (NullPointerException e) {
+					flag = false;
+					activActivities++;
+				}
+				if (flag) {
+					if (pomodoro.getActivity().getStartDate().before(testDate)
+							&& pomodoro.getActivity().getDeadline().after(testDate)) {
+						activActivities++;
+					}
+				}
 			}
 		}
 		return activActivities;
@@ -87,5 +104,5 @@ public class Employee {
 		}
 		return false;
 	}
-	
+
 }

@@ -28,4 +28,24 @@ Scenario: Looking for availability at a specific date
 	When the logged in employee looks for availability at the date 19 05 2021
 	Then display a list of 29 employee that are available at that date
 
-	
+Scenario: Looking for availability at a specific date, including activities that doesn't have start date
+	Given every employee has the activity "activityTest" assigned, with the start date 20 05 2021 for the project "Project1" 
+	When the logged in employee looks for availability at the date 25 05 2021
+	Then display a list of 0 employee that are available at that date
+	When the logged in employee looks for availability at the date 19 05 2021
+	Then display a list of 29 employee that are available at that date
+
+Scenario: Looking for availability at a specific date, including activities that doesn't have deadline
+	Given every employee has the activity "activityTest" assigned, with the deadline 20 05 2021 for the project "Project1" 
+	When the logged in employee looks for availability at the date 25 05 2021
+	Then display a list of 0 employee that are available at that date
+	When the logged in employee looks for availability at the date 19 05 2021
+	Then display a list of 29 employee that are available at that date
+
+Scenario: Looking for availability at a specific date, including activities that doesn't either startdate or deadline
+	When the logged in employee adds the activity "activityTest"
+	Then the project has the activity "activityTest"
+	When the logged in employee looks for availability at the date 25 05 2021
+	Then display a list of 0 employee that are available at that date
+	When the logged in employee looks for availability at the date 19 05 2021
+	Then display a list of 29 employee that are available at that date

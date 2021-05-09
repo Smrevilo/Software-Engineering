@@ -57,15 +57,40 @@ public class AvailabilityTest {
 			}
 		}
 	}
-	
+
 	@When("the logged in employee looks for availability at the date {int} {int} {int}")
-	public void the_logged_in_employee_looks_for_availability_at_the_date(int day, int month, int year) throws Exception {
+	public void the_logged_in_employee_looks_for_availability_at_the_date(int day, int month, int year)
+			throws Exception {
 		GregorianCalendar date = new GregorianCalendar(year, month, day);
 		availableEmployee = system.getAvailableEmployees(date);
 	}
-	
+
 	@Then("display a list of {int} employee that are available at that date")
 	public void display_a_list_of_employee_that_are_available_at_that_date(int numAvailable) {
 		assertThat(availableEmployee.size(), is(numAvailable));
+	}
+
+	@Given("every employee has the activity {string} assigned, with the start date {int} {int} {int} for the project {string}")
+	public void every_employee_has_the_activity_assigned_with_the_start_date_for_the_project(String activityName,
+			int startDay, int startMonth, int startYear, String projectName) throws Exception {
+		system.setSelectedProject(system.getProject(projectName));
+		system.getSelectedProject().createActivty(system.getLoggedInAs(), activityName);
+		system.setSelectedActivity(system.getSelectedProject().getActivity(activityName));
+		system.setStartDate(startDay, startMonth, startYear);
+		for (Employee employee : system.getEmployees()) {
+			system.getSelectedActivity().addEmployee(employee);
+		}
+	}
+
+	@Given("every employee has the activity {string} assigned, with the deadline {int} {int} {int} for the project {string}")
+	public void every_employee_has_the_activity_assigned_with_the_deadline_for_the_project(String activityName,
+			int deadDay, int deadMonth, int deadYear, String projectName) throws Exception {
+		system.setSelectedProject(system.getProject(projectName));
+		system.getSelectedProject().createActivty(system.getLoggedInAs(), activityName);
+		system.setSelectedActivity(system.getSelectedProject().getActivity(activityName));
+		system.setDeadline(deadDay, deadMonth, deadYear);
+		for (Employee employee : system.getEmployees()) {
+			system.getSelectedActivity().addEmployee(employee);
+		}
 	}
 }

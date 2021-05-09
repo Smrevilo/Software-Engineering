@@ -43,7 +43,7 @@ public class UI {
 					deleteActivity();
 					break;
 				case "remove employee from activity":
-					removeEmployeeFromActivity();
+					removeActivityFromEmployee();
 					break;
 				case "set project leader":
 					setProjectLeader();
@@ -86,7 +86,7 @@ public class UI {
 
 	}
 
-	private void removeEmployeeFromActivity() {
+	private void removeActivityFromEmployee() {
 		while (true) {
 			System.out.print("Name of project to remove activity to (q to stop): ");
 			String projectName = in.nextLine();
