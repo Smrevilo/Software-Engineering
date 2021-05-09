@@ -22,18 +22,25 @@ import system.app.Project;
 class WhiteBoxIsAvailable {
 	
 //	public int getAvailablePomodoro(GregorianCalendar testDate) {
-//		int activActivities = 0;
+//	int activActivities = 0;
 //
-//		for (Pomodoro pomodoro : pomodoros) {
-//			if (specialActivities.contains(pomodoro.getActivity().getName())) {
-//				continue;
-//			}
-//			if (pomodoro.getActivity().getStartDate().before(testDate) && pomodoro.getActivity().getDeadline().after(testDate)) {
+//	for (Pomodoro pomodoro : pomodoros) {
+//		if (specialActivities.contains(pomodoro.getActivity().getName())) {
+//			continue;
+//		}
+//		try {
+//			if (pomodoro.getActivity().getStartDate().before(testDate)
+//					&& pomodoro.getActivity().getDeadline().after(testDate)) {
 //				activActivities++;
 //			}
+//		} catch (NullPointerException e) {
+//			activActivities++;
 //		}
-//		return activActivities;
+//
 //	}
+//	return activActivities;
+//
+//}
 
 	PKV pkvSystem;
 	Employee eUser;
