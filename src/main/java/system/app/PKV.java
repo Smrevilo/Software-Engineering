@@ -129,7 +129,8 @@ public class PKV {
 		gui.start();
 	}
 
-	public ArrayList<Employee> getAvailableEmployees(GregorianCalendar date) {
+	public ArrayList<Employee> getAvailableEmployees(GregorianCalendar date) throws Exception {
+		checkValid(date.get(date.DATE),date.get(date.MONTH),date.get(date.YEAR));
 		ArrayList<Employee> availableEmployees = new ArrayList<Employee>();
 		for (Employee employee : employees) {
 			if (employee.getAvailablePomodoro(date) <= threshold && employee != loggedInAs) {

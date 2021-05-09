@@ -59,7 +59,7 @@ public class AvailabilityTest {
 	}
 	
 	@When("the logged in employee looks for availability at the date {int} {int} {int}")
-	public void the_logged_in_employee_looks_for_availability_at_the_date(int day, int month, int year) {
+	public void the_logged_in_employee_looks_for_availability_at_the_date(int day, int month, int year) throws Exception {
 		GregorianCalendar date = new GregorianCalendar(year, month, day);
 		availableEmployee = system.getAvailableEmployees(date);
 	}
