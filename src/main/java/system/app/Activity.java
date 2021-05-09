@@ -1,5 +1,7 @@
 package system.app;
 
+import static org.junit.Assert.assertFalse;
+
 import java.util.*;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -66,14 +68,13 @@ public class Activity {
 	}
 
 	public void addTime(Employee employee, int i) throws Exception {
+		assert(employee != null);
 		boolean found = false;
 		for (Pomodoro pomodoro : pomodoros) {
 			if (pomodoro.getEmployee() == employee) {
-				
 				if ((pomodoro.getTime() + i) >= maxTimePerUser) {
 					throw new Exception("You can't register more than " + maxTimePerUser + "pomodoros to this activity");
 				}
-				
 				pomodoro.addTime(i);
 				found=true;
 			}
@@ -81,6 +82,7 @@ public class Activity {
 		if (!found) {
 			throw new Exception("You are not assigned to this activity");
 		}
+		assert(true);
 	}
 
 	public int getTotalTime() {
