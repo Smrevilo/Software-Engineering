@@ -41,18 +41,14 @@ class WhiteBoxTimeReg {
 	@Test
 	void positiveArg() {
 		assertTrue(selectedActivty.getTotalTime() == 0);
-		try {
-			selectedActivty.addTime(eUser, 10);
-		} catch (Exception e) {}
+		assertDoesNotThrow(() -> selectedActivty.addTime(eUser, 10));
 		assertTrue(selectedActivty.getTotalTime() == 10);
 	}
 	
 	@Test
 	void negativeArg() {
 		assertTrue(selectedActivty.getTotalTime() == 0);
-		try {
-			selectedActivty.addTime(eUser, -10);
-		} catch (Exception e) {}
+		assertThrows(Exception.class,() -> selectedActivty.addTime(eUser, -10));
 		assertTrue(selectedActivty.getTotalTime() == 0);
 	}
 	
@@ -73,11 +69,7 @@ class WhiteBoxTimeReg {
 		selectedActivty = selectedProject.getActivity("Sick Days");
 		
 		assertTrue(selectedActivty.getTotalTime() == 0);
-		
-		try {
-			selectedActivty.addTime(eUser, 21);
-		} catch (Exception e) {}
-		
+		assertThrows(Exception.class,() -> selectedActivty.addTime(eUser, 21));
 		assertTrue(selectedActivty.getTotalTime() == 0);
 	}
 	
@@ -87,11 +79,7 @@ class WhiteBoxTimeReg {
 		selectedActivty.addEmployee(eUser2);
 		
 		assertTrue(selectedActivty.getTotalTime() == 0);
-		
-		try {
-			selectedActivty.addTime(eUser2, 123);
-		} catch (Exception e) {}
-		
+		assertDoesNotThrow(() -> selectedActivty.addTime(eUser2, 123));
 		assertTrue(selectedActivty.getTotalTime() == 123);
 	}
 	
@@ -99,16 +87,10 @@ class WhiteBoxTimeReg {
 	void multipleAssigned() throws Exception {
 		Employee eUser2 = pkvSystem.getEmployee("ABCE");
 		selectedActivty.addEmployee(eUser2);
-		try {
-			selectedActivty.addTime(eUser, 1);
-		} catch (Exception e) {}
+		assertDoesNotThrow(() -> selectedActivty.addTime(eUser, 1));
 		
 		assertTrue(selectedActivty.getTotalTime() == 1);
-		
-		try {
-			selectedActivty.addTime(eUser2, 10);
-		} catch (Exception e) {}
-		
+		assertDoesNotThrow(() -> selectedActivty.addTime(eUser2, 10));
 		assertTrue(selectedActivty.getTotalTime() == 11);
 	}
 
