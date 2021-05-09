@@ -1,115 +1,110 @@
-//package WhiteboxTests;
+package WhiteboxTests;
+
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertThrows;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import org.junit.jupiter.api.Test;
+
+import system.app.Activity;
+import system.app.Employee;
+import system.app.PKV;
+import system.app.Pomodoro;
+import system.app.Project;
+
+class WhiteBoxIsAvailable {
+	
+//	public int getAvailablePomodoro(GregorianCalendar testDate) {
+//		int activActivities = 0;
 //
-//import static org.junit.jupiter.api.Assertions.*;
-//
-//import org.junit.jupiter.api.Test;
-//
-//import system.app.Activity;
-//import system.app.Employee;
-//import system.app.PKV;
-//import system.app.Pomodoro;
-//import system.app.Project;
-//
-//class WhiteBoxIsAvailable {
-//	
-////	public void addTime(Employee employee, int i) throws Exception {
-////		boolean found = false;
-////		for (Pomodoro pomodoro : pomodoros) {
-////			if (pomodoro.getEmployee() == employee) {
-////				pomodoro.addTime(i);
-////				found=true;
-////			}
-////		}
-////		if (!found) {
-////			throw new Exception("You are not assigned to this activity");
-////		}
-////	}
-//
-//	PKV pkvSystem;
-//	Employee eUser;
-//	Project selectedProject;
-//	Activity selectedActivty;
-//	
-//	public WhiteBoxIsAvailable() throws Exception {
-//		pkvSystem = new PKV();
-//		pkvSystem.login("ABCD");
-//		eUser = pkvSystem.getEmployee("ABCD");
-//		selectedProject = pkvSystem.getProject("ABCD");
-//		selectedActivty = selectedProject.getActivity("Sick Days");
-//	}
-//	
-//	@Test
-//	void positiveArg() {
-//		assertTrue(selectedActivty.getTotalTime() == 0);
-//		try {
-//			selectedActivty.addTime(eUser, 10);
-//		} catch (Exception e) {}
-//		assertTrue(selectedActivty.getTotalTime() == 10);
-//	}
-//	
-//	@Test
-//	void negativeArg() {
-//		assertTrue(selectedActivty.getTotalTime() == 0);
-//		try {
-//			selectedActivty.addTime(eUser, -10);
-//		} catch (Exception e) {}
-//		assertTrue(selectedActivty.getTotalTime() == 0);
-//	}
-//	
-//	@Test
-//	void gaussTest() {
-//		assertTrue(selectedActivty.getTotalTime() == 0);
-//		for (int i = 1; i <= 100; i++) {
-//			try {
-//				selectedActivty.addTime(eUser, i);
-//			} catch (Exception e) {}
+//		for (Pomodoro pomodoro : pomodoros) {
+//			if (specialActivities.contains(pomodoro.getActivity().getName())) {
+//				continue;
+//			}
+//			if (pomodoro.getActivity().getStartDate().before(testDate) && pomodoro.getActivity().getDeadline().after(testDate)) {
+//				activActivities++;
+//			}
 //		}
-//		assertTrue(selectedActivty.getTotalTime() == 5050);
+//		return activActivities;
 //	}
-//	
-//	@Test
-//	void notAssigned() throws Exception{
-//		selectedProject = pkvSystem.getProject("ABCE");
-//		selectedActivty = selectedProject.getActivity("Sick Days");
-//		
-//		assertTrue(selectedActivty.getTotalTime() == 0);
-//		
-//		try {
-//			selectedActivty.addTime(eUser, 21);
-//		} catch (Exception e) {}
-//		
-//		assertTrue(selectedActivty.getTotalTime() == 0);
-//	}
-//	
-//	@Test
-//	void newAssigned() throws Exception {
-//		Employee eUser2 = pkvSystem.getEmployee("ABCE");
-//		selectedActivty.addEmployee(eUser2);
-//		
-//		assertTrue(selectedActivty.getTotalTime() == 0);
-//		
-//		try {
-//			selectedActivty.addTime(eUser2, 123);
-//		} catch (Exception e) {}
-//		
-//		assertTrue(selectedActivty.getTotalTime() == 123);
-//	}
-//	
-//	@Test
-//	void multipleAssigned() throws Exception {
-//		Employee eUser2 = pkvSystem.getEmployee("ABCE");
-//		selectedActivty.addEmployee(eUser2);
-//		try {
-//			selectedActivty.addTime(eUser, 1);
-//		} catch (Exception e) {}
-//		
-//		assertTrue(selectedActivty.getTotalTime() == 1);
-//		
-//		try {
-//			selectedActivty.addTime(eUser2, 10);
-//		} catch (Exception e) {}
-//		
-//		assertTrue(selectedActivty.getTotalTime() == 11);
-//	}
-//
-//}
+
+	PKV pkvSystem;
+	Employee eUser;
+	Project selectedProject;
+	Activity selectedActivty;
+	
+	public WhiteBoxIsAvailable() throws Exception {
+		pkvSystem = new PKV();
+		pkvSystem.login("ABCD");
+		eUser = pkvSystem.getEmployee("ABCD");
+		pkvSystem.createProject("project1");
+		pkvSystem.setSelectedProject(pkvSystem.getProject("project1"));
+		pkvSystem.getSelectedProject().setLeader(pkvSystem.getLoggedInAs());
+		String[] activityNames = {"activity1", "activity2","activity3","activity4","activity5","activity6","activity7","activity8","activity9","activity10","activity11"};
+		for (String activityName : activityNames) {
+			pkvSystem.getSelectedProject().createActivty(pkvSystem.getLoggedInAs(), activityName);
+			pkvSystem.setSelectedActivity(pkvSystem.getSelectedProject().getActivity(activityName));
+			pkvSystem.setStartDate(15, 05, 2021);
+			pkvSystem.setDeadline(30, 05, 2021);
+			
+		}
+		ArrayList<Activity> activityList = pkvSystem.getSelectedProject().getActivities();
+		for (Activity activity : activityList) {
+			activity.addEmployee(pkvSystem.getLoggedInAs());
+			
+		}
+	}
+	
+	@Test
+	void StartDeadBefore() throws Exception{
+		GregorianCalendar date= new GregorianCalendar();
+		date.set(2022, 9, 01);
+		assertThat(pkvSystem.getSelectedProject().getActivities().size(), is(11));
+		assertDoesNotThrow(() -> pkvSystem.checkValid(01, 9, 2022));
+	
+		Employee test= pkvSystem.getLoggedInAs();
+		assertThat(test.getAvailablePomodoro(date), is(0));
+	}
+	
+	@Test
+	void StartDeadAfter() {
+		GregorianCalendar date= new GregorianCalendar();
+		date.set(2007, 29, 12);
+		assertThat(pkvSystem.getSelectedProject().getActivities().size(), is(11));
+		assertDoesNotThrow(() -> pkvSystem.checkValid(01, 9, 2022));
+	
+		Employee test= pkvSystem.getLoggedInAs();
+		assertThat(test.getAvailablePomodoro(date), is(0));
+	}
+	
+	@Test
+	void StartBeforeDeadAfter() {
+		GregorianCalendar date= new GregorianCalendar();
+		date.set(2021, 5, 23);
+		assertThat(pkvSystem.getSelectedProject().getActivities().size(), is(11));
+		assertDoesNotThrow(() -> pkvSystem.checkValid(01, 9, 2022));
+	
+		Employee test= pkvSystem.getLoggedInAs();
+		assertThat(test.getAvailablePomodoro(date), is(11));
+	}
+	
+	@Test
+	void OnlyRegular() throws Exception {
+		pkvSystem.login("ABCE");
+		GregorianCalendar date= new GregorianCalendar();
+		date.set(2022, 9, 01);
+		assertThat(pkvSystem.getSelectedProject().getActivities().size(), is(11));
+		assertDoesNotThrow(() -> pkvSystem.checkValid(01, 9, 2022));
+	
+		Employee test= pkvSystem.getLoggedInAs();
+		assertThat(test.getAvailablePomodoro(date), is(0));
+	}
+		
+}
