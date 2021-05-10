@@ -1,6 +1,8 @@
 package WhiteboxTests;
 
+import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.CoreMatchers.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -40,37 +42,35 @@ class WhiteBoxTimeReg {
 	
 	@Test
 	void positiveArg() {
-		assertTrue(selectedActivty.getTotalTime() == 0);
+		assertThat(selectedActivty.getTotalTime(), is(0));
 		assertDoesNotThrow(() -> selectedActivty.addTime(eUser, 10));
-		assertTrue(selectedActivty.getTotalTime() == 10);
+		assertThat(selectedActivty.getTotalTime(), is(10));
 	}
 	
 	@Test
 	void negativeArg() {
-		assertTrue(selectedActivty.getTotalTime() == 0);
+		assertThat(selectedActivty.getTotalTime(), is(0));
 		assertThrows(Exception.class,() -> selectedActivty.addTime(eUser, -10));
-		assertTrue(selectedActivty.getTotalTime() == 0);
+		assertThat(selectedActivty.getTotalTime(), is(0));
 	}
 	
 	@Test
-	void gaussTest() {
-		assertTrue(selectedActivty.getTotalTime() == 0);
+	void gaussTest() throws Exception {
+		assertThat(selectedActivty.getTotalTime(), is(0));
 		for (int i = 1; i <= 100; i++) {
-			try {
-				selectedActivty.addTime(eUser, i);
-			} catch (Exception e) {}
+			selectedActivty.addTime(eUser, i);
 		}
-		assertTrue(selectedActivty.getTotalTime() == 5050);
+		assertThat(selectedActivty.getTotalTime(), is(5050));
 	}
 	
 	@Test
 	void notAssigned() throws Exception{
 		selectedProject = pkvSystem.getProject("ABCE");
 		selectedActivty = selectedProject.getActivity("Sick Days");
-		
-		assertTrue(selectedActivty.getTotalTime() == 0);
+
+		assertThat(selectedActivty.getTotalTime(), is(0));
 		assertThrows(Exception.class,() -> selectedActivty.addTime(eUser, 21));
-		assertTrue(selectedActivty.getTotalTime() == 0);
+		assertThat(selectedActivty.getTotalTime(), is(0));
 	}
 	
 	@Test
@@ -78,17 +78,17 @@ class WhiteBoxTimeReg {
 		Employee eUser2 = pkvSystem.getEmployee("ABCE");
 		selectedActivty.addEmployee(eUser2);
 		assertDoesNotThrow(() -> selectedActivty.addTime(eUser, 1));
-		
-		assertTrue(selectedActivty.getTotalTime() == 1);
+
+		assertThat(selectedActivty.getTotalTime(), is(1));
 		assertDoesNotThrow(() -> selectedActivty.addTime(eUser2, 10));
-		assertTrue(selectedActivty.getTotalTime() == 11);
+		assertThat(selectedActivty.getTotalTime(), is(11));
 	}
 	
 	@Test
 	void intOverload() {
-		assertTrue(selectedActivty.getTotalTime() == 0);
+		assertThat(selectedActivty.getTotalTime(), is(0));
 		assertThrows(Exception.class,() -> selectedActivty.addTime(eUser, 2147483647));
-		assertTrue(selectedActivty.getTotalTime() == 0);
+		assertThat(selectedActivty.getTotalTime(), is(0));
 	}
 
 }
