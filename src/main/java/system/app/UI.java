@@ -438,6 +438,9 @@ public class UI {
 							System.out.println(e.getMessage());
 							continue;
 						}
+					} else {
+						System.out.println("<" + edit + "> is not a known command right here");
+						continue;
 					}
 					System.out.println("Date has been succesfully edited");
 					return;
