@@ -34,7 +34,7 @@ public class Employee {
 	public String makeRepport() {
 		String output = "";
 		for (Pomodoro pomodoro : pomodoros) {
-			output += "Activity: " + pomodoro.getActivity().getName() + ", hours: " + pomodoro.getTime() + "\n";
+			output += "Activity: " + pomodoro.getActivity().getName() + ", hours: " + ((float)pomodoro.getTime())/2.0 + "\n";
 		}
 		return output;
 	}
@@ -43,7 +43,7 @@ public class Employee {
 		String output = "";
 		for (Pomodoro pomodoro : pomodoros) {
 			if (pomodoro.getActivity().getName().equals(activityName)) {
-				output += "Activity: " + pomodoro.getActivity().getName() + ", hours: " + pomodoro.getTime() + "\n";
+				output += "Activity: " + pomodoro.getActivity().getName() + ", hours: " + ((float)pomodoro.getTime())/2.0 + "\n";
 			}
 		}
 		if (output.equals("")) {

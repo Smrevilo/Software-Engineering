@@ -621,7 +621,7 @@ public class UI {
 
 	private void deleteTime() throws Exception {
 		while (true) {
-			System.out.print("How many hours do you want to delete (-1 to stop)?: ");
+			System.out.print("How many half-hours do you want to delete (-1 to stop)?: ");
 			try {
 				int time = in.nextInt();
 				in.nextLine();
@@ -640,7 +640,7 @@ public class UI {
 
 	private void addTime() throws Exception {
 		while (true) {
-			System.out.print("How many hours do you want to registre (-1 to stop)?: ");
+			System.out.print("How many half-hours do you want to registre (-1 to stop)?: ");
 			try {
 				int time = in.nextInt();
 				in.nextLine();
