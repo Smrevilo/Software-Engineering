@@ -86,6 +86,7 @@ public class PKV {
 			throw new Exception("The project contains activities and can not be deleted");
 		}
 		projects.remove(project); // 4
+		assert(!(getProjects().remove(project)));
 	}
 
 	public String makeReportFor(String projectName) throws Exception {
