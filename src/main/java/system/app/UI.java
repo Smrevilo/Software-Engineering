@@ -616,7 +616,8 @@ public class UI {
 							continue;
 						}
 					}
-					return;
+					System.out.println("<" + edit + "> is not a known command right here");
+					
 				}
 			}
 		}
