@@ -96,7 +96,7 @@ public class Activity {
 	public String getReport() {
 		String output = "";
 		for (Pomodoro pomodoro : pomodoros) {
-			output += "Employee: " + pomodoro.getEmployee().getInitials() + ", hours: " + pomodoro.getTime() + "\n";
+			output += "Employee: " + pomodoro.getEmployee().getInitials() + ", hours: " + ((float)pomodoro.getTime())/2.0 + "\n";
 		}
 		return output;
 	}
