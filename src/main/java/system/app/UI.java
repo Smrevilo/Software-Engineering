@@ -1,3 +1,4 @@
+//Maximilian s204178
 package system.app;
 
 import java.util.ArrayList;
@@ -12,13 +13,13 @@ public class UI {
 	private PKV pkv;
 	private boolean isLoggedIn = false;
 
+	//Maximilian s204178
 	public UI(PKV pkv) {
 		in = new Scanner(System.in);
 		this.pkv = pkv;
 	}
 
-	// TODO:
-	// create delete activity method (it does not exist in the program yet)
+	//Maximilian s204178
 	public void start() {
 		while (true) {
 			login();
@@ -87,6 +88,7 @@ public class UI {
 		}
 	}
 
+	//Maximilian s204178
 	private void deleteActivity() {
 		while (true) {
 			System.out.print("Give name of a project to delete activity from (q to stop): ");
@@ -128,6 +130,7 @@ public class UI {
 		
 	}
 
+	//Maximilian s204178
 	private void editThreshhold() {
 		while (true) {
 			System.out.println("Threshhold is currently :"+pkv.getThreshold());
@@ -151,6 +154,7 @@ public class UI {
 		
 	}
 
+	//Maximilian s204178
 	private void deleteProject() {
 		while (true) {
 			System.out.print("Give name of a project to delete it (q to stop): ");
@@ -183,6 +187,7 @@ public class UI {
 		}
 	}
 
+	//Maximilian s204178
 	private void removeActivityFromEmployee() {
 		while (true) {
 			System.out.print("Give a name of the project under which the activity, that you want to remove the employee from, is (q to stop): ");
@@ -228,6 +233,7 @@ public class UI {
 
 	}
 
+	//Maximilian s204178
 	private void getTimeOverview() {
 		while (true) {
 			try {
@@ -240,6 +246,7 @@ public class UI {
 		}
 	}
 
+	//Maximilian s204178
 	private void setStatusofActivity() {
 		while (true) {
 			System.out.print("Name of project to set status for (q to stop): ");
@@ -289,6 +296,7 @@ public class UI {
 
 	}
 
+	//Maximilian s204178
 	private void setWorkload() {
 		while (true) {
 			System.out.print("Name of project to set workload for (q to stop): ");
@@ -350,6 +358,7 @@ public class UI {
 		}
 	}
 
+	//Maximilian s204178
 	private void searchAvailable() {
 		while (true) {
 			System.out.print("Date dd/mm/yyyy (q to stop): ");
@@ -384,6 +393,7 @@ public class UI {
 		}
 	}
 
+	//Maximilian s204178
 	private void setDate() {
 		while (true) {
 			System.out.print("Name of project to set date for (q to stop): ");
@@ -449,6 +459,7 @@ public class UI {
 		}
 	}
 
+	//Maximilian s204178
 	private void setStartDate() {
 		while (true) {
 			System.out.print("Date dd/mm/yyyy (q to stop): ");
@@ -478,6 +489,7 @@ public class UI {
 		}
 	}
 
+	//Maximilian s204178
 	private void setDeadline() {
 		while (true) {
 			System.out.print("Date dd/mm/yyyy (q to stop): ");
@@ -507,6 +519,7 @@ public class UI {
 		}
 	}
 
+	//Maximilian s204178
 	private void addEmployee() {
 		while (true) {
 			System.out.println("Name of project to add employee to (q to stop): ");
@@ -561,6 +574,7 @@ public class UI {
 		}
 	}
 
+	//Maximilian s204178
 	private void editTime() {
 		while (true) {
 			System.out.print("Name of project to edit time for (q to stop): ");
@@ -623,6 +637,7 @@ public class UI {
 		}
 	}
 
+	//Maximilian s204178
 	private void deleteTime() throws Exception {
 		while (true) {
 			System.out.print("How many half-hours do you want to delete (-1 to stop)?: ");
@@ -647,6 +662,7 @@ public class UI {
 		}
 	}
 
+	//Maximilian s204178
 	private void addTime() throws Exception {
 		while (true) {
 			System.out.print("How many half-hours do you want to registre (-1 to stop)?: ");
@@ -672,6 +688,7 @@ public class UI {
 		}
 	}
 
+	//Maximilian s204178
 	private void setProjectLeader() {
 		while (true) {
 			System.out.print("Name of project to set project leader (q to stop): ");
@@ -690,6 +707,7 @@ public class UI {
 		}
 	}
 
+	//Maximilian s204178
 	private void makeReport() {
 		while (true) {
 			System.out.print("Name of project to make report off (q to stop): ");
@@ -707,6 +725,7 @@ public class UI {
 		}
 	}
 
+	//Maximilian s204178
 	private void createActivity() {
 		while (true) {
 			System.out.print("Name of project to add activity to (q to stop): ");
@@ -744,6 +763,7 @@ public class UI {
 		}
 	}
 
+	//Maximilian s204178
 	private void createProject() {
 		while (true) {
 			System.out.print("Name of project (q to stop): ");
@@ -762,11 +782,13 @@ public class UI {
 		}
 	}
 
+	//Maximilian s204178
 	private void logOut() {
 		pkv.logOut();
 		isLoggedIn = false;
 	}
 
+	//Maximilian s204178
 	private void displayHelp() {
 		System.out.println("Logout: Logs you out");
 		System.out.println("Help: Displays this");
@@ -787,6 +809,7 @@ public class UI {
 		System.out.println("Delete Activity: Deletes an activity");
 	}
 
+	//Maximilian s204178
 	private void login() {
 		while (!isLoggedIn) {
 			System.out.println("Write your initials to login: ");

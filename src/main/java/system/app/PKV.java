@@ -1,3 +1,4 @@
+//Oliver s204182
 package system.app;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class PKV {
 	private UI gui;
 	private int threshold;
 
+	//Oliver s204182
 	public PKV() throws Exception {
 		this.employees = new ArrayList<Employee>();
 		this.projects = new ArrayList<Project>();
@@ -26,6 +28,7 @@ public class PKV {
 		this.gui = new UI(this);
 	}
 
+	//Oliver s204182
 	public void login(String initials) throws Exception {
 		logOut();
 		for (Employee employee : employees) {
@@ -37,10 +40,12 @@ public class PKV {
 		throw new Exception("Wrong initials");
 	}
 
+	//Oliver s204182
 	public void logOut() {
 		this.loggedInAs = null;
 	}
 
+	//Oliver s204182
 	public void createProject(String name) throws Exception {
 		if (hasProject(name)) {
 			throw new Exception("A project with the name \"" + name + "\" already exsits");
@@ -53,6 +58,7 @@ public class PKV {
 		projects.add(newProject);
 	}
 
+	//Oliver s204182
 	public boolean hasProject(String name) {
 		for (int i = 0; i < projects.size(); i++) {
 			if (projects.get(i).getName().equals(name)) {
@@ -62,6 +68,7 @@ public class PKV {
 		return false;
 	}
 
+	//Oliver s204182
 	public Project getProject(String name) throws Exception {
 		for (Project p : projects) {
 			if (p.getName().equals(name)) {
@@ -90,6 +97,7 @@ public class PKV {
 		assert(!(getProjects().remove(project)));
 	}
 
+	//Oliver s204182
 	public String makeReportFor(String projectName) throws Exception {
 		Project project = getProject(projectName);
 		if (project.getLeader() == loggedInAs) {
@@ -99,6 +107,7 @@ public class PKV {
 		}
 	}
 
+	//Oliver s204182
 	public void setStartDate(int startDay, int startMonth, int startYear) throws Exception {
 		if (selectedProject.getLeader() != loggedInAs) {
 			throw new Exception("Only the project leader can set a startdate");
@@ -107,6 +116,7 @@ public class PKV {
 		selectedActivity.setStartDate(startDay, startMonth, startYear);
 	}
 
+	//Oliver s204182
 	public void checkValid(int day, int month, int year) throws Exception {
 		Calendar checker = new GregorianCalendar();
 		checker.set(year, month, day);
@@ -115,11 +125,13 @@ public class PKV {
 		}
 	}
 
+	//Oliver s204182
 	public Calendar getStartDate() throws Exception {
 		Calendar output = selectedActivity.getStartDate();
 		return output;
 	}
 
+	//Oliver s204182
 	public void setDeadline(int deadDay, int deadMonth, int deadYear) throws Exception {
 		if (selectedProject.getLeader() != loggedInAs) {
 			throw new Exception("Only the project leader can set a deadline");
@@ -128,15 +140,18 @@ public class PKV {
 		selectedActivity.setDeadline(deadDay, deadMonth, deadYear);
 	}
 
+	//Oliver s204182
 	public Calendar getDeadline() throws Exception {
 		Calendar output = selectedActivity.getDeadline();
 		return output;
 	}
 
+	//Oliver s204182
 	public void startApp() {
 		gui.start();
 	}
 
+	//Oliver s204182
 	public ArrayList<Employee> getAvailableEmployees(GregorianCalendar date) throws Exception {
 		checkValid(date.get(date.DATE),date.get(date.MONTH),date.get(date.YEAR));
 		ArrayList<Employee> availableEmployees = new ArrayList<Employee>();
@@ -148,6 +163,7 @@ public class PKV {
 		return availableEmployees;
 	}
 
+	//Oliver s204182
 	public Employee getEmployee(String initials) throws Exception {
 		for (Employee employee : employees) {
 			if (employee.getInitials().equals(initials)) {
@@ -157,6 +173,7 @@ public class PKV {
 		throw new Exception("An employee with the initials \"" + initials + "\" does not exsit");
 	}
 
+	//Oliver s204182
 	public void setWorkload(int workload) throws Exception {
 		if (selectedProject.getLeader() != loggedInAs) {
 			throw new Exception("Only the project leader can set the workload");
@@ -164,6 +181,7 @@ public class PKV {
 		selectedActivity.setWorkload(workload);
 	}
 	
+	//Oliver s204182
 	public void addEmployeeToActivity(Employee employee) throws Exception {
 		if (selectedProject.getLeader() != loggedInAs) {
 			throw new Exception("Only the project leader can add the employee to the activity");
@@ -171,38 +189,47 @@ public class PKV {
 		selectedActivity.addEmployee(employee);
 	}
 
+	//Oliver s204182
 	public void setThreshold(int threshold) {
 		this.threshold = threshold;
 	}
 
+	//Oliver s204182
 	public int getThreshold() {
 		return threshold;
 	}
 
+	//Oliver s204182
 	public List<Employee> getEmployees() {
 		return employees;		
 	}
 
+	//Oliver s204182
 	public Employee getLoggedInAs() {
 		return this.loggedInAs;
 	}
 
+	//Oliver s204182
 	public Activity getSelectedActivity() {
 		return selectedActivity;
 	}
 
+	//Oliver s204182
 	public void setSelectedActivity(Activity selectedActivity) {
 		this.selectedActivity = selectedActivity;
 	}
 
+	//Oliver s204182
 	public ArrayList<Project> getProjects() {
 		return projects;
 	}
 
+	//Oliver s204182
 	public Project getSelectedProject() {
 		return selectedProject;
 	}
 
+	//Oliver s204182
 	public void setSelectedProject(Project selectedProject) {
 		this.selectedProject = selectedProject;
 	}

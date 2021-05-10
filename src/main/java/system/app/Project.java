@@ -1,3 +1,4 @@
+//Viktor s204166
 package system.app;
 
 import java.util.ArrayList;
@@ -9,12 +10,14 @@ public class Project {
 	private Employee leader = null;
 	private boolean isEditable = true;
 	
+	//Viktor s204166
 	public Project(String name, int id) {
 		this.name = name;
 		this.id = id;
 		activites = new ArrayList<Activity>();
 	}
 	
+	//Viktor s204166
 	public void createActivty(Employee employee, String name) throws Exception {
 		if (hasActivity(name)) {
 			throw new Exception("An activity with the name \"" + name + "\" already exsits");
@@ -31,6 +34,7 @@ public class Project {
 		activites.add(new Activity(name));
 	}
 	
+	//Viktor s204166
 	public void deleteActivity(String name) throws Exception {
 		for (Activity a : activites) {
 			if (a.getName().equals(name)) {
@@ -45,6 +49,7 @@ public class Project {
 		throw new Exception(name +" activty does not exists");
 	}
 	
+	//Viktor s204166
 	public boolean hasActivity(String name) {
 		for (Activity a : activites) {
 			if (a.getName().equals(name)) {
@@ -54,6 +59,7 @@ public class Project {
 		return false;		
 	}
 	
+	//Viktor s204166
 	public Activity getActivity(String name) throws Exception {
 		for (Activity a : activites) {
 			if (a.getName().equals(name)) {
@@ -63,6 +69,7 @@ public class Project {
 		throw new Exception("An activity with that name doesn't exsits");
 	}
 	
+	//Viktor s204166
 	public String makeReport() {
 		String report = "";
 		for (Activity activity : activites) {
@@ -83,26 +90,32 @@ public class Project {
 		return report;
 	}
 	
+	//Viktor s204166
 	public ArrayList<Activity> getActivities() {
 		return activites;
 	}
 	
+	//Viktor s204166
 	public Employee getLeader() {
 		return leader;
 	}
 	
+	//Viktor s204166
 	public void setLeader(Employee leader) {
 		this.leader = leader;
 	}
 	
+	//Viktor s204166
 	public String getName() {
 		return name;
 	}
 	
+	//Viktor s204166
 	public void setEditable(boolean editable) {
 		isEditable = editable;
 	}
 	
+	//Viktor s204166
 	public boolean getEditable() {
 		return isEditable;
 	}

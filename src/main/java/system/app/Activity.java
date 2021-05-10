@@ -1,3 +1,4 @@
+// Mads s204170
 package system.app;
 
 import static org.junit.Assert.assertFalse;
@@ -16,20 +17,24 @@ public class Activity {
 	private int workload;
 	private boolean activityisDone;
 	private int maxTimePerUser = 10000;
-
+	
+	// Mads s204170
 	public Activity(String name) {
 		this.name = name;
 		this.pomodoros = new ArrayList<Pomodoro>();
 	}
 	
+	// Mads s204170
 	public String getName() {
 		return name;
 	}
-
+	
+	// Mads s204170
 	public Calendar getStartDate() {
 		return this.startDate;
 	}
-
+	
+	// Mads s204170
 	public void setStartDate(int startDay, int startMonth, int startYear) throws Exception {
 		if (!isEditable) {
 			throw new Exception("This activity can not be modified");
@@ -42,10 +47,12 @@ public class Activity {
 		this.startDate = temp;
 	}
 
+	// Mads s204170
 	public Calendar getDeadline() {
 		return this.deadline;
 	}
 
+	// Mads s204170
 	public void setDeadline(int deadDay, int deadMonth, int deadYear) throws Exception {
 		if (!isEditable) {
 			throw new Exception("This activity can not be modified");
@@ -57,7 +64,8 @@ public class Activity {
 		}
 		this.deadline = temp;
 	}
-
+	
+	// Mads s204170
 	public void addEmployee(Employee employee) throws Exception {
 		if (isAssignedTo(employee)) {
 			throw new Exception("Employee is already assigned to this activity");
@@ -85,7 +93,8 @@ public class Activity {
 		}
 		assert(true);
 	}
-
+	
+	// Mads s204170
 	public int getTotalTime() {
 		int output = 0;
 		for (Pomodoro pomodoro : pomodoros) {
@@ -94,6 +103,7 @@ public class Activity {
 		return output;
 	}
 	
+	// Mads s204170
 	public String getReport() {
 		String output = "";
 		for (Pomodoro pomodoro : pomodoros) {
@@ -102,6 +112,7 @@ public class Activity {
 		return output;
 	}
 
+	// Mads s204170
 	public boolean isAssignedTo(Employee check) {
 		for (Pomodoro pomodoro : pomodoros) {
 			if (pomodoro.getEmployee() == check) {
@@ -111,6 +122,7 @@ public class Activity {
 		return false;
 	}
 
+	// Mads s204170
 	public void deleteTime(Employee loggedInAs, int i) throws Exception {
 		for (Pomodoro pomodoro : pomodoros) {
 			if (pomodoro.getEmployee() == loggedInAs) {
@@ -142,6 +154,7 @@ public class Activity {
 		assertThat(toRemove.getEmployee(), is(employee));
 	}
 
+	// Mads s204170
 	public boolean hasEmployee(Employee employee) {
 		for (Pomodoro pomodoro : pomodoros) {
 			if (pomodoro.getEmployee() == employee) {
@@ -151,14 +164,17 @@ public class Activity {
 		return false;
 	}
 	
+	// Mads s204170
 	public void setEditable(boolean editable) {
 		isEditable = editable;
 	}
 	
+	// Mads s204170
 	public boolean getEditable() {
 		return isEditable;
 	}
 
+	// Mads s204170
 	public String printTime() {
 		String out = "";
 		if (startDate != null) {
@@ -171,14 +187,17 @@ public class Activity {
 		return out;
 	}
 
+	// Mads s204170
 	public void setWorkload(int workload) {
 		this.workload = workload;
 	}
 
+	// Mads s204170
 	public int getWorkload() {
 		return workload;
 	}
 
+	// Mads s204170
 	public void setStatusOfActivity(String status) throws Exception {
 		if (status.toLowerCase().equals("done")) {
 			this.activityisDone = true;
@@ -191,10 +210,12 @@ public class Activity {
 		
 	}
 	
+	// Mads s204170
 	public List<Pomodoro> getPomodoros(){
 		return pomodoros;
 	}
 
+	// Mads s204170
 	public boolean getStatusOfActivity() {
 		return this.activityisDone;
 		

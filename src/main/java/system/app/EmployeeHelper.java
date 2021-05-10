@@ -1,3 +1,4 @@
+//Maximilian s204178
 package system.app;
 
 import java.util.*;
@@ -6,6 +7,7 @@ public class EmployeeHelper {
 	private List<Employee> employeeList;
 	private List<Project> projects;
 
+	//Maximilian s204178
 	public EmployeeHelper() throws Exception {
 		employeeList = new ArrayList<>();
 		String[] initialer = { "ABCD", "ABCE", "ABCF", "ABCG", "ABCH", "ABCI", "ABCJ", "ABCK", "ABCL", "ABCM", "ABCN",
@@ -44,18 +46,22 @@ public class EmployeeHelper {
 		}
 	}
 
+	//Maximilian s204178
 	public String getInitials() {
 		return employeeList.get(0).getInitials();
 	}
 
+	//Maximilian s204178
 	public List<Employee> getEmployeeList() {
 		return employeeList;
 	}
 
+	//Maximilian s204178
 	public List<Project> getProjectList() {
 		return projects;
 	}
 
+	//Maximilian s204178
 	public String getInitials2() {
 		return employeeList.get(1).getInitials();
 	}

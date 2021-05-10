@@ -1,6 +1,8 @@
+//Viktor s204166
 package system.app;
 
 import java.util.*;
+
 
 public class Employee {
 	private String initialer;
@@ -8,19 +10,23 @@ public class Employee {
 	private ArrayList<String> specialActivities = new ArrayList<String>(
 			Arrays.asList("Sick Days", "Vacation", "Courses"));
 
+	//Viktor s204166
 	public Employee(String initialer) {
 		this.initialer = initialer;
 		this.pomodoros = new ArrayList<>();
 	}
 
+	//Viktor s204166
 	public void addActivity(Pomodoro pomodoro) {
 		pomodoros.add(pomodoro);
 	}
 
+	//Viktor s204166
 	public String getInitials() {
 		return initialer;
 	}
 
+	//Viktor s204166
 	public int getTimefor(String activityName) {
 		int time = 0;
 		for (Pomodoro pomodoro : pomodoros) {
@@ -31,6 +37,7 @@ public class Employee {
 		return time;
 	}
 
+	//Viktor s204166
 	public String makeRepport() {
 		String output = "";
 		for (Pomodoro pomodoro : pomodoros) {
@@ -39,6 +46,7 @@ public class Employee {
 		return output;
 	}
 
+	//Viktor s204166
 	public String makeRepport(String activityName) throws Exception {
 		String output = "";
 		for (Pomodoro pomodoro : pomodoros) {
@@ -81,6 +89,7 @@ public class Employee {
 
 	}
 
+	//Viktor s204166
 	public void removeActivity(Activity activity) throws Exception {
 		Pomodoro toRemove = null;
 		for (Pomodoro pomodoro : pomodoros) {
@@ -91,6 +100,7 @@ public class Employee {
 		pomodoros.remove(toRemove);
 	}
 
+	//Viktor s204166
 	public boolean hasActivity(Activity activity) {
 		for (Pomodoro pomodoro : pomodoros) {
 			if (pomodoro.getActivity() == activity) {
