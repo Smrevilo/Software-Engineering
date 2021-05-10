@@ -74,7 +74,7 @@ public class Project {
 			if (activityReport.equals("")) {
 				report += "\tThis activity has no registred hours\n\n";
 			} else {
-				report += "\t"+activityReport + "\n";
+				report += activityReport + "\n";
 			}
 		}
 		if (report.equals("")) {
