@@ -1,3 +1,4 @@
+// Mads s204170
 package WhiteboxTests;
 
 import static org.junit.Assert.assertThat;
@@ -13,19 +14,6 @@ import system.app.Pomodoro;
 import system.app.Project;
 
 class WhiteBoxTimeReg {
-	
-//	public void addTime(Employee employee, int i) throws Exception {
-//		boolean found = false;
-//		for (Pomodoro pomodoro : pomodoros) {
-//			if (pomodoro.getEmployee() == employee) {   //1
-//				pomodoro.addTime(i);                    //1i
-//				found=true;
-//			}
-//		}
-//		if (!found) {                                   //2
-//			throw new Exception("You are not assigned to this activity");
-//		}
-//	}
 
 	PKV pkvSystem;
 	Employee eUser;
