@@ -632,7 +632,12 @@ public class UI {
 				if (time == -1) {
 					return;
 				}
-				pkv.getSelectedActivity().deleteTime(pkv.getLoggedInAs(), time);
+				try {
+					pkv.getSelectedActivity().deleteTime(pkv.getLoggedInAs(), time);
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					continue;
+				}
 				return;
 			} catch (InputMismatchException e) {
 				System.out.println("error NAN");
@@ -651,7 +656,12 @@ public class UI {
 				if (time == -1) {
 					return;
 				}
-				pkv.getSelectedActivity().addTime(pkv.getLoggedInAs(), time);
+				try {
+					pkv.getSelectedActivity().addTime(pkv.getLoggedInAs(), time);
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					continue;
+				}
 				return;
 			} catch (InputMismatchException e) {
 				System.out.println("error NAN");
