@@ -67,6 +67,7 @@ public class Activity {
 		employee.addActivity(pomodoro);
 	}
 
+	// Mads s204170
 	public void addTime(Employee employee, int i) throws Exception {
 		assert(employee != null);
 		boolean found = false;
@@ -118,6 +119,7 @@ public class Activity {
 		}
 	}
 
+	//Maximilian s204178
 	public void removeEmployee(Employee employee) throws Exception {
 		assertThat(employee, not(nullValue()));
 		if (!hasEmployee(employee)) {

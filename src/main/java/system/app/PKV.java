@@ -71,6 +71,7 @@ public class PKV {
 		throw new Exception("A project with that name doesn't exits");
 	}
 	
+	//Viktor s204166
 	public void deleteProject(String projectName) throws Exception {
 		assert(projectName!=null);
 		if (!hasProject(projectName)) { 
